@@ -1,0 +1,39 @@
+{
+  "nodes": [
+    {
+      "id": "start",
+      "character": "Садако",
+      "text": "Ты сегодня опоздал...",
+      "nextNodeID": "next1"
+    },
+    {
+      "id": "next1",
+      "character": "Садако",
+      "text": "Всё в порядке?",
+      "choices": [
+        {
+          "text": "Да, всё нормально",
+          "nextNodeID": "good",
+          "sadakoChange": 1
+        },
+        {
+          "text": "Не твоё дело",
+          "nextNodeID": "bad",
+          "sadakoChange": -2
+        }
+      ]
+    },
+    {
+      "id": "good",
+      "character": "Садако",
+      "text": "Хорошо... я рада",
+      "nextNodeID": ""
+    },
+    {
+      "id": "bad",
+      "character": "Садако",
+      "text": "...Понятно",
+      "nextNodeID": ""
+    }
+  ]
+}
