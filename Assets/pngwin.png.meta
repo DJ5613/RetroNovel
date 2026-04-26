@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 46117a6a17e3e5443bd1abf202e1db8c
+guid: 4280ed2d8538b094c844e4bd05445ee3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8739482045110217063
-    second: foni-papik-pro-oany-p-kartinki-belii-uzor-na-prozrachnom-fone-3_0
+      213: 907231597135109371
+    second: pngwin_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: foni-papik-pro-oany-p-kartinki-belii-uzor-na-prozrachnom-fone-3_0
+      name: pngwin_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 746
-        height: 328
+        width: 46
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 769e2b3cd90e84970800000000000000
-      internalID: 8739482045110217063
+      spriteID: bfc9f34b452279c00800000000000000
+      internalID: 907231597135109371
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      foni-papik-pro-oany-p-kartinki-belii-uzor-na-prozrachnom-fone-3_0: 8739482045110217063
+      pngwin_0: 907231597135109371
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
