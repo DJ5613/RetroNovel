@@ -56,4 +56,19 @@ public class GameFlags : MonoBehaviour
     {
         return flags.Contains(flag);
     }
+
+    public List<string> GetAllFlags()
+    {
+        return new List<string>(flags);
+    }
+
+    public void LoadFlags(List<string> loadedFlags)
+    {
+        flags.Clear();
+
+        foreach (string flag in loadedFlags)
+        {
+            flags.Add(flag);
+        }
+    }
 }

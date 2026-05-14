@@ -11,24 +11,33 @@ public class CharacterManager : MonoBehaviour
 
     [Header("Colors")]
     public Color activeColor = Color.white;
-    public Color inactiveColor = new Color(0.5f, 0.5f, 0.5f, 1f);
 
-    // Храним кто где стоит
-    private Dictionary<string, CharacterData> activeCharacters = new();
+    public Color inactiveColor =
+        new Color(0.5f, 0.5f, 0.5f, 1f);
+
+    // активные персонажи
+    private Dictionary<string, CharacterData> activeCharacters =
+        new Dictionary<string, CharacterData>();
 
     // =========================
     // SHOW CHARACTER
     // =========================
 
-    public void ShowCharacter(string characterName, string emotion, string position)
+    public void ShowCharacter(
+        string characterName,
+        string emotion,
+        string position)
     {
-        string path = $"Sprites/Characters/{characterName}/{emotion}";
+        string path =
+            $"Sprites/Characters/{characterName}/{emotion}";
 
         Sprite sprite = Resources.Load<Sprite>(path);
 
         if (sprite == null)
         {
-            Debug.LogWarning("Спрайт не найден: " + path);
+            Debug.LogWarning(
+                "Спрайт не найден: " + path);
+
             return;
         }
 
@@ -36,29 +45,39 @@ public class CharacterManager : MonoBehaviour
 
         if (slot == null)
         {
-            Debug.LogWarning("Слот не найден: " + position);
+            Debug.LogWarning(
+                "Слот не найден: " + position);
+
             return;
         }
 
-        slot.sprite = sprite;
+        // показать слот
         slot.enabled = true;
 
-        // По умолчанию затемняем
+        // установить спрайт
+        slot.sprite = sprite;
+
+        // затемнить по умолчанию
         slot.color = inactiveColor;
 
-        // Если персонаж уже есть → обновляем
+        // обновить/добавить персонажа
         if (activeCharacters.ContainsKey(characterName))
         {
-            activeCharacters[characterName].emotion = emotion;
-            activeCharacters[characterName].position = position;
+            activeCharacters[characterName].emotion =
+                emotion;
+
+            activeCharacters[characterName].position =
+                position;
         }
         else
         {
-            activeCharacters.Add(characterName, new CharacterData
-            {
-                emotion = emotion,
-                position = position
-            });
+            activeCharacters.Add(
+                characterName,
+                new CharacterData
+                {
+                    emotion = emotion,
+                    position = position
+                });
         }
     }
 
@@ -66,17 +85,25 @@ public class CharacterManager : MonoBehaviour
     // CHANGE EMOTION
     // =========================
 
-    public void ChangeEmotion(string characterName, string newEmotion)
+    public void ChangeEmotion(
+        string characterName,
+        string newEmotion)
     {
         if (!activeCharacters.ContainsKey(characterName))
         {
-            Debug.LogWarning("Персонаж не найден: " + characterName);
+            Debug.LogWarning(
+                "Персонаж не найден: " + characterName);
+
             return;
         }
 
-        string position = activeCharacters[characterName].position;
+        string position =
+            activeCharacters[characterName].position;
 
-        ShowCharacter(characterName, newEmotion, position);
+        ShowCharacter(
+            characterName,
+            newEmotion,
+            position);
     }
 
     // =========================
@@ -88,37 +115,78 @@ public class CharacterManager : MonoBehaviour
         if (!activeCharacters.ContainsKey(characterName))
             return;
 
-        string position = activeCharacters[characterName].position;
+        string position =
+            activeCharacters[characterName].position;
 
         Image slot = GetSlot(position);
 
         if (slot != null)
         {
             slot.enabled = false;
+            slot.sprite = null;
         }
 
         activeCharacters.Remove(characterName);
     }
 
     // =========================
-    // SET ACTIVE SPEAKER
+    // HIDE ALL
+    // =========================
+
+    public void HideAll()
+    {
+        ClearSlot(leftSlot);
+        ClearSlot(centerSlot);
+        ClearSlot(rightSlot);
+
+        activeCharacters.Clear();
+    }
+
+    void ClearSlot(Image slot)
+    {
+        slot.enabled = false;
+        slot.sprite = null;
+    }
+
+    // =========================
+    // SET SPEAKER
     // =========================
 
     public void SetSpeaker(string speakerName)
     {
+        // затемняем всех
         DimAll();
 
-        if (!activeCharacters.ContainsKey(speakerName))
+        if (string.IsNullOrEmpty(speakerName))
             return;
 
-        string position = activeCharacters[speakerName].position;
+        if (!activeCharacters.ContainsKey(speakerName))
+        {
+            Debug.LogWarning(
+                "Активный персонаж не найден: " +
+                speakerName);
+
+            return;
+        }
+
+        string position =
+            activeCharacters[speakerName].position;
 
         Image slot = GetSlot(position);
 
-        if (slot != null)
-        {
-            slot.color = activeColor;
-        }
+        if (slot == null)
+            return;
+
+        slot.color = activeColor;
+    }
+
+    // =========================
+    // HAS CHARACTER
+    // =========================
+
+    public bool HasCharacter(string characterName)
+    {
+        return activeCharacters.ContainsKey(characterName);
     }
 
     // =========================
@@ -159,16 +227,44 @@ public class CharacterManager : MonoBehaviour
     }
 
     // =========================
-    // HIDE ALL
+    // SAVE CHARACTERS
     // =========================
 
-    public void HideAll()
+    public List<CharacterSaveData> GetCharacters()
     {
-        leftSlot.enabled = false;
-        centerSlot.enabled = false;
-        rightSlot.enabled = false;
+        List<CharacterSaveData> list =
+            new List<CharacterSaveData>();
 
-        activeCharacters.Clear();
+        foreach (var pair in activeCharacters)
+        {
+            list.Add(
+                new CharacterSaveData
+                {
+                    name = pair.Key,
+                    emotion = pair.Value.emotion,
+                    position = pair.Value.position
+                });
+        }
+
+        return list;
+    }
+
+    // =========================
+    // LOAD CHARACTERS
+    // =========================
+
+    public void LoadCharacters(
+        List<CharacterSaveData> characters)
+    {
+        HideAll();
+
+        foreach (var character in characters)
+        {
+            ShowCharacter(
+                character.name,
+                character.emotion,
+                character.position);
+        }
     }
 }
 

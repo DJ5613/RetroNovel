@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -19,7 +20,13 @@ public class DialogueManager : MonoBehaviour
     public BackgroundManager backgroundManager;
     public EventManager eventManager;
 
+    [Header("Typewriter")]
+    public float typingSpeed = 0.03f;
+
     private DialogueNode currentNode;
+
+    private Coroutine typingCoroutine;
+    private bool isTyping = false;
 
     // =========================
     // START
@@ -36,37 +43,22 @@ public class DialogueManager : MonoBehaviour
     }
 
     // =========================
-    // UPDATE
-    // =========================
-
-    void Update()
-    {
-        if (currentNode == null)
-            return;
-
-        // если нет выборов → клик идёт дальше
-        if (currentNode.choices == null || currentNode.choices.Count == 0)
-        {
-            if (Input.GetMouseButtonDown(0) || Input.touchCount > 0)
-            {
-                NextDialogue();
-            }
-        }
-    }
-
-    // =========================
     // SHOW NODE
     // =========================
 
     public void ShowNode(string nodeID)
     {
+        Debug.Log("SHOW NODE: " + nodeID);
+
         ClearChoices();
 
         currentNode = database.GetNode(nodeID);
 
         if (currentNode == null)
         {
-            Debug.LogError("Нода не найдена: " + nodeID);
+            Debug.LogError(
+                "Нода не найдена: " + nodeID);
+
             return;
         }
 
@@ -80,7 +72,9 @@ public class DialogueManager : MonoBehaviour
             {
                 if (!GameFlags.Instance.HasFlag(flag))
                 {
-                    Debug.Log("Нет нужного флага: " + flag);
+                    Debug.Log(
+                        "Нет нужного флага: " + flag);
+
                     return;
                 }
             }
@@ -104,7 +98,8 @@ public class DialogueManager : MonoBehaviour
 
         if (!string.IsNullOrEmpty(currentNode.background))
         {
-            backgroundManager.ChangeBackground(currentNode.background);
+            backgroundManager.ChangeBackground(
+                currentNode.background);
         }
 
         // =========================
@@ -144,9 +139,10 @@ public class DialogueManager : MonoBehaviour
 
         if (currentNode.hideCharacters != null)
         {
-            foreach (var characterName in currentNode.hideCharacters)
+            foreach (string characterName in currentNode.hideCharacters)
             {
-                characterManager.HideCharacter(characterName);
+                characterManager.HideCharacter(
+                    characterName);
             }
         }
 
@@ -155,13 +151,25 @@ public class DialogueManager : MonoBehaviour
         // =========================
 
         nameText.text = currentNode.speaker;
-        dialogueText.text = currentNode.text;
+
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+        }
+
+        typingCoroutine =
+            StartCoroutine(
+                TypeText(currentNode.text));
 
         // =========================
         // ACTIVE SPEAKER
         // =========================
 
-        characterManager.SetSpeaker(currentNode.speaker);
+        if (characterManager.HasCharacter(currentNode.speaker))
+        {
+            characterManager.SetSpeaker(
+                currentNode.speaker);
+        }
 
         // =========================
         // CHOICES
@@ -173,7 +181,9 @@ public class DialogueManager : MonoBehaviour
             foreach (DialogueChoice choice in currentNode.choices)
             {
                 GameObject buttonObj =
-                    Instantiate(choicePrefab, choicesContainer);
+                    Instantiate(
+                        choicePrefab,
+                        choicesContainer);
 
                 buttonObj
                     .GetComponentInChildren<TextMeshProUGUI>()
@@ -191,20 +201,59 @@ public class DialogueManager : MonoBehaviour
     }
 
     // =========================
+    // CONTINUE DIALOGUE
+    // =========================
+
+    public void ContinueDialogue()
+    {
+        if (currentNode == null)
+            return;
+
+        // если есть выборы
+        if (currentNode.choices != null &&
+            currentNode.choices.Count > 0)
+        {
+            return;
+        }
+
+        // если текст ещё печатается
+        if (isTyping)
+        {
+            StopCoroutine(typingCoroutine);
+
+            dialogueText.text =
+                currentNode.text;
+
+            isTyping = false;
+
+            return;
+        }
+
+        NextDialogue();
+    }
+
+    // =========================
     // NEXT DIALOGUE
     // =========================
 
     void NextDialogue()
     {
+        // есть следующая нода
         if (!string.IsNullOrEmpty(currentNode.nextNodeID))
         {
             ShowNode(currentNode.nextNodeID);
-        }
-        else
-        {
-            Debug.Log("Конец диалога");
 
-            ClearChoices();
+            return;
+        }
+
+        // конец дня
+        Debug.Log("Конец дня");
+
+        ClearChoices();
+
+        if (eventManager != null)
+        {
+            eventManager.NextDay();
         }
     }
 
@@ -222,26 +271,39 @@ public class DialogueManager : MonoBehaviour
         // RELATIONSHIP CHECKS
         // =========================
 
-        if (relationshipSystem.sadako < choice.requiredSadako)
+        if (relationshipSystem.sadako <
+            choice.requiredSadako)
+        {
             passed = false;
+        }
 
-        if (relationshipSystem.sumiko < choice.requiredSumiko)
+        if (relationshipSystem.sumiko <
+            choice.requiredSumiko)
+        {
             passed = false;
+        }
 
-        if (relationshipSystem.teruko < choice.requiredTeruko)
+        if (relationshipSystem.teruko <
+            choice.requiredTeruko)
+        {
             passed = false;
+        }
 
-        string nextID = choice.nextNodeID;
+        string nextID =
+            choice.nextNodeID;
 
-        // если провалили проверку
-        if (!passed && !string.IsNullOrEmpty(choice.failNodeID))
+        // если не прошёл проверку
+        if (!passed &&
+            !string.IsNullOrEmpty(choice.failNodeID))
         {
             nextID = choice.failNodeID;
         }
 
         if (string.IsNullOrEmpty(nextID))
         {
-            Debug.LogError("Нет следующей ноды!");
+            Debug.LogError(
+                "Нет следующей ноды!");
+
             return;
         }
 
@@ -258,5 +320,50 @@ public class DialogueManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+    }
+
+    // =========================
+    // TYPEWRITER
+    // =========================
+
+    IEnumerator TypeText(string text)
+    {
+        isTyping = true;
+
+        dialogueText.text = "";
+
+        foreach (char letter in text)
+        {
+            dialogueText.text += letter;
+
+            yield return new WaitForSeconds(
+                typingSpeed);
+        }
+
+        isTyping = false;
+    }
+
+    // =========================
+    // GET CURRENT NODE ID
+    // =========================
+
+    public string GetCurrentNodeID()
+    {
+        if (currentNode == null)
+            return "";
+
+        return currentNode.id;
+    }
+
+    // =========================
+    // GET CURRENT SPEAKER
+    // =========================
+
+    public string GetCurrentSpeaker()
+    {
+        if (currentNode == null)
+            return "";
+
+        return currentNode.speaker;
     }
 }

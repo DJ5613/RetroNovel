@@ -2,38 +2,101 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
+    [Header("Databases")]
     public EventDatabase eventDatabase;
+
+    [Header("Systems")]
     public DialogueManager dialogueManager;
 
-    public void StartDayEvent()
+    [Header("Day System")]
+    public int currentDay = 1;
+
+    // =========================
+    // START DAY EVENT
+    // =========================
+
+    public bool StartDayEvent()
     {
-        int currentDay = GameManager.Instance.currentDay;
+        Debug.Log(
+            "Запуск дня: " + currentDay);
 
         foreach (EventData eventData in eventDatabase.events)
         {
+            // день не совпадает
             if (eventData.day != currentDay)
                 continue;
 
-            // проверка route
+            // =========================
+            // ROUTE CHECK
+            // =========================
+
             if (!string.IsNullOrEmpty(eventData.requiredRoute))
             {
                 if (!CheckRoute(eventData.requiredRoute))
                     continue;
             }
 
-            // проверка флагов
+            // =========================
+            // FLAG CHECK
+            // =========================
+
             if (!string.IsNullOrEmpty(eventData.requiredFlag))
             {
                 if (!CheckFlag(eventData.requiredFlag))
                     continue;
             }
 
-            dialogueManager.ShowNode(eventData.nodeID);
-            return;
-        }
+            // =========================
+            // START EVENT
+            // =========================
 
-        Debug.Log("Событие не найдено");
+            dialogueManager.ShowNode(
+                eventData.nodeID);
+
+            dialogueManager.ShowNode(eventData.nodeID);
+
+            return true;
+        }
+        Debug.LogWarning(
+    "Событие для дня не найдено");
+
+        return false;
     }
+
+    // =========================
+    // NEXT DAY
+    // =========================
+
+    public void NextDay()
+    {
+        currentDay++;
+
+        Debug.Log(
+            "Новый день: " + currentDay);
+
+        bool success = StartDayEvent();
+
+        if (!success)
+        {
+            currentDay--;
+
+            Debug.Log(
+                "Больше дней нет");
+        }
+    }
+
+    // =========================
+    // GET CURRENT DAY
+    // =========================
+
+    public int GetCurrentDay()
+    {
+        return currentDay;
+    }
+
+    // =========================
+    // CHECK ROUTE
+    // =========================
 
     bool CheckRoute(string route)
     {
@@ -51,6 +114,10 @@ public class EventManager : MonoBehaviour
 
         return false;
     }
+
+    // =========================
+    // CHECK FLAG
+    // =========================
 
     bool CheckFlag(string flag)
     {
