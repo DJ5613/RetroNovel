@@ -2,11 +2,11 @@
   "nodes": [
     {
       "id": "start",
+      "background": "classroom",
       "character": "Sadako",
       "emotion": "normal",
       "position": "right",
-      "text": "Ты сегодня опоздал...",
-      "nextNodeID": "sadako2"
+      "text": "Ты сегодня опоздал..."
     },
 
     {

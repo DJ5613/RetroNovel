@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour
     private DialogueNode currentNode;
 
     public CharacterManager characterManager;
+    public BackgroundManager backgroundManager;
 
     void Start()
     {
@@ -75,6 +76,10 @@ public class DialogueManager : MonoBehaviour
                     OnChoiceSelected(choice);
                 });
             }
+        }
+        if (!string.IsNullOrEmpty(currentNode.background))
+        {
+            backgroundManager.ChangeBackground(currentNode.background);
         }
     }
 

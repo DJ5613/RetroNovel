@@ -26,6 +26,7 @@ public class DialogueChoice
 public class DialogueNode
 {
     public string id;
+    public string background;
     public string character;
     public string emotion;
     public string position;
