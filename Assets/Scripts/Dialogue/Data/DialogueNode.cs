@@ -27,6 +27,9 @@ public class DialogueNode
 {
     public string id;
     public string character;
+    public string emotion;
+    public string position;
+    public bool hideCharacter;
     public string text;
 
     public string nextNodeID;

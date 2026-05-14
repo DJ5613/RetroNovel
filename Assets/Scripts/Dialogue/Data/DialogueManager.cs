@@ -15,6 +15,8 @@ public class DialogueManager : MonoBehaviour
 
     private DialogueNode currentNode;
 
+    public CharacterManager characterManager;
+
     void Start()
     {
         ShowNode("start");
@@ -46,6 +48,18 @@ public class DialogueManager : MonoBehaviour
 
         nameText.text = currentNode.character;
         dialogueText.text = currentNode.text;
+        if (currentNode.hideCharacter)
+        {
+            characterManager.HideCharacter(currentNode.position);
+        }
+        else
+        {
+            characterManager.ShowCharacter(
+                currentNode.character,
+                currentNode.emotion,
+                currentNode.position
+            );
+        }
 
         // Если есть выборы — создаём кнопки
         if (currentNode.choices != null && currentNode.choices.Count > 0)

@@ -2,37 +2,105 @@
   "nodes": [
     {
       "id": "start",
-      "character": "Садако",
+      "character": "Sadako",
+      "emotion": "normal",
+      "position": "right",
       "text": "Ты сегодня опоздал...",
-      "nextNodeID": "next1"
+      "nextNodeID": "sadako2"
     },
+
     {
-      "id": "next1",
-      "character": "Садако",
-      "text": "Всё в порядке?",
+      "id": "sadako2",
+      "character": "Sadako",
+      "emotion": "smile",
+      "position": "right",
+      "text": "Я уже начала переживать.",
+      "nextNodeID": "sumiko_enter"
+    },
+
+    {
+      "id": "sumiko_enter",
+      "character": "Sumiko",
+      "emotion": "annoyed",
+      "position": "left",
+      "text": "Как обычно. Он никогда не приходит вовремя.",
+      "nextNodeID": "choice1"
+    },
+
+    {
+      "id": "choice1",
+      "character": "Sadako",
+      "emotion": "normal",
+      "position": "right",
+      "text": "Ну... главное, что пришёл.",
       "choices": [
         {
-          "text": "Да, всё нормально",
-          "nextNodeID": "good",
-          "sadakoChange": 1
+          "text": "Извиниться",
+          "nextNodeID": "good_response",
+          "sadakoChange": 1,
+          "sumikoChange": 1
         },
+
         {
-          "text": "Не твоё дело",
-          "nextNodeID": "bad",
-          "sadakoChange": -2
+          "text": "Огрызнуться",
+          "nextNodeID": "bad_response",
+          "sadakoChange": -1,
+          "sumikoChange": -2
         }
       ]
     },
+
     {
-      "id": "good",
-      "character": "Садако",
-      "text": "Хорошо... я рада",
-      "nextNodeID": ""
+      "id": "good_response",
+      "character": "Sumiko",
+      "emotion": "thinking",
+      "position": "left",
+      "text": "...Ладно. Хотя бы честно.",
+      "nextNodeID": "teruko_enter"
     },
+
     {
-      "id": "bad",
-      "character": "Садако",
-      "text": "...Понятно",
+      "id": "bad_response",
+      "character": "Sadako",
+      "emotion": "sad",
+      "position": "right",
+      "text": "...Я просто волновалась.",
+      "nextNodeID": "sumiko_leave"
+    },
+
+    {
+      "id": "sumiko_leave",
+      "character": "Sumiko",
+      "position": "left",
+      "hideCharacter": true,
+      "text": "Сумико раздражённо отвернулась и ушла.",
+      "nextNodeID": "sadako_alone"
+    },
+
+    {
+      "id": "sadako_alone",
+      "character": "Sadako",
+      "emotion": "sad",
+      "position": "right",
+      "text": "Не обращай внимания... у неё просто тяжёлый характер.",
+      "nextNodeID": "teruko_enter"
+    },
+
+    {
+      "id": "teruko_enter",
+      "character": "Teruko",
+      "emotion": "happy",
+      "position": "center",
+      "text": "О! Все уже здесь?",
+      "nextNodeID": "final_scene"
+    },
+
+    {
+      "id": "final_scene",
+      "character": "Teruko",
+      "emotion": "laugh",
+      "position": "center",
+      "text": "Тогда пошли скорее! А то снова опоздаем!",
       "nextNodeID": ""
     }
   ]
