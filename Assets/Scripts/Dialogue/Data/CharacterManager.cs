@@ -1,49 +1,145 @@
-using UnityEngine;
+п»їusing UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class CharacterManager : MonoBehaviour
 {
+    [Header("Character Slots")]
     public Image leftSlot;
     public Image centerSlot;
     public Image rightSlot;
 
+    [Header("Colors")]
     public Color activeColor = Color.white;
-    public Color inactiveColor = new Color(0.5f, 0.5f, 0.5f);
+    public Color inactiveColor = new Color(0.5f, 0.5f, 0.5f, 1f);
 
-    void Start()
-    {
-        HideAll();
-    }
+    // РҐСЂР°РЅРёРј РєС‚Рѕ РіРґРµ СЃС‚РѕРёС‚
+    private Dictionary<string, CharacterData> activeCharacters = new();
+
+    // =========================
+    // SHOW CHARACTER
+    // =========================
 
     public void ShowCharacter(string characterName, string emotion, string position)
     {
         string path = $"Sprites/Characters/{characterName}/{emotion}";
+
         Sprite sprite = Resources.Load<Sprite>(path);
 
         if (sprite == null)
         {
-            Debug.LogWarning("Спрайт не найден: " + path);
+            Debug.LogWarning("РЎРїСЂР°Р№С‚ РЅРµ РЅР°Р№РґРµРЅ: " + path);
             return;
         }
 
-        Image targetSlot = GetSlot(position);
+        Image slot = GetSlot(position);
 
-        if (targetSlot == null)
+        if (slot == null)
         {
-            Debug.LogWarning("Позиция не найдена: " + position);
+            Debug.LogWarning("РЎР»РѕС‚ РЅРµ РЅР°Р№РґРµРЅ: " + position);
             return;
         }
 
-        // ставим персонажа
-        targetSlot.sprite = sprite;
-        targetSlot.enabled = true;
+        slot.sprite = sprite;
+        slot.enabled = true;
 
-        // затемняем ВСЕХ
+        // РџРѕ СѓРјРѕР»С‡Р°РЅРёСЋ Р·Р°С‚РµРјРЅСЏРµРј
+        slot.color = inactiveColor;
+
+        // Р•СЃР»Рё РїРµСЂСЃРѕРЅР°Р¶ СѓР¶Рµ РµСЃС‚СЊ в†’ РѕР±РЅРѕРІР»СЏРµРј
+        if (activeCharacters.ContainsKey(characterName))
+        {
+            activeCharacters[characterName].emotion = emotion;
+            activeCharacters[characterName].position = position;
+        }
+        else
+        {
+            activeCharacters.Add(characterName, new CharacterData
+            {
+                emotion = emotion,
+                position = position
+            });
+        }
+    }
+
+    // =========================
+    // CHANGE EMOTION
+    // =========================
+
+    public void ChangeEmotion(string characterName, string newEmotion)
+    {
+        if (!activeCharacters.ContainsKey(characterName))
+        {
+            Debug.LogWarning("РџРµСЂСЃРѕРЅР°Р¶ РЅРµ РЅР°Р№РґРµРЅ: " + characterName);
+            return;
+        }
+
+        string position = activeCharacters[characterName].position;
+
+        ShowCharacter(characterName, newEmotion, position);
+    }
+
+    // =========================
+    // HIDE CHARACTER
+    // =========================
+
+    public void HideCharacter(string characterName)
+    {
+        if (!activeCharacters.ContainsKey(characterName))
+            return;
+
+        string position = activeCharacters[characterName].position;
+
+        Image slot = GetSlot(position);
+
+        if (slot != null)
+        {
+            slot.enabled = false;
+        }
+
+        activeCharacters.Remove(characterName);
+    }
+
+    // =========================
+    // SET ACTIVE SPEAKER
+    // =========================
+
+    public void SetSpeaker(string speakerName)
+    {
         DimAll();
 
-        // активного делаем ярким
-        targetSlot.color = activeColor;
+        if (!activeCharacters.ContainsKey(speakerName))
+            return;
+
+        string position = activeCharacters[speakerName].position;
+
+        Image slot = GetSlot(position);
+
+        if (slot != null)
+        {
+            slot.color = activeColor;
+        }
     }
+
+    // =========================
+    // DIM ALL
+    // =========================
+
+    void DimAll()
+    {
+        if (leftSlot.enabled)
+            leftSlot.color = inactiveColor;
+
+        if (centerSlot.enabled)
+            centerSlot.color = inactiveColor;
+
+        if (rightSlot.enabled)
+            rightSlot.color = inactiveColor;
+    }
+
+    // =========================
+    // GET SLOT
+    // =========================
 
     Image GetSlot(string position)
     {
@@ -62,32 +158,27 @@ public class CharacterManager : MonoBehaviour
         return null;
     }
 
-    void DimAll()
-    {
-        if (leftSlot.enabled)
-            leftSlot.color = inactiveColor;
-
-        if (centerSlot.enabled)
-            centerSlot.color = inactiveColor;
-
-        if (rightSlot.enabled)
-            rightSlot.color = inactiveColor;
-    }
+    // =========================
+    // HIDE ALL
+    // =========================
 
     public void HideAll()
     {
         leftSlot.enabled = false;
         centerSlot.enabled = false;
         rightSlot.enabled = false;
-    }
 
-    public void HideCharacter(string position)
-    {
-        Image targetSlot = GetSlot(position);
-
-        if (targetSlot != null)
-        {
-            targetSlot.enabled = false;
-        }
+        activeCharacters.Clear();
     }
+}
+
+// =========================
+// CHARACTER DATA
+// =========================
+
+[System.Serializable]
+public class CharacterData
+{
+    public string emotion;
+    public string position;
 }

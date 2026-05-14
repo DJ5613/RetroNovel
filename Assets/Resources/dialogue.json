@@ -1,106 +1,242 @@
 {
   "nodes": [
     {
-      "id": "start",
+      "id": "day1_start",
+
       "background": "classroom",
-      "character": "Sadako",
-      "emotion": "normal",
-      "position": "right",
-      "text": "Ты сегодня опоздал..."
+
+      "setCharacters": [
+        {
+          "name": "Sadako",
+          "emotion": "normal",
+          "position": "right"
+        }
+      ],
+
+      "speaker": "Sadako",
+
+      "text": "Ты сегодня снова опоздал.",
+
+      "nextNodeID": "day1_2"
     },
 
     {
-      "id": "sadako2",
-      "character": "Sadako",
-      "emotion": "smile",
-      "position": "right",
-      "text": "Я уже начала переживать.",
-      "nextNodeID": "sumiko_enter"
+      "id": "day1_2",
+
+      "speaker": "Sadako",
+
+      "text": "Хотя... я уже начинаю привыкать.",
+
+      "nextNodeID": "day1_3"
     },
 
     {
-      "id": "sumiko_enter",
-      "character": "Sumiko",
-      "emotion": "annoyed",
-      "position": "left",
-      "text": "Как обычно. Он никогда не приходит вовремя.",
-      "nextNodeID": "choice1"
+      "id": "day1_3",
+
+      "setCharacters": [
+        {
+          "name": "Sumiko",
+          "emotion": "thinking",
+          "position": "left"
+        }
+      ],
+
+      "speaker": "Sumiko",
+
+      "text": "Вы опять разговариваете про его опоздания?",
+
+      "nextNodeID": "day1_4"
     },
 
     {
-      "id": "choice1",
-      "character": "Sadako",
-      "emotion": "normal",
-      "position": "right",
-      "text": "Ну... главное, что пришёл.",
+      "id": "day1_4",
+
+      "emotionChanges": [
+        {
+          "name": "Sadako",
+          "emotion": "angry"
+        }
+      ],
+
+      "speaker": "Sadako",
+
+      "text": "Это вообще-то важный вопрос.",
+
+      "nextNodeID": "day1_5"
+    },
+
+    {
+      "id": "day1_5",
+
+      "speaker": "Sumiko",
+
+      "text": "Если бы за опоздания ставили диагноз, ты бы уже защитила диссертацию.",
+
+      "nextNodeID": "day1_6"
+    },
+
+    {
+      "id": "day1_6",
+
+      "hideCharacters": [
+        "Sadako"
+      ],
+
+      "speaker": "Sumiko",
+
+      "text": "Она ушла обиженная.",
+
+      "nextNodeID": "day1_7"
+    },
+
+    {
+      "id": "day1_7",
+
+      "background": "club",
+
+      "setCharacters": [
+        {
+          "name": "Teruko",
+          "emotion": "happy",
+          "position": "center"
+        },
+        {
+          "name": "Sadako",
+          "emotion": "normal",
+          "position": "right"
+        }
+      ],
+
+      "speaker": "Teruko",
+
+      "text": "Смотрите что я нашла!",
+
+      "nextNodeID": "day1_8"
+    },
+
+    {
+      "id": "day1_8",
+
+      "speaker": "Teruko",
+
+      "text": "Это старая кассета. Очень старая.",
+
+      "nextNodeID": "day1_9"
+    },
+
+    {
+      "id": "day1_9",
+
+      "setFlags": [
+        "foundCassette"
+      ],
+
+      "speaker": "Narrator",
+
+      "text": "Ты внимательно посмотрел на кассету.",
+
+      "nextNodeID": "day1_10"
+    },
+
+    {
+      "id": "day1_10",
+
+      "speaker": "Sumiko",
+
+      "text": "Не нравится мне эта штука.",
+
+      "nextNodeID": "day1_choice"
+    },
+
+    {
+      "id": "day1_choice",
+
+      "speaker": "",
+
+      "text": "После уроков у тебя появилось немного свободного времени.",
+
       "choices": [
         {
-          "text": "Извиниться",
-          "nextNodeID": "good_response",
-          "sadakoChange": 1,
-          "sumikoChange": 1
+          "text": "Пойти к Тэруко",
+
+          "terukoChange": 1,
+
+          "nextNodeID": "teruko_route"
         },
 
         {
-          "text": "Огрызнуться",
-          "nextNodeID": "bad_response",
-          "sadakoChange": -1,
-          "sumikoChange": -2
+          "text": "Пойти к Сумико",
+
+          "sumikoChange": 1,
+
+          "nextNodeID": "sumiko_route"
         }
       ]
     },
 
     {
-      "id": "good_response",
-      "character": "Sumiko",
-      "emotion": "thinking",
-      "position": "left",
-      "text": "...Ладно. Хотя бы честно.",
-      "nextNodeID": "teruko_enter"
+      "id": "teruko_route",
+
+      "background": "club",
+
+      "hideCharacters": [
+        "Sadako",
+        "Sumiko"
+      ],
+
+      "speaker": "Teruko",
+
+      "text": "Хочешь посмотреть кассету вместе?",
+
+      "nextNodeID": "secret_check"
     },
 
     {
-      "id": "bad_response",
-      "character": "Sadako",
-      "emotion": "sad",
-      "position": "right",
-      "text": "...Я просто волновалась.",
-      "nextNodeID": "sumiko_leave"
+      "id": "sumiko_route",
+
+      "background": "street",
+
+      "hideCharacters": [
+        "Sadako",
+        "Teruko"
+      ],
+
+      "speaker": "Sumiko",
+
+      "text": "Мне кажется эта кассета какая-то странная.",
+
+      "nextNodeID": "secret_check"
     },
 
     {
-      "id": "sumiko_leave",
-      "character": "Sumiko",
-      "position": "left",
-      "hideCharacter": true,
-      "text": "Сумико раздражённо отвернулась и ушла.",
-      "nextNodeID": "sadako_alone"
+      "id": "secret_check",
+
+      "requiredFlags": [
+        "foundCassette"
+      ],
+
+      "background": "room",
+
+      "hideCharacters": [
+        "Sumiko",
+        "Teruko",
+        "Sadako"
+      ],
+
+      "speaker": "Narrator",
+
+      "text": "Поздно ночью ты заметил, что кассета лежит у тебя дома.",
+
+      "nextNodeID": "secret_scene"
     },
 
     {
-      "id": "sadako_alone",
-      "character": "Sadako",
-      "emotion": "sad",
-      "position": "right",
-      "text": "Не обращай внимания... у неё просто тяжёлый характер.",
-      "nextNodeID": "teruko_enter"
-    },
+      "id": "secret_scene",
 
-    {
-      "id": "teruko_enter",
-      "character": "Teruko",
-      "emotion": "happy",
-      "position": "center",
-      "text": "О! Все уже здесь?",
-      "nextNodeID": "final_scene"
-    },
+      "speaker": "Narrator",
 
-    {
-      "id": "final_scene",
-      "character": "Teruko",
-      "emotion": "laugh",
-      "position": "center",
-      "text": "Тогда пошли скорее! А то снова опоздаем!",
+      "text": "Хотя ты точно помнил, что не забирал её.",
+
       "nextNodeID": ""
     }
   ]

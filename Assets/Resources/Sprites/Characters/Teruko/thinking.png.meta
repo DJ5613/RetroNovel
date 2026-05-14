@@ -1,0 +1,1846 @@
+fileFormatVersion: 2
+guid: 3b630a72ecab4ef4c90dc905f1ac10f0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6154494665042352654
+    second: thinking_0
+  - first:
+      213: 4518773677466724543
+    second: thinking_1
+  - first:
+      213: -9069949552499274962
+    second: thinking_2
+  - first:
+      213: 1870237062913961718
+    second: thinking_3
+  - first:
+      213: -9093886188583988979
+    second: thinking_4
+  - first:
+      213: -8327289981859671245
+    second: thinking_5
+  - first:
+      213: -8274831657458470702
+    second: thinking_6
+  - first:
+      213: 2710382672443189554
+    second: thinking_7
+  - first:
+      213: 2247489152953956514
+    second: thinking_8
+  - first:
+      213: 3547335762733170065
+    second: thinking_9
+  - first:
+      213: 5222199266563313480
+    second: thinking_10
+  - first:
+      213: -415363456944502321
+    second: thinking_11
+  - first:
+      213: -2811907968336563689
+    second: thinking_12
+  - first:
+      213: 6791261743463436238
+    second: thinking_13
+  - first:
+      213: -1605429757660987650
+    second: thinking_14
+  - first:
+      213: -3289602260868962788
+    second: thinking_15
+  - first:
+      213: 2088108282660540515
+    second: thinking_16
+  - first:
+      213: 109761843341425304
+    second: thinking_17
+  - first:
+      213: -2300897377795271874
+    second: thinking_18
+  - first:
+      213: -521653132619929731
+    second: thinking_19
+  - first:
+      213: 8874781761619217985
+    second: thinking_20
+  - first:
+      213: -8205959240862779701
+    second: thinking_21
+  - first:
+      213: 3185943232513363423
+    second: thinking_22
+  - first:
+      213: 3036899047898343897
+    second: thinking_23
+  - first:
+      213: 3526088609438761318
+    second: thinking_24
+  - first:
+      213: -5805294889588093809
+    second: thinking_25
+  - first:
+      213: 7489313317894544397
+    second: thinking_26
+  - first:
+      213: 7884735615133117958
+    second: thinking_27
+  - first:
+      213: -2567592393054920280
+    second: thinking_28
+  - first:
+      213: -6020736740992854842
+    second: thinking_29
+  - first:
+      213: -1222838631361847080
+    second: thinking_30
+  - first:
+      213: -4790769504590687571
+    second: thinking_31
+  - first:
+      213: 4833682618635249719
+    second: thinking_32
+  - first:
+      213: -4444919307773809128
+    second: thinking_33
+  - first:
+      213: 3292040851236107466
+    second: thinking_34
+  - first:
+      213: -3306126491537916405
+    second: thinking_35
+  - first:
+      213: 4773357965124943494
+    second: thinking_36
+  - first:
+      213: -7761941685107099822
+    second: thinking_37
+  - first:
+      213: -7631113063884375690
+    second: thinking_38
+  - first:
+      213: 8762715238083454050
+    second: thinking_39
+  - first:
+      213: 5969850609076881872
+    second: thinking_40
+  - first:
+      213: 9117189581498747108
+    second: thinking_41
+  - first:
+      213: -4182923102027932830
+    second: thinking_42
+  - first:
+      213: 4482929517543522636
+    second: thinking_43
+  - first:
+      213: -3062267715395970926
+    second: thinking_44
+  - first:
+      213: -1221426080500669225
+    second: thinking_45
+  - first:
+      213: -4697287848261979786
+    second: thinking_46
+  - first:
+      213: -4713487771838893557
+    second: thinking_47
+  - first:
+      213: 9182153642498318153
+    second: thinking_48
+  - first:
+      213: 5765631784456926865
+    second: thinking_49
+  - first:
+      213: -4580295092048341927
+    second: thinking_50
+  - first:
+      213: -4401204035108206774
+    second: thinking_51
+  - first:
+      213: -4699321255881647107
+    second: thinking_52
+  - first:
+      213: 2356236107750021171
+    second: thinking_53
+  - first:
+      213: 5935530597002202922
+    second: thinking_54
+  - first:
+      213: 7414200690585284064
+    second: thinking_55
+  - first:
+      213: 3652721455876380633
+    second: thinking_56
+  - first:
+      213: 5219459747905594599
+    second: thinking_57
+  - first:
+      213: -2651361331251049610
+    second: thinking_58
+  - first:
+      213: -1735888097092173082
+    second: thinking_59
+  - first:
+      213: -3463020968507292897
+    second: thinking_60
+  - first:
+      213: 4702044617338467674
+    second: thinking_61
+  - first:
+      213: -6963612925989406677
+    second: thinking_62
+  - first:
+      213: -8620687884707202446
+    second: thinking_63
+  - first:
+      213: 2053530123378205559
+    second: thinking_64
+  - first:
+      213: -1697917803665044487
+    second: thinking_65
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: thinking_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 1187
+        width: 248
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f52d16c5b7d69aa0800000000000000
+      internalID: -6154494665042352654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_1
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 1306
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb82ac9d7b8e5be30800000000000000
+      internalID: 4518773677466724543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_2
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 1331
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2b4198cfe0112280800000000000000
+      internalID: -9069949552499274962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_3
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 0
+        width: 1477
+        height: 1434
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fea1c423ba64f910800000000000000
+      internalID: 1870237062913961718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_4
+      rect:
+        serializedVersion: 2
+        x: 2263
+        y: 1306
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d01de9561b60cc180800000000000000
+      internalID: -9093886188583988979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_5
+      rect:
+        serializedVersion: 2
+        x: 2287
+        y: 1331
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 333d591a1e58f6c80800000000000000
+      internalID: -8327289981859671245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_6
+      rect:
+        serializedVersion: 2
+        x: 2410
+        y: 1338
+        width: 90
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d0f7011374e92d80800000000000000
+      internalID: -8274831657458470702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_7
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 1249
+        width: 52
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 239a95c2ea63d9520800000000000000
+      internalID: 2710382672443189554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_8
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 1287
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a83d561a7fa03f10800000000000000
+      internalID: 2247489152953956514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_9
+      rect:
+        serializedVersion: 2
+        x: 2207
+        y: 1249
+        width: 52
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19dffb4e41baa3130800000000000000
+      internalID: 3547335762733170065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_10
+      rect:
+        serializedVersion: 2
+        x: 2249
+        y: 1287
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84fcfc5809af87840800000000000000
+      internalID: 5222199266563313480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_11
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 1188
+        width: 42
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc90528f2255c3af0800000000000000
+      internalID: -415363456944502321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_12
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 1219
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7127536d9981af8d0800000000000000
+      internalID: -2811907968336563689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_13
+      rect:
+        serializedVersion: 2
+        x: 2151
+        y: 1188
+        width: 42
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecf86d3f2986f3e50800000000000000
+      internalID: 6791261743463436238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_14
+      rect:
+        serializedVersion: 2
+        x: 2182
+        y: 1219
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efe76ce242e58b9e0800000000000000
+      internalID: -1605429757660987650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_15
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 1103
+        width: 74
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c16659c3c2cf852d0800000000000000
+      internalID: -3289602260868962788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_16
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 855
+        width: 255
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36058887b637afc10800000000000000
+      internalID: 2088108282660540515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_17
+      rect:
+        serializedVersion: 2
+        x: 2066
+        y: 1103
+        width: 74
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89af142a0d3f58100800000000000000
+      internalID: 109761843341425304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_18
+      rect:
+        serializedVersion: 2
+        x: 2135
+        y: 855
+        width: 255
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3392eb86029110e0800000000000000
+      internalID: -2300897377795271874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_19
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 1027
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d77283e5d37b2c8f0800000000000000
+      internalID: -521653132619929731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_20
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 1051
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14ecd68ddfe892b70800000000000000
+      internalID: 8874781761619217985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_21
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 969
+        width: 52
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc63a072c839e1e80800000000000000
+      internalID: -8205959240862779701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_22
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 1007
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fddc4887d7eb63c20800000000000000
+      internalID: 3185943232513363423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_23
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 909
+        width: 42
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d9e3b8089b352a20800000000000000
+      internalID: 3036899047898343897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_24
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 940
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 661062488ee2fe030800000000000000
+      internalID: 3526088609438761318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_25
+      rect:
+        serializedVersion: 2
+        x: 2473
+        y: 910
+        width: 27
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8c06b14e037f6fa0800000000000000
+      internalID: -5805294889588093809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_26
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 586
+        width: 248
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0cd4b458c26fe760800000000000000
+      internalID: 7489313317894544397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_27
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 705
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60e61ef44453c6d60800000000000000
+      internalID: 7884735615133117958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_28
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 730
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a167fb72541e5cd0800000000000000
+      internalID: -2567592393054920280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_29
+      rect:
+        serializedVersion: 2
+        x: 2263
+        y: 705
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c45af255db027ca0800000000000000
+      internalID: -6020736740992854842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_30
+      rect:
+        serializedVersion: 2
+        x: 2287
+        y: 730
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d06d006eba970fe0800000000000000
+      internalID: -1222838631361847080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_31
+      rect:
+        serializedVersion: 2
+        x: 2410
+        y: 737
+        width: 90
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da21916a484c38db0800000000000000
+      internalID: -4790769504590687571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_32
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 648
+        width: 52
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 738ebb05bb0b41340800000000000000
+      internalID: 4833682618635249719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_33
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 686
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81eedd490797052c0800000000000000
+      internalID: -4444919307773809128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_34
+      rect:
+        serializedVersion: 2
+        x: 2207
+        y: 648
+        width: 52
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac4b00456bdafad20800000000000000
+      internalID: 3292040851236107466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_35
+      rect:
+        serializedVersion: 2
+        x: 2249
+        y: 686
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0ebf59f8774e12d0800000000000000
+      internalID: -3306126491537916405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_36
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 588
+        width: 42
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68ebd0967cf5e3240800000000000000
+      internalID: 4773357965124943494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_37
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 618
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 257f4e3792b084490800000000000000
+      internalID: -7761941685107099822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_38
+      rect:
+        serializedVersion: 2
+        x: 2151
+        y: 588
+        width: 42
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 679345a8917d81690800000000000000
+      internalID: -7631113063884375690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_39
+      rect:
+        serializedVersion: 2
+        x: 2182
+        y: 618
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 264edd9051b6b9970800000000000000
+      internalID: 8762715238083454050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_40
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 502
+        width: 74
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d94d24df7b29d250800000000000000
+      internalID: 5969850609076881872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_41
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 254
+        width: 255
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e800239e93c68e70800000000000000
+      internalID: 9117189581498747108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_42
+      rect:
+        serializedVersion: 2
+        x: 2066
+        y: 502
+        width: 74
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26b99dcc99543f5c0800000000000000
+      internalID: -4182923102027932830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_43
+      rect:
+        serializedVersion: 2
+        x: 2135
+        y: 254
+        width: 255
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c418b4605a0963e30800000000000000
+      internalID: 4482929517543522636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_44
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 426
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2981da8ccb3a085d0800000000000000
+      internalID: -3062267715395970926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_45
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 450
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d42c50837f9c0fe0800000000000000
+      internalID: -1221426080500669225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_46
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 368
+        width: 53
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 671f59cd691efceb0800000000000000
+      internalID: -4697287848261979786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_47
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 406
+        width: 24
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b02356a38d3569eb0800000000000000
+      internalID: -4713487771838893557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_48
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 308
+        width: 43
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94fdb26b6109d6f70800000000000000
+      internalID: 9182153642498318153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_49
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 339
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 196b1427f83a30050800000000000000
+      internalID: 5765631784456926865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_50
+      rect:
+        serializedVersion: 2
+        x: 2472
+        y: 309
+        width: 28
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9545ef791e58f60c0800000000000000
+      internalID: -4580295092048341927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_51
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 0
+        width: 237
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a470c57af38cbe2c0800000000000000
+      internalID: -4401204035108206774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_52
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 104
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfb5bb14738a8ceb0800000000000000
+      internalID: -4699321255881647107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_53
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 129
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3389361914803b020800000000000000
+      internalID: 2356236107750021171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_54
+      rect:
+        serializedVersion: 2
+        x: 2263
+        y: 104
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2f47c351ad3f5250800000000000000
+      internalID: 5935530597002202922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_55
+      rect:
+        serializedVersion: 2
+        x: 2287
+        y: 129
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0edaac7fe3884e660800000000000000
+      internalID: 7414200690585284064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_56
+      rect:
+        serializedVersion: 2
+        x: 2410
+        y: 136
+        width: 90
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d795f8afc211b230800000000000000
+      internalID: 3652721455876380633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_57
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 47
+        width: 52
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e4ec51acfe3f6840800000000000000
+      internalID: 5219459747905594599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_58
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 85
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67b039faae8743bd0800000000000000
+      internalID: -2651361331251049610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_59
+      rect:
+        serializedVersion: 2
+        x: 2207
+        y: 47
+        width: 52
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e20efa09f2e8e7e0800000000000000
+      internalID: -1735888097092173082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_60
+      rect:
+        serializedVersion: 2
+        x: 2249
+        y: 85
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f13c46ae6c0e0ffc0800000000000000
+      internalID: -3463020968507292897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_61
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 0
+        width: 42
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a553f7ebaa4014140800000000000000
+      internalID: 4702044617338467674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_62
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 17
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b28351940f64c5f90800000000000000
+      internalID: -6963612925989406677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_63
+      rect:
+        serializedVersion: 2
+        x: 949
+        y: 0
+        width: 42
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27a73801b0a2d5880800000000000000
+      internalID: -8620687884707202446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_64
+      rect:
+        serializedVersion: 2
+        x: 2151
+        y: 0
+        width: 42
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 773a58364ca9f7c10800000000000000
+      internalID: 2053530123378205559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thinking_65
+      rect:
+        serializedVersion: 2
+        x: 2182
+        y: 17
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fbcbb6e0c8cf68e0800000000000000
+      internalID: -1697917803665044487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      thinking_0: -6154494665042352654
+      thinking_1: 4518773677466724543
+      thinking_10: 5222199266563313480
+      thinking_11: -415363456944502321
+      thinking_12: -2811907968336563689
+      thinking_13: 6791261743463436238
+      thinking_14: -1605429757660987650
+      thinking_15: -3289602260868962788
+      thinking_16: 2088108282660540515
+      thinking_17: 109761843341425304
+      thinking_18: -2300897377795271874
+      thinking_19: -521653132619929731
+      thinking_2: -9069949552499274962
+      thinking_20: 8874781761619217985
+      thinking_21: -8205959240862779701
+      thinking_22: 3185943232513363423
+      thinking_23: 3036899047898343897
+      thinking_24: 3526088609438761318
+      thinking_25: -5805294889588093809
+      thinking_26: 7489313317894544397
+      thinking_27: 7884735615133117958
+      thinking_28: -2567592393054920280
+      thinking_29: -6020736740992854842
+      thinking_3: 1870237062913961718
+      thinking_30: -1222838631361847080
+      thinking_31: -4790769504590687571
+      thinking_32: 4833682618635249719
+      thinking_33: -4444919307773809128
+      thinking_34: 3292040851236107466
+      thinking_35: -3306126491537916405
+      thinking_36: 4773357965124943494
+      thinking_37: -7761941685107099822
+      thinking_38: -7631113063884375690
+      thinking_39: 8762715238083454050
+      thinking_4: -9093886188583988979
+      thinking_40: 5969850609076881872
+      thinking_41: 9117189581498747108
+      thinking_42: -4182923102027932830
+      thinking_43: 4482929517543522636
+      thinking_44: -3062267715395970926
+      thinking_45: -1221426080500669225
+      thinking_46: -4697287848261979786
+      thinking_47: -4713487771838893557
+      thinking_48: 9182153642498318153
+      thinking_49: 5765631784456926865
+      thinking_5: -8327289981859671245
+      thinking_50: -4580295092048341927
+      thinking_51: -4401204035108206774
+      thinking_52: -4699321255881647107
+      thinking_53: 2356236107750021171
+      thinking_54: 5935530597002202922
+      thinking_55: 7414200690585284064
+      thinking_56: 3652721455876380633
+      thinking_57: 5219459747905594599
+      thinking_58: -2651361331251049610
+      thinking_59: -1735888097092173082
+      thinking_6: -8274831657458470702
+      thinking_60: -3463020968507292897
+      thinking_61: 4702044617338467674
+      thinking_62: -6963612925989406677
+      thinking_63: -8620687884707202446
+      thinking_64: 2053530123378205559
+      thinking_65: -1697917803665044487
+      thinking_7: 2710382672443189554
+      thinking_8: 2247489152953956514
+      thinking_9: 3547335762733170065
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

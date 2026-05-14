@@ -1,32 +1,51 @@
-using UnityEngine;
+п»їusing UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+    [Header("UI")]
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
 
+    [Header("Choices")]
     public GameObject choicePrefab;
     public Transform choicesContainer;
 
+    [Header("Systems")]
     public DialogueDatabase database;
     public RelationshipSystem relationshipSystem;
+    public CharacterManager characterManager;
+    public BackgroundManager backgroundManager;
+    public EventManager eventManager;
 
     private DialogueNode currentNode;
 
-    public CharacterManager characterManager;
-    public BackgroundManager backgroundManager;
+    // =========================
+    // START
+    // =========================
 
     void Start()
     {
-        ShowNode("start");
+        characterManager.HideAll();
+
+        if (eventManager != null)
+        {
+            eventManager.StartDayEvent();
+        }
     }
+
+    // =========================
+    // UPDATE
+    // =========================
 
     void Update()
     {
-        // Если нет выборов — кликом идём дальше
-        if (currentNode != null && (currentNode.choices == null || currentNode.choices.Count == 0))
+        if (currentNode == null)
+            return;
+
+        // РµСЃР»Рё РЅРµС‚ РІС‹Р±РѕСЂРѕРІ в†’ РєР»РёРє РёРґС‘С‚ РґР°Р»СЊС€Рµ
+        if (currentNode.choices == null || currentNode.choices.Count == 0)
         {
             if (Input.GetMouseButtonDown(0) || Input.touchCount > 0)
             {
@@ -34,6 +53,10 @@ public class DialogueManager : MonoBehaviour
             }
         }
     }
+
+    // =========================
+    // SHOW NODE
+    // =========================
 
     public void ShowNode(string nodeID)
     {
@@ -43,45 +66,133 @@ public class DialogueManager : MonoBehaviour
 
         if (currentNode == null)
         {
-            Debug.LogError("Node not found: " + nodeID);
+            Debug.LogError("РќРѕРґР° РЅРµ РЅР°Р№РґРµРЅР°: " + nodeID);
             return;
         }
 
-        nameText.text = currentNode.character;
-        dialogueText.text = currentNode.text;
-        if (currentNode.hideCharacter)
-        {
-            characterManager.HideCharacter(currentNode.position);
-        }
-        else
-        {
-            characterManager.ShowCharacter(
-                currentNode.character,
-                currentNode.emotion,
-                currentNode.position
-            );
-        }
+        // =========================
+        // REQUIRED FLAGS
+        // =========================
 
-        // Если есть выборы — создаём кнопки
-        if (currentNode.choices != null && currentNode.choices.Count > 0)
+        if (currentNode.requiredFlags != null)
         {
-            foreach (var choice in currentNode.choices)
+            foreach (string flag in currentNode.requiredFlags)
             {
-                var btn = Instantiate(choicePrefab, choicesContainer);
-
-                btn.GetComponentInChildren<TextMeshProUGUI>().text = choice.text;
-
-                btn.GetComponent<Button>().onClick.AddListener(() =>
+                if (!GameFlags.Instance.HasFlag(flag))
                 {
-                    OnChoiceSelected(choice);
-                });
+                    Debug.Log("РќРµС‚ РЅСѓР¶РЅРѕРіРѕ С„Р»Р°РіР°: " + flag);
+                    return;
+                }
             }
         }
+
+        // =========================
+        // SET FLAGS
+        // =========================
+
+        if (currentNode.setFlags != null)
+        {
+            foreach (string flag in currentNode.setFlags)
+            {
+                GameFlags.Instance.SetFlag(flag);
+            }
+        }
+
+        // =========================
+        // BACKGROUND
+        // =========================
+
         if (!string.IsNullOrEmpty(currentNode.background))
         {
             backgroundManager.ChangeBackground(currentNode.background);
         }
+
+        // =========================
+        // SHOW CHARACTERS
+        // =========================
+
+        if (currentNode.setCharacters != null)
+        {
+            foreach (var character in currentNode.setCharacters)
+            {
+                characterManager.ShowCharacter(
+                    character.name,
+                    character.emotion,
+                    character.position
+                );
+            }
+        }
+
+        // =========================
+        // CHANGE EMOTIONS
+        // =========================
+
+        if (currentNode.emotionChanges != null)
+        {
+            foreach (var change in currentNode.emotionChanges)
+            {
+                characterManager.ChangeEmotion(
+                    change.name,
+                    change.emotion
+                );
+            }
+        }
+
+        // =========================
+        // HIDE CHARACTERS
+        // =========================
+
+        if (currentNode.hideCharacters != null)
+        {
+            foreach (var characterName in currentNode.hideCharacters)
+            {
+                characterManager.HideCharacter(characterName);
+            }
+        }
+
+        // =========================
+        // TEXT
+        // =========================
+
+        nameText.text = currentNode.speaker;
+        dialogueText.text = currentNode.text;
+
+        // =========================
+        // ACTIVE SPEAKER
+        // =========================
+
+        characterManager.SetSpeaker(currentNode.speaker);
+
+        // =========================
+        // CHOICES
+        // =========================
+
+        if (currentNode.choices != null &&
+            currentNode.choices.Count > 0)
+        {
+            foreach (DialogueChoice choice in currentNode.choices)
+            {
+                GameObject buttonObj =
+                    Instantiate(choicePrefab, choicesContainer);
+
+                buttonObj
+                    .GetComponentInChildren<TextMeshProUGUI>()
+                    .text = choice.text;
+
+                buttonObj
+                    .GetComponent<Button>()
+                    .onClick
+                    .AddListener(() =>
+                    {
+                        OnChoiceSelected(choice);
+                    });
+            }
+        }
     }
+
+    // =========================
+    // NEXT DIALOGUE
+    // =========================
 
     void NextDialogue()
     {
@@ -91,17 +202,25 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Конец диалога");
+            Debug.Log("РљРѕРЅРµС† РґРёР°Р»РѕРіР°");
+
             ClearChoices();
         }
     }
 
+    // =========================
+    // CHOICE SELECTED
+    // =========================
+
     void OnChoiceSelected(DialogueChoice choice)
     {
-        // применяем отношения
         relationshipSystem.ApplyChoice(choice);
 
         bool passed = true;
+
+        // =========================
+        // RELATIONSHIP CHECKS
+        // =========================
 
         if (relationshipSystem.sadako < choice.requiredSadako)
             passed = false;
@@ -114,18 +233,24 @@ public class DialogueManager : MonoBehaviour
 
         string nextID = choice.nextNodeID;
 
+        // РµСЃР»Рё РїСЂРѕРІР°Р»РёР»Рё РїСЂРѕРІРµСЂРєСѓ
         if (!passed && !string.IsNullOrEmpty(choice.failNodeID))
         {
             nextID = choice.failNodeID;
         }
+
         if (string.IsNullOrEmpty(nextID))
         {
-            Debug.LogError("Нет следующей ноды!");
+            Debug.LogError("РќРµС‚ СЃР»РµРґСѓСЋС‰РµР№ РЅРѕРґС‹!");
             return;
         }
 
         ShowNode(nextID);
     }
+
+    // =========================
+    // CLEAR CHOICES
+    // =========================
 
     void ClearChoices()
     {

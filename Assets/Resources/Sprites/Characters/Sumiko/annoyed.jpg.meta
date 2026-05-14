@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d8af538f87d3fc04ab498256572f08a3
+guid: 5afab5c261d10a5429a1b5fad7b8f3e8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6545164459252947525
-    second: afa9e2fcf355223c2650b14eb75d53b8_0
+      213: 8726783322534400942
+    second: annoyed_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: afa9e2fcf355223c2650b14eb75d53b8_0
+      name: annoyed_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1440
-        height: 1440
+        width: 900
+        height: 900
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 54a984ed56815da50800000000000000
-      internalID: 6545164459252947525
+      spriteID: ea357730233cb1970800000000000000
+      internalID: 8726783322534400942
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      afa9e2fcf355223c2650b14eb75d53b8_0: 6545164459252947525
+      annoyed_0: 8726783322534400942
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d032ca5ad7422e14da5b0b61ffe2ba87
+guid: d8af538f87d3fc04ab498256572f08a3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6154494665042352654
-    second: thinking_0
+      213: 6545164459252947525
+    second: afa9e2fcf355223c2650b14eb75d53b8_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: thinking_0
+      name: afa9e2fcf355223c2650b14eb75d53b8_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 735
-        height: 540
+        width: 1440
+        height: 1440
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2f52d16c5b7d69aa0800000000000000
-      internalID: -6154494665042352654
+      spriteID: 54a984ed56815da50800000000000000
+      internalID: 6545164459252947525
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      thinking_0: -6154494665042352654
+      afa9e2fcf355223c2650b14eb75d53b8_0: 6545164459252947525
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

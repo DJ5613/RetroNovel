@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d032ca5ad7422e14da5b0b61ffe2ba87
+guid: c8cb1968ddd735144bb1ca196d3607ef
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6154494665042352654
-    second: thinking_0
+      213: 348505817706626259
+    second: room_dark_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: thinking_0
+      name: room_dark_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 735
-        height: 540
+        width: 3498
+        height: 1960
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2f52d16c5b7d69aa0800000000000000
-      internalID: -6154494665042352654
+      spriteID: 3dc7f8ad13426d400800000000000000
+      internalID: 348505817706626259
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      thinking_0: -6154494665042352654
+      room_dark_0: 348505817706626259
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

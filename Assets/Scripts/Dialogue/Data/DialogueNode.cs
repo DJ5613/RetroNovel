@@ -12,27 +12,65 @@ public class DialogueChoice
     public int sumikoChange;
     public int terukoChange;
 
-    // условия
+    // условия отношений
     public int requiredSadako;
     public int requiredSumiko;
     public int requiredTeruko;
 
-    // если не прошёл проверку
+    // если проверка не пройдена
     public string failNodeID;
 }
-
 
 [Serializable]
 public class DialogueNode
 {
     public string id;
-    public string background;
-    public string character;
-    public string emotion;
-    public string position;
-    public bool hideCharacter;
+
+    public string speaker;
     public string text;
 
     public string nextNodeID;
+
     public List<DialogueChoice> choices;
+
+    // =========================
+    // BACKGROUND
+    // =========================
+
+    public string background;
+
+    // =========================
+    // CHARACTER SYSTEM
+    // =========================
+
+    public List<CharacterState> setCharacters;
+
+    public List<CharacterEmotionChange> emotionChanges;
+
+    public List<string> hideCharacters;
+
+    // =========================
+    // FLAGS SYSTEM
+    // =========================
+
+    // установить флаги
+    public List<string> setFlags;
+
+    // требуемые флаги
+    public List<string> requiredFlags;
+}
+
+[Serializable]
+public class CharacterState
+{
+    public string name;
+    public string emotion;
+    public string position;
+}
+
+[Serializable]
+public class CharacterEmotionChange
+{
+    public string name;
+    public string emotion;
 }
