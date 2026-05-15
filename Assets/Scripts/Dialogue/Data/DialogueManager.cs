@@ -251,6 +251,14 @@ public class DialogueManager : MonoBehaviour
 
         ClearChoices();
 
+        if (currentNode.id == "free_time_start")
+        {
+            FindObjectOfType<FreeTimeManager>()
+                .OpenFreeTime();
+
+            return;
+        }
+
         if (eventManager != null)
         {
             eventManager.NextDay();

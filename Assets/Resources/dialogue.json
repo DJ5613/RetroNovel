@@ -25,7 +25,7 @@
 
       "speaker": "Sumiko",
 
-      "text": "Ты сегодня снова пришёл первым.",
+      "text": "Ты сегодня снова пришёл раньше всех.",
 
       "nextNodeID": "day1_2"
     },
@@ -43,117 +43,30 @@
     {
       "id": "day1_3",
 
-      "speaker": "Teruko",
-
-      "text": "Мрачновато звучит.",
-
-      "nextNodeID": "day1_4"
-    },
-
-    {
-      "id": "day1_4",
-
-      "emotionChanges": [
-        {
-          "name": "Sadako",
-          "emotion": "angry"
-        }
-      ],
-
       "speaker": "Sadako",
 
-      "text": "Он просто нормальный человек. В отличие от некоторых.",
+      "text": "После уроков не уходи сразу.",
 
-      "nextNodeID": "day1_5"
+      "nextNodeID": "free_time_start"
     },
 
     {
-      "id": "day1_5",
-
-      "emotionChanges": [
-        {
-          "name": "Sumiko",
-          "emotion": "happy"
-        }
-      ],
-
-      "speaker": "Sumiko",
-
-      "text": "Это было грубо.",
-
-      "nextNodeID": "day1_choice"
-    },
-
-    {
-      "id": "day1_choice",
+      "id": "free_time_start",
 
       "speaker": "",
 
-      "text": "После занятий клуб опустел. С кем провести время?",
-
-      "choices": [
-        {
-          "text": "Пойти с Садако",
-
-          "nextNodeID": "sadako_day1",
-
-          "sadakoChange": 1
-        },
-
-        {
-          "text": "Остаться с Сумико",
-
-          "nextNodeID": "sumiko_day1",
-
-          "sumikoChange": 1
-        },
-
-        {
-          "text": "Помочь Тэруко",
-
-          "nextNodeID": "teruko_day1",
-
-          "terukoChange": 1
-        }
-      ]
+      "text": "Чем заняться после уроков?"
     },
 
     {
-      "id": "sadako_day1",
+      "id": "roof_scene",
 
-      "background": "corridor",
+      "background": "rooftop",
 
       "hideCharacters": [
         "Sumiko",
         "Teruko"
       ],
-
-      "emotionChanges": [
-        {
-          "name": "Sadako",
-          "emotion": "normal"
-        }
-      ],
-
-      "speaker": "Sadako",
-
-      "text": "Ты ведь тоже заметил странности в старом корпусе?",
-
-      "nextNodeID": "sadako_day1_2"
-    },
-
-    {
-      "id": "sadako_day1_2",
-
-      "speaker": "Player",
-
-      "text": "Ты про шумы по ночам?",
-
-      "nextNodeID": "sadako_day1_3"
-    },
-
-    {
-      "id": "sadako_day1_3",
 
       "emotionChanges": [
         {
@@ -164,17 +77,37 @@
 
       "speaker": "Sadako",
 
-      "text": "Не только шумы.",
+      "text": "На крыше всегда тихо. Слишком тихо.",
+
+      "nextNodeID": "roof_scene_2"
+    },
+
+    {
+      "id": "roof_scene_2",
+
+      "speaker": "Player",
+
+      "text": "Тебе нравится здесь?",
+
+      "nextNodeID": "roof_scene_3"
+    },
+
+    {
+      "id": "roof_scene_3",
+
+      "speaker": "Sadako",
+
+      "text": "Здесь хотя бы никто не врёт.",
 
       "setFlags": [
-        "sadakoTalked"
+        "sadakoRoof"
       ]
     },
 
     {
-      "id": "sumiko_day1",
+      "id": "music_scene",
 
-      "background": "clubroom",
+      "background": "music_room",
 
       "hideCharacters": [
         "Sadako",
@@ -190,44 +123,37 @@
 
       "speaker": "Sumiko",
 
-      "text": "Слушай, а ты веришь в проклятые кассеты?",
+      "text": "Я иногда прихожу сюда просто послушать тишину.",
 
-      "nextNodeID": "sumiko_day1_2"
+      "nextNodeID": "music_scene_2"
     },
 
     {
-      "id": "sumiko_day1_2",
+      "id": "music_scene_2",
 
       "speaker": "Player",
 
-      "text": "Звучит как дешёвый ужастик.",
+      "text": "Это звучит немного грустно.",
 
-      "nextNodeID": "sumiko_day1_3"
+      "nextNodeID": "music_scene_3"
     },
 
     {
-      "id": "sumiko_day1_3",
-
-      "emotionChanges": [
-        {
-          "name": "Sumiko",
-          "emotion": "normal"
-        }
-      ],
+      "id": "music_scene_3",
 
       "speaker": "Sumiko",
 
-      "text": "А если я скажу, что одна такая лежит у нас в школе?",
+      "text": "Может быть.",
 
       "setFlags": [
-        "cassetteMentioned"
+        "sumikoMusic"
       ]
     },
 
     {
-      "id": "teruko_day1",
+      "id": "oldschool_scene",
 
-      "background": "storage",
+      "background": "old_school",
 
       "hideCharacters": [
         "Sadako",
@@ -243,37 +169,30 @@
 
       "speaker": "Teruko",
 
-      "text": "Можешь помочь разобрать коробки?",
+      "text": "Старый корпус закрыли не просто так.",
 
-      "nextNodeID": "teruko_day1_2"
+      "nextNodeID": "oldschool_scene_2"
     },
 
     {
-      "id": "teruko_day1_2",
+      "id": "oldschool_scene_2",
 
       "speaker": "Player",
 
-      "text": "Тут пыли больше, чем вещей.",
+      "text": "Ты серьёзно веришь в эти слухи?",
 
-      "nextNodeID": "teruko_day1_3"
+      "nextNodeID": "oldschool_scene_3"
     },
 
     {
-      "id": "teruko_day1_3",
-
-      "emotionChanges": [
-        {
-          "name": "Teruko",
-          "emotion": "happy"
-        }
-      ],
+      "id": "oldschool_scene_3",
 
       "speaker": "Teruko",
 
-      "text": "Зато теперь ты официально член клуба уборки.",
+      "text": "После того, что я видела... да.",
 
       "setFlags": [
-        "terukoHelped"
+        "terukoOldSchool"
       ]
     },
 
@@ -302,7 +221,7 @@
 
       "speaker": "Player",
 
-      "text": "Сегодня школа выглядела непривычно тихой.",
+      "text": "Следующий день начался странно тихо.",
 
       "nextNodeID": "day2_2"
     },
@@ -312,146 +231,7 @@
 
       "speaker": "Sumiko",
 
-      "text": "Вы тоже это чувствуете?",
-
-      "nextNodeID": "day2_3"
-    },
-
-    {
-      "id": "day2_3",
-
-      "emotionChanges": [
-        {
-          "name": "Teruko",
-          "emotion": "sad"
-        }
-      ],
-
-      "speaker": "Teruko",
-
-      "text": "В старом корпусе ночью снова горел свет.",
-
-      "nextNodeID": "day2_4"
-    },
-
-    {
-      "id": "day2_4",
-
-      
-
-      "emotionChanges": [
-        {
-          "name": "Sadako",
-          "emotion": "angry"
-        }
-      ],
-
-      "speaker": "Sadako",
-
-      "text": "Я же говорила не трогать ту кассету.",
-
-      "nextNodeID": "day2_5"
-    },
-
-    {
-      "id": "day2_5",
-
-      "speaker": "Player",
-
-      "text": "Подождите... о какой кассете вообще речь?",
-
-      "nextNodeID": "day2_choice"
-    },
-
-    {
-      "id": "day2_choice",
-
-      "speaker": "",
-
-      "text": "После уроков кто-то позвал тебя в старый корпус.",
-
-      "choices": [
-        {
-          "text": "Пойти с Садако",
-
-          "nextNodeID": "sadako_day2",
-
-          "requiredSadako": 1
-        },
-
-        {
-          "text": "Пойти с Сумико",
-
-          "nextNodeID": "sumiko_day2",
-
-          "requiredSumiko": 1
-        },
-
-        {
-          "text": "Пойти с Тэруко",
-
-          "nextNodeID": "teruko_day2",
-
-          "requiredTeruko": 1
-        }
-      ]
-    },
-
-    {
-      "id": "sadako_day2",
-
-      "background": "old_school",
-
-      "hideCharacters": [
-        "Sumiko",
-        "Teruko"
-      ],
-
-      "speaker": "Sadako",
-
-      "text": "Если услышишь шум кассеты... не оборачивайся.",
-
-      "setFlags": [
-        "worldBroken"
-      ]
-    },
-
-    {
-      "id": "sumiko_day2",
-
-      "background": "music_room",
-
-      "hideCharacters": [
-        "Sadako",
-        "Teruko"
-      ],
-
-      "speaker": "Sumiko",
-
-      "text": "Иногда мне кажется, что школа пытается что-то вспомнить.",
-
-      "setFlags": [
-        "sumikoSecret"
-      ]
-    },
-
-    {
-      "id": "teruko_day2",
-
-      "background": "rooftop",
-
-      "hideCharacters": [
-        "Sadako",
-        "Sumiko"
-      ],
-
-      "speaker": "Teruko",
-
-      "text": "Ты замечал, что некоторые ученики исчезают из фотографий?",
-
-      "setFlags": [
-        "photoGlitch"
-      ]
+      "text": "Вы тоже заметили, что школа будто опустела?"
     }
   ]
 }
