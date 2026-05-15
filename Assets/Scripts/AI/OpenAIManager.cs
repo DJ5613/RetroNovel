@@ -28,7 +28,7 @@ public class OpenAIManager : MonoBehaviour
         var requestData =
             new
             {
-                model = "gemma4",
+                model = "qwen2.5:7b",
 
                 messages = new[]
                 {
@@ -78,7 +78,8 @@ public class OpenAIManager : MonoBehaviour
 
                 options = new
                 {
-                    temperature = 0.4
+                    temperature = 0.4,
+                    num_predict = 40
                 }
             };
 
@@ -89,8 +90,6 @@ public class OpenAIManager : MonoBehaviour
         string json =
             JsonConvert.SerializeObject(
                 requestData);
-
-        Debug.Log(json);
 
         byte[] bodyRaw =
             Encoding.UTF8.GetBytes(json);
@@ -142,8 +141,6 @@ public class OpenAIManager : MonoBehaviour
         string responseJson =
             request.downloadHandler.text;
 
-        Debug.Log(responseJson);
-
         // =========================
         // PARSE RESPONSE
         // =========================
@@ -159,10 +156,12 @@ public class OpenAIManager : MonoBehaviour
             aiText =
                 jsonResponse["message"]["content"]
                 .ToString();
-            int thinkIndex =
-    aiText.IndexOf("<think>");
 
-            if (thinkIndex != -1)
+            // =========================
+            // REMOVE THINKING
+            // =========================
+
+            if (aiText.Contains("<think>"))
             {
                 int endThink =
                     aiText.IndexOf("</think>");
@@ -173,9 +172,14 @@ public class OpenAIManager : MonoBehaviour
                         aiText.Substring(endThink + 8);
                 }
             }
+
+            aiText = aiText.Trim();
         }
 
-        // fallback
+        // =========================
+        // FALLBACK
+        // =========================
+
         if (string.IsNullOrEmpty(aiText))
         {
             aiText = "...";
@@ -204,22 +208,30 @@ public class OpenAIManager : MonoBehaviour
     string CleanResponse(string text)
     {
         // переносы
+
         text = text.Replace("\n", " ");
+
+        // formatting
 
         text = text.Replace("*", "");
         text = text.Replace("#", "");
-
-        // кавычки
         text = text.Replace("\"", "");
 
-        // двойные пробелы
-        while (text.Contains("  "))
-        {
-            text =
-                text.Replace("  ", " ");
-        }
+        // emotion tags
 
-        // мусор
+        text = text.Replace("[happy]", "");
+        text = text.Replace("[sad]", "");
+        text = text.Replace("[nervous]", "");
+        text = text.Replace("[angry]", "");
+        text = text.Replace("[neutral]", "");
+
+        // relationship tags
+
+        text = text.Replace("[relationship:+1]", "");
+        text = text.Replace("[relationship:-1]", "");
+
+        // bad phrases
+
         string[] badPhrases =
         {
             "The user wants",
@@ -242,6 +254,14 @@ public class OpenAIManager : MonoBehaviour
                     text.Substring(
                         index + phrase.Length);
             }
+        }
+
+        // double spaces
+
+        while (text.Contains("  "))
+        {
+            text =
+                text.Replace("  ", " ");
         }
 
         return text.Trim();

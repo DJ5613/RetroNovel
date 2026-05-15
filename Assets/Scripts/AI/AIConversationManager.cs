@@ -94,6 +94,7 @@ public class AIConversationManager : MonoBehaviour
     public void SendMessageToAI()
     {
         // already generating
+
         if (isRequesting)
             return;
 
@@ -101,10 +102,12 @@ public class AIConversationManager : MonoBehaviour
             inputField.text;
 
         // empty input
+
         if (string.IsNullOrWhiteSpace(playerMessage))
             return;
 
         // no talks left
+
         if (remainingTalks <= 0)
         {
             dialogueManager.ShowAIMessage(
@@ -134,11 +137,12 @@ public class AIConversationManager : MonoBehaviour
             "\n";
 
         // LIMIT MEMORY
-        if (conversationHistory.Length > 4000)
+
+        if (conversationHistory.Length > 2500)
         {
             conversationHistory =
                 conversationHistory.Substring(
-                    conversationHistory.Length - 4000);
+                    conversationHistory.Length - 2500);
         }
 
         // =========================
@@ -156,6 +160,7 @@ public class AIConversationManager : MonoBehaviour
             SendRealAI(prompt));
 
         // clear input
+
         inputField.text = "";
     }
 
@@ -222,18 +227,40 @@ public class AIConversationManager : MonoBehaviour
         prompt +=
             "Output ONLY spoken dialogue.\n";
 
+        // =========================
         // EMOTIONS
+        // =========================
 
         prompt +=
-            "Start every response with an emotion tag.\n";
+            "You may include ONE emotion tag.\n";
 
         prompt +=
-            "Available emotions: neutral, happy, nervous, sad, angry.\n";
+            "Format:\n";
 
         prompt +=
-            "Example: [nervous] Мне здесь не нравится.\n";
+            "[emotion:nervous]\n";
 
+        prompt +=
+            "Available emotions:\n";
+
+        prompt +=
+            "neutral\n";
+
+        prompt +=
+            "happy\n";
+
+        prompt +=
+            "nervous\n";
+
+        prompt +=
+            "sad\n";
+
+        prompt +=
+            "angry\n";
+
+        // =========================
         // RELATIONSHIPS
+        // =========================
 
         prompt +=
             "The character may include relationship tags.\n";
@@ -244,14 +271,18 @@ public class AIConversationManager : MonoBehaviour
         prompt +=
             "Use them only when the player's behavior strongly affects emotions.\n";
 
+        // =========================
         // DAY
+        // =========================
 
         prompt +=
             "Current Day: " +
             eventManager.currentDay +
             "\n";
 
+        // =========================
         // RELATIONSHIPS VALUES
+        // =========================
 
         prompt +=
             "Sadako Relationship: " +
@@ -268,7 +299,9 @@ public class AIConversationManager : MonoBehaviour
             relationshipSystem.teruko +
             "\n";
 
+        // =========================
         // FLAGS
+        // =========================
 
         if (GameFlags.Instance.HasFlag("worldBroken"))
         {
@@ -282,14 +315,18 @@ public class AIConversationManager : MonoBehaviour
                 "A cursed cassette exists.\n";
         }
 
+        // =========================
         // HISTORY
+        // =========================
 
         prompt +=
             "Conversation History:\n" +
             conversationHistory +
             "\n";
 
+        // =========================
         // PLAYER MESSAGE
+        // =========================
 
         prompt +=
             "Player said: " +
@@ -381,11 +418,11 @@ public class AIConversationManager : MonoBehaviour
 
         // LIMIT MEMORY
 
-        if (conversationHistory.Length > 4000)
+        if (conversationHistory.Length > 2500)
         {
             conversationHistory =
                 conversationHistory.Substring(
-                    conversationHistory.Length - 4000);
+                    conversationHistory.Length - 2500);
         }
 
         // SHOW RESPONSE
@@ -420,6 +457,11 @@ public class AIConversationManager : MonoBehaviour
 
         text = text.Replace("#", "");
 
+        // relationship tags
+
+        text = text.Replace("[relationship:+1]", "");
+        text = text.Replace("[relationship:-1]", "");
+
         while (text.Contains("  "))
         {
             text =
@@ -435,27 +477,55 @@ public class AIConversationManager : MonoBehaviour
 
     string ExtractEmotion(ref string text)
     {
-        if (!text.StartsWith("[") ||
-            text.StartsWith("[relationship"))
+        if (text.Contains("[emotion:happy]"))
         {
-            return "neutral";
+            text =
+                text.Replace(
+                    "[emotion:happy]",
+                    "");
+
+            return "happy";
         }
 
-        int end =
-            text.IndexOf("]");
-
-        if (end == -1)
+        if (text.Contains("[emotion:nervous]"))
         {
-            return "neutral";
+            text =
+                text.Replace(
+                    "[emotion:nervous]",
+                    "");
+
+            return "nervous";
         }
 
-        string emotion =
-            text.Substring(1, end - 1);
+        if (text.Contains("[emotion:sad]"))
+        {
+            text =
+                text.Replace(
+                    "[emotion:sad]",
+                    "");
 
-        text =
-            text.Substring(end + 1).Trim();
+            return "sad";
+        }
 
-        return emotion;
+        if (text.Contains("[emotion:angry]"))
+        {
+            text =
+                text.Replace(
+                    "[emotion:angry]",
+                    "");
+
+            return "angry";
+        }
+
+        if (text.Contains("[emotion:neutral]"))
+        {
+            text =
+                text.Replace(
+                    "[emotion:neutral]",
+                    "");
+        }
+
+        return "neutral";
     }
 
     // =========================
@@ -496,17 +566,25 @@ public class AIConversationManager : MonoBehaviour
         string speaker =
             dialogueManager.GetCurrentSpeaker();
 
-        // emotion
+        // =========================
+        // EMOTION
+        // =========================
 
         string emotion =
             ExtractEmotion(ref response);
 
-        // relationship
+        // =========================
+        // RELATIONSHIP
+        // =========================
 
         int relationshipChange =
             ExtractRelationshipChange(ref response);
 
-        // apply relationship
+        response = response.Trim();
+
+        // =========================
+        // APPLY RELATIONSHIP
+        // =========================
 
         switch (speaker)
         {
@@ -532,13 +610,17 @@ public class AIConversationManager : MonoBehaviour
                 break;
         }
 
-        // apply emotion
+        // =========================
+        // APPLY EMOTION
+        // =========================
 
         dialogueManager.ApplyAIEmotion(
             speaker,
             emotion);
 
-        // show text
+        // =========================
+        // SHOW TEXT
+        // =========================
 
         dialogueManager.ShowAIMessage(
             speaker,
