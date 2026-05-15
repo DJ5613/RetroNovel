@@ -7,6 +7,7 @@ public class EventManager : MonoBehaviour
 
     [Header("Systems")]
     public DialogueManager dialogueManager;
+    public AIConversationManager aiConversationManager;
 
     [Header("Day System")]
     public int currentDay = 1;
@@ -73,6 +74,8 @@ public class EventManager : MonoBehaviour
 
         Debug.Log(
             "Новый день: " + currentDay);
+
+        aiConversationManager.ResetDailyTalkLimit();
 
         bool success = StartDayEvent();
 

@@ -1,0 +1,280 @@
+{
+  "nodes": [
+
+    {
+      "id": "day2_start",
+      "speaker": "Narrator",
+      "text": "На следующее утро школа казалась непривычно тихой.",
+      "background": "school_hall",
+      "nextNodeID": "day2_sumiko_1"
+    },
+
+    {
+      "id": "day2_sumiko_1",
+      "speaker": "Sumiko",
+      "text": "Ты тоже заметил, что сегодня слишком тихо?",
+      "setCharacters": [
+        {
+          "name": "Sumiko",
+          "emotion": "nervous",
+          "position": "center"
+        }
+      ],
+      "nextNodeID": "day2_sumiko_2"
+    },
+
+    {
+      "id": "day2_sumiko_2",
+      "speaker": "Sumiko",
+      "text": "Даже учителя какие-то странные...",
+      "choices": [
+        {
+          "text": "Мне тоже так кажется.",
+          "nextNodeID": "day2_agree",
+          "sumikoChange": 1
+        },
+
+        {
+          "text": "Ты слишком переживаешь.",
+          "nextNodeID": "day2_disagree",
+          "sumikoChange": -1
+        }
+      ]
+    },
+
+    {
+      "id": "day2_agree",
+      "speaker": "Sumiko",
+      "text": "Спасибо... Я уже начала думать, что схожу с ума.",
+      "emotionChanges": [
+        {
+          "name": "Sumiko",
+          "emotion": "sad"
+        }
+      ],
+      "nextNodeID": "day2_teruko_1"
+    },
+
+    {
+      "id": "day2_disagree",
+      "speaker": "Sumiko",
+      "text": "...Может быть.",
+      "emotionChanges": [
+        {
+          "name": "Sumiko",
+          "emotion": "sad"
+        }
+      ],
+      "nextNodeID": "day2_teruko_1"
+    },
+
+    {
+      "id": "day2_teruko_1",
+      "speaker": "Teruko",
+      "text": "Сегодня утром старый корпус снова закрыли.",
+      "setCharacters": [
+        {
+          "name": "Teruko",
+          "emotion": "neutral",
+          "position": "left"
+        }
+      ],
+      "nextNodeID": "day2_teruko_2"
+    },
+
+    {
+      "id": "day2_teruko_2",
+      "speaker": "Teruko",
+      "text": "Но ночью там вроде бы кто-то ходил.",
+      "emotionChanges": [
+        {
+          "name": "Teruko",
+          "emotion": "nervous"
+        }
+      ],
+      "nextNodeID": "day2_sadako_1"
+    },
+
+    {
+      "id": "day2_sadako_1",
+      "speaker": "Sadako",
+      "text": "...Лучше туда не возвращаться.",
+      "setCharacters": [
+        {
+          "name": "Sadako",
+          "emotion": "neutral",
+          "position": "right"
+        }
+      ],
+      "nextNodeID": "day2_sadako_2"
+    },
+
+    {
+      "id": "day2_sadako_2",
+      "speaker": "Sumiko",
+      "text": "Ты опять говоришь так, будто знаешь больше нас.",
+      "emotionChanges": [
+        {
+          "name": "Sumiko",
+          "emotion": "angry"
+        }
+      ],
+      "nextNodeID": "day2_sadako_3"
+    },
+
+    {
+      "id": "day2_sadako_3",
+      "speaker": "Sadako",
+      "text": "...Я просто не хочу, чтобы кто-то пострадал.",
+      "emotionChanges": [
+        {
+          "name": "Sadako",
+          "emotion": "sad"
+        }
+      ],
+      "nextNodeID": "day2_cassette"
+    },
+
+    {
+      "id": "day2_cassette",
+      "speaker": "Teruko",
+      "text": "Кстати... Вы слышали про старую кассету?",
+      "setFlags": [
+        "cassetteMentioned"
+      ],
+      "nextNodeID": "day2_cassette_2"
+    },
+
+    {
+      "id": "day2_cassette_2",
+      "speaker": "Sumiko",
+      "text": "Ту самую странную запись?",
+      "nextNodeID": "day2_cassette_3"
+    },
+
+    {
+      "id": "day2_cassette_3",
+      "speaker": "Teruko",
+      "text": "Говорят, после неё людям начинают сниться одинаковые сны.",
+      "nextNodeID": "day2_lights"
+    },
+
+    {
+      "id": "day2_lights",
+      "speaker": "Narrator",
+      "text": "Свет в коридоре резко погас.",
+      "hideCharacters": [
+        "Sadako"
+      ],
+      "nextNodeID": "day2_lights_2"
+    },
+
+    {
+      "id": "day2_lights_2",
+      "speaker": "Narrator",
+      "text": "Когда лампы снова загорелись, Садако уже исчезла.",
+      "nextNodeID": "free_time_day2"
+    },
+
+    {
+      "id": "free_time_day2",
+      "speaker": "Narrator",
+      "text": "После уроков тревожное чувство так и не исчезло.",
+      "choices": [
+        {
+          "text": "Музыкальный кабинет",
+          "nextNodeID": "music_room_day2"
+        },
+
+        {
+          "text": "Крыша",
+          "nextNodeID": "roof_day2"
+        },
+
+        {
+          "text": "Старый корпус",
+          "nextNodeID": "old_school_day2"
+        },
+
+        {
+          "text": "Закончить день",
+          "nextNodeID": "day2_end"
+        }
+      ]
+    },
+
+    {
+      "id": "music_room_day2",
+      "speaker": "Sumiko",
+      "text": "Я пыталась отвлечься музыкой... но сегодня вообще не получается.",
+      "background": "music_room",
+      "setCharacters": [
+        {
+          "name": "Sumiko",
+          "emotion": "sad",
+          "position": "center"
+        }
+      ],
+      "nextNodeID": "music_room_ai_day2"
+    },
+
+    {
+      "id": "music_room_ai_day2",
+      "speaker": "Sumiko",
+      "text": "Можно поговорить с Сумико.",
+      "nextNodeID": "free_time_day2"
+    },
+
+    {
+      "id": "roof_day2",
+      "speaker": "Teruko",
+      "text": "Иногда мне кажется, будто школа становится другой ночью.",
+      "background": "roof",
+      "setCharacters": [
+        {
+          "name": "Teruko",
+          "emotion": "nervous",
+          "position": "center"
+        }
+      ],
+      "nextNodeID": "roof_ai_day2"
+    },
+
+    {
+      "id": "roof_ai_day2",
+      "speaker": "Teruko",
+      "text": "Можно поговорить с Теруко.",
+      "nextNodeID": "free_time_day2"
+    },
+
+    {
+      "id": "old_school_day2",
+      "speaker": "Sadako",
+      "text": "...Ты всё равно пришёл сюда.",
+      "background": "old_school",
+      "setCharacters": [
+        {
+          "name": "Sadako",
+          "emotion": "sad",
+          "position": "center"
+        }
+      ],
+      "nextNodeID": "old_school_ai_day2"
+    },
+
+    {
+      "id": "old_school_ai_day2",
+      "speaker": "Sadako",
+      "text": "Воздух здесь казался ещё холоднее, чем вчера.",
+      "nextNodeID": "free_time_day2"
+    },
+
+    {
+      "id": "day2_end",
+      "speaker": "Narrator",
+      "text": "Ночью тебе долго не удавалось уснуть.",
+      "nextNodeID": "day3_start"
+    }
+
+  ]
+}

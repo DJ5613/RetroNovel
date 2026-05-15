@@ -1,0 +1,256 @@
+{
+  "nodes": [
+
+    {
+      "id": "day1_start",
+      "speaker": "Sumiko",
+      "text": "Ты сегодня снова пришёл раньше всех.",
+      "background": "school_hall",
+      "setCharacters": [
+        {
+          "name": "Sumiko",
+          "emotion": "happy",
+          "position": "center"
+        }
+      ],
+      "nextNodeID": "day1_sumiko_1"
+    },
+
+    {
+      "id": "day1_sumiko_1",
+      "speaker": "Sumiko",
+      "text": "Школа утром выглядит жутковато... Хотя, может, это только мне так кажется.",
+      "emotionChanges": [
+        {
+          "name": "Sumiko",
+          "emotion": "nervous"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Да, тут действительно странно.",
+          "nextNodeID": "day1_sumiko_agree",
+          "sumikoChange": 1
+        },
+
+        {
+          "text": "Ты просто себя накручиваешь.",
+          "nextNodeID": "day1_sumiko_disagree",
+          "sumikoChange": -1
+        }
+      ]
+    },
+
+    {
+      "id": "day1_sumiko_agree",
+      "speaker": "Sumiko",
+      "text": "Вот! Я же говорила. Будто здесь иногда кто-то есть... даже когда никого нет.",
+      "nextNodeID": "day1_teruko_intro"
+    },
+
+    {
+      "id": "day1_sumiko_disagree",
+      "speaker": "Sumiko",
+      "text": "Может быть... Хотя всё равно не по себе.",
+      "nextNodeID": "day1_teruko_intro"
+    },
+
+    {
+      "id": "day1_teruko_intro",
+      "speaker": "Teruko",
+      "text": "Вы опять обсуждаете страшные вещи с самого утра?",
+      "setCharacters": [
+        {
+          "name": "Teruko",
+          "emotion": "neutral",
+          "position": "left"
+        }
+      ],
+      "nextNodeID": "day1_teruko_1"
+    },
+
+    {
+      "id": "day1_teruko_1",
+      "speaker": "Teruko",
+      "text": "Сегодня в старом корпусе снова отключался свет.",
+      "emotionChanges": [
+        {
+          "name": "Teruko",
+          "emotion": "sad"
+        }
+      ],
+      "nextNodeID": "day1_sadako_intro"
+    },
+
+    {
+      "id": "day1_sadako_intro",
+      "speaker": "Sadako",
+      "text": "...Не ходите туда после уроков.",
+      "setCharacters": [
+        {
+          "name": "Sadako",
+          "emotion": "neutral",
+          "position": "right"
+        }
+      ],
+      "nextNodeID": "day1_sadako_1"
+    },
+
+    {
+      "id": "day1_sadako_1",
+      "speaker": "Sumiko",
+      "text": "Ты опять появилась из ниоткуда?!",
+      "emotionChanges": [
+        {
+          "name": "Sumiko",
+          "emotion": "angry"
+        }
+      ],
+      "nextNodeID": "day1_sadako_2"
+    },
+
+    {
+      "id": "day1_sadako_2",
+      "speaker": "Sadako",
+      "text": "Я просто предупредила.",
+      "emotionChanges": [
+        {
+          "name": "Sadako",
+          "emotion": "sad"
+        }
+      ],
+      "nextNodeID": "day1_noise"
+    },
+
+    {
+      "id": "day1_noise",
+      "speaker": "Narrator",
+      "text": "Где-то в глубине школы раздался металлический скрип.",
+      "hideCharacters": [
+        "Sadako"
+      ],
+      "nextNodeID": "day1_noise_2"
+    },
+
+    {
+      "id": "day1_noise_2",
+      "speaker": "Teruko",
+      "text": "...Вы тоже это слышали?",
+      "emotionChanges": [
+        {
+          "name": "Teruko",
+          "emotion": "nervous"
+        }
+      ],
+      "setFlags": [
+        "worldBroken"
+      ],
+      "nextNodeID": "free_time_start"
+    },
+
+    {
+      "id": "free_time_start",
+      "speaker": "Narrator",
+      "text": "Уроки закончились. Осталось немного свободного времени.",
+      "hideCharacters": [
+        "Sumiko",
+        "Teruko"
+      ],
+      "choices": [
+        {
+          "text": "Музыкальный кабинет",
+          "nextNodeID": "music_room_day1"
+        },
+
+        {
+          "text": "Крыша",
+          "nextNodeID": "roof_day1"
+        },
+
+        {
+          "text": "Старый корпус",
+          "nextNodeID": "old_school_day1"
+        },
+
+        {
+          "text": "Закончить день",
+          "nextNodeID": "day1_end"
+        }
+      ]
+    },
+
+    {
+      "id": "music_room_day1",
+      "speaker": "Sumiko",
+      "text": "О, ты пришёл.",
+      "background": "music_room",
+      "setCharacters": [
+        {
+          "name": "Sumiko",
+          "emotion": "happy",
+          "position": "center"
+        }
+      ],
+      "nextNodeID": "music_room_ai"
+    },
+
+    {
+      "id": "music_room_ai",
+      "speaker": "Sumiko",
+      "text": "Можно поговорить с Сумико.",
+      "nextNodeID": "free_time_start"
+    },
+
+    {
+      "id": "roof_day1",
+      "speaker": "Teruko",
+      "text": "Здесь хотя бы тихо.",
+      "background": "roof",
+      "setCharacters": [
+        {
+          "name": "Teruko",
+          "emotion": "neutral",
+          "position": "center"
+        }
+      ],
+      "nextNodeID": "roof_ai"
+    },
+
+    {
+      "id": "roof_ai",
+      "speaker": "Teruko",
+      "text": "Можно поговорить с Теруко.",
+      "nextNodeID": "free_time_start"
+    },
+
+    {
+      "id": "old_school_day1",
+      "speaker": "Sadako",
+      "text": "...Ты всё-таки пришёл.",
+      "background": "old_school",
+      "setCharacters": [
+        {
+          "name": "Sadako",
+          "emotion": "neutral",
+          "position": "center"
+        }
+      ],
+      "nextNodeID": "old_school_ai"
+    },
+
+    {
+      "id": "old_school_ai",
+      "speaker": "Sadako",
+      "text": "Воздух здесь был странно холодным.",
+      "nextNodeID": "free_time_start"
+    },
+
+    {
+      "id": "day1_end",
+      "speaker": "Narrator",
+      "text": "День подошёл к концу.",
+      "nextNodeID": "day2_start"
+    }
+
+  ]
+}

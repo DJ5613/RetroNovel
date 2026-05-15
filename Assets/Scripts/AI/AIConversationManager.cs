@@ -7,16 +7,23 @@ public class AIConversationManager : MonoBehaviour
 {
     [Header("UI")]
     public TMP_InputField inputField;
-
     public Button sendButton;
-
     public TextMeshProUGUI sendButtonText;
+    public GameObject aiPanel;
 
     [Header("Systems")]
     public DialogueManager dialogueManager;
     public EventManager eventManager;
     public RelationshipSystem relationshipSystem;
     public OpenAIManager openAIManager;
+
+    // =========================
+    // FREE TIME
+    // =========================
+
+    private int remainingTalks;
+
+    private string returnNodeID;
 
     // =========================
     // MEMORY
@@ -29,6 +36,56 @@ public class AIConversationManager : MonoBehaviour
     // =========================
 
     private bool isRequesting = false;
+
+    // =========================
+    // START
+    // =========================
+
+    void Start()
+    {
+        remainingTalks =
+            Random.Range(5, 8);
+
+        aiPanel.SetActive(false);
+    }
+
+    // =========================
+    // OPEN CHAT
+    // =========================
+
+    public void OpenAIChat(string returnNode)
+    {
+        returnNodeID = returnNode;
+
+        aiPanel.SetActive(true);
+    }
+
+    // =========================
+    // CLOSE CHAT
+    // =========================
+
+    public void CloseAIChat()
+    {
+        aiPanel.SetActive(false);
+    }
+
+    // =========================
+    // LEAVE CONVERSATION
+    // =========================
+
+    public void LeaveConversation()
+    {
+        isRequesting = false;
+
+        sendButton.interactable = true;
+
+        sendButtonText.text = "Отправить";
+
+        aiPanel.SetActive(false);
+
+        dialogueManager.ShowNode(
+            returnNodeID);
+    }
 
     // =========================
     // SEND MESSAGE
@@ -46,6 +103,16 @@ public class AIConversationManager : MonoBehaviour
         // empty input
         if (string.IsNullOrWhiteSpace(playerMessage))
             return;
+
+        // no talks left
+        if (remainingTalks <= 0)
+        {
+            dialogueManager.ShowAIMessage(
+                dialogueManager.GetCurrentSpeaker(),
+                "Кажется, разговор уже закончился.");
+
+            return;
+        }
 
         isRequesting = true;
 
@@ -104,18 +171,21 @@ public class AIConversationManager : MonoBehaviour
         string prompt = "";
 
         // CHARACTER
+
         prompt +=
             "Character: " +
             currentCharacter +
             "\n";
 
         // PERSONALITY
+
         prompt +=
             "Personality: " +
             GetCharacterPrompt(currentCharacter) +
             "\n";
 
         // RULES
+
         prompt +=
             "Speak naturally like a real person.\n";
 
@@ -152,22 +222,37 @@ public class AIConversationManager : MonoBehaviour
         prompt +=
             "Output ONLY spoken dialogue.\n";
 
-        prompt +=
-"Start every response with an emotion tag.\n";
+        // EMOTIONS
 
         prompt +=
-        "Available emotions: neutral, happy, nervous, sad, angry.\n";
+            "Start every response with an emotion tag.\n";
 
         prompt +=
-        "Example: [nervous] Мне здесь не нравится.\n";
+            "Available emotions: neutral, happy, nervous, sad, angry.\n";
+
+        prompt +=
+            "Example: [nervous] Мне здесь не нравится.\n";
+
+        // RELATIONSHIPS
+
+        prompt +=
+            "The character may include relationship tags.\n";
+
+        prompt +=
+            "Available tags: [relationship:+1], [relationship:-1]\n";
+
+        prompt +=
+            "Use them only when the player's behavior strongly affects emotions.\n";
 
         // DAY
+
         prompt +=
             "Current Day: " +
             eventManager.currentDay +
             "\n";
 
-        // RELATIONSHIPS
+        // RELATIONSHIPS VALUES
+
         prompt +=
             "Sadako Relationship: " +
             relationshipSystem.sadako +
@@ -184,6 +269,7 @@ public class AIConversationManager : MonoBehaviour
             "\n";
 
         // FLAGS
+
         if (GameFlags.Instance.HasFlag("worldBroken"))
         {
             prompt +=
@@ -197,12 +283,14 @@ public class AIConversationManager : MonoBehaviour
         }
 
         // HISTORY
+
         prompt +=
             "Conversation History:\n" +
             conversationHistory +
             "\n";
 
         // PLAYER MESSAGE
+
         prompt +=
             "Player said: " +
             playerMessage +
@@ -212,7 +300,7 @@ public class AIConversationManager : MonoBehaviour
     }
 
     // =========================
-    // PERSONALITY
+    // PERSONALITIES
     // =========================
 
     string GetCharacterPrompt(string character)
@@ -272,25 +360,40 @@ public class AIConversationManager : MonoBehaviour
         }
 
         // fallback
+
         if (string.IsNullOrEmpty(aiResponse))
         {
             aiResponse = "...";
         }
 
         // clean
+
         aiResponse =
             CleanResponse(aiResponse);
 
         // SAVE AI RESPONSE
+
         conversationHistory +=
             dialogueManager.GetCurrentSpeaker() +
             ": " +
             aiResponse +
             "\n";
 
+        // LIMIT MEMORY
+
+        if (conversationHistory.Length > 4000)
+        {
+            conversationHistory =
+                conversationHistory.Substring(
+                    conversationHistory.Length - 4000);
+        }
+
         // SHOW RESPONSE
+
         yield return StartCoroutine(
             ShowResponse(aiResponse));
+
+        remainingTalks--;
 
         // =========================
         // UNLOCK UI
@@ -325,9 +428,15 @@ public class AIConversationManager : MonoBehaviour
 
         return text.Trim();
     }
+
+    // =========================
+    // EXTRACT EMOTION
+    // =========================
+
     string ExtractEmotion(ref string text)
     {
-        if (!text.StartsWith("["))
+        if (!text.StartsWith("[") ||
+            text.StartsWith("[relationship"))
         {
             return "neutral";
         }
@@ -348,6 +457,36 @@ public class AIConversationManager : MonoBehaviour
 
         return emotion;
     }
+
+    // =========================
+    // EXTRACT RELATIONSHIP
+    // =========================
+
+    int ExtractRelationshipChange(ref string text)
+    {
+        if (text.Contains("[relationship:+1]"))
+        {
+            text =
+                text.Replace(
+                    "[relationship:+1]",
+                    "");
+
+            return 1;
+        }
+
+        if (text.Contains("[relationship:-1]"))
+        {
+            text =
+                text.Replace(
+                    "[relationship:-1]",
+                    "");
+
+            return -1;
+        }
+
+        return 0;
+    }
+
     // =========================
     // SHOW RESPONSE
     // =========================
@@ -357,12 +496,49 @@ public class AIConversationManager : MonoBehaviour
         string speaker =
             dialogueManager.GetCurrentSpeaker();
 
+        // emotion
+
         string emotion =
             ExtractEmotion(ref response);
+
+        // relationship
+
+        int relationshipChange =
+            ExtractRelationshipChange(ref response);
+
+        // apply relationship
+
+        switch (speaker)
+        {
+            case "Sadako":
+
+                relationshipSystem.sadako +=
+                    relationshipChange;
+
+                break;
+
+            case "Sumiko":
+
+                relationshipSystem.sumiko +=
+                    relationshipChange;
+
+                break;
+
+            case "Teruko":
+
+                relationshipSystem.teruko +=
+                    relationshipChange;
+
+                break;
+        }
+
+        // apply emotion
 
         dialogueManager.ApplyAIEmotion(
             speaker,
             emotion);
+
+        // show text
 
         dialogueManager.ShowAIMessage(
             speaker,
@@ -378,5 +554,15 @@ public class AIConversationManager : MonoBehaviour
     public void ResetConversation()
     {
         conversationHistory = "";
+    }
+
+    // =========================
+    // RESET DAILY LIMIT
+    // =========================
+
+    public void ResetDailyTalkLimit()
+    {
+        remainingTalks =
+            Random.Range(5, 8);
     }
 }

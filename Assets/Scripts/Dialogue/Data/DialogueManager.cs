@@ -19,6 +19,7 @@ public class DialogueManager : MonoBehaviour
     public CharacterManager characterManager;
     public BackgroundManager backgroundManager;
     public EventManager eventManager;
+    public AIConversationManager aiConversationManager;
 
     [Header("Typewriter")]
     public float typingSpeed = 0.03f;
@@ -27,6 +28,7 @@ public class DialogueManager : MonoBehaviour
 
     private Coroutine typingCoroutine;
     private bool isTyping = false;
+
 
     // AI MESSAGE
     private bool aiMessageActive = false;
@@ -57,6 +59,7 @@ public class DialogueManager : MonoBehaviour
         ClearChoices();
 
         currentNode = database.GetNode(nodeID);
+        aiConversationManager.CloseAIChat();
 
         if (currentNode == null)
         {
@@ -64,6 +67,15 @@ public class DialogueManager : MonoBehaviour
                 "Нода не найдена: " + nodeID);
 
             return;
+        }
+
+        if (nodeID.Contains("_ai"))
+        {
+            string returnNode =
+                currentNode.nextNodeID;
+
+            aiConversationManager.OpenAIChat(
+                returnNode);
         }
 
         // AI режим выключается
