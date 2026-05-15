@@ -4,16 +4,14 @@ using System.Collections;
 using System.Text;
 using System;
 
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 public class OpenAIManager : MonoBehaviour
 {
-    [Header("API")]
-    [TextArea]
-    public string apiKey;
-
-    private const string API_URL =
-        "https://openrouter.ai/api/v1/chat/completions";
+    [Header("LOCAL AI")]
+    private string apiUrl =
+        "http://localhost:11434/api/chat";
 
     // =========================
     // SEND REQUEST
@@ -23,68 +21,87 @@ public class OpenAIManager : MonoBehaviour
         string prompt,
         Action<string> onResponse)
     {
-        ChatRequest requestData =
-            new ChatRequest
+        // =========================
+        // REQUEST BODY
+        // =========================
+
+        var requestData =
+            new
             {
-                model = "deepseek/deepseek-v4-flash:free",
+                model = "gemma4",
 
-                messages = new Message[]
-{
-    new Message
-    {
-        role = "system",
-        content =
-"You are a character from a Japanese psychological horror visual novel.\n" +
+                messages = new[]
+                {
+                    new
+                    {
+                        role = "system",
 
-"Speak naturally like a real human being.\n" +
+                        content =
+                        "You are a character from a Japanese psychological horror visual novel.\n" +
 
-"The world may sometimes feel slightly unsettling or emotionally tense,\n" +
-"but the character should still sound believable and grounded.\n" +
+                        "Speak naturally like a real human being.\n" +
 
-"Always answer ONLY in Russian.\n" +
+                        "The atmosphere may sometimes feel emotionally tense or slightly unsettling,\n" +
+                        "but the character should still sound believable and grounded.\n" +
 
-"Keep responses short.\n" +
-"Usually 1-3 natural sentences.\n" +
+                        "Always answer ONLY in Russian.\n" +
 
-"Use casual human dialogue.\n" +
-"Avoid theatrical horror behavior.\n" +
-"Avoid exaggerated anime speech.\n" +
+                        "Keep responses short.\n" +
+                        "Usually 1-3 natural sentences.\n" +
 
-"Never repeat words or sounds.\n" +
-"Never output random noises.\n" +
-"Never mix languages.\n" +
-"Never output timestamps or metadata.\n" +
+                        "Use casual human dialogue.\n" +
+                        "Avoid theatrical horror behavior.\n" +
+                        "Avoid exaggerated anime speech.\n" +
 
-"Never explain reasoning.\n" +
-"Never explain thoughts.\n" +
-"Never analyze the request.\n" +
+                        "Never repeat words or sounds.\n" +
+                        "Never output random noises.\n" +
+                        "Never mix languages.\n" +
+                        "Never output timestamps or metadata.\n" +
 
-"Output ONLY the final spoken dialogue.\n" +
+                        "Never explain reasoning.\n" +
+                        "Never explain thoughts.\n" +
+                        "Never analyze the request.\n" +
 
-"Stay fully in character.",
-    },
+                        "Output ONLY the final spoken dialogue.\n" +
 
-    new Message
-    {
-        role = "user",
-        content = prompt
-    }
-},
+                        "Stay fully in character."
+                    },
 
-                temperature = 0.3f,
+                    new
+                    {
+                        role = "user",
+                        content = prompt
+                    }
+                },
 
-                max_tokens = 80
+                stream = false,
+
+                options = new
+                {
+                    temperature = 0.4
+                }
             };
 
+        // =========================
+        // JSON
+        // =========================
+
         string json =
-            JsonUtility.ToJson(requestData);
+            JsonConvert.SerializeObject(
+                requestData);
+
+        Debug.Log(json);
 
         byte[] bodyRaw =
             Encoding.UTF8.GetBytes(json);
 
+        // =========================
+        // REQUEST
+        // =========================
+
         UnityWebRequest request =
             new UnityWebRequest(
-                API_URL,
+                apiUrl,
                 "POST");
 
         request.uploadHandler =
@@ -97,18 +114,15 @@ public class OpenAIManager : MonoBehaviour
             "Content-Type",
             "application/json");
 
-        request.SetRequestHeader(
-            "Authorization",
-            "Bearer " + apiKey);
+        // =========================
+        // SEND
+        // =========================
 
-        request.SetRequestHeader(
-    "HTTP-Referer",
-    "https://localhost");
-
-        request.SetRequestHeader(
-            "X-Title",
-            "AI Horror VN");
         yield return request.SendWebRequest();
+
+        // =========================
+        // ERROR
+        // =========================
 
         if (request.result !=
             UnityWebRequest.Result.Success)
@@ -121,99 +135,115 @@ public class OpenAIManager : MonoBehaviour
             yield break;
         }
 
+        // =========================
+        // RESPONSE JSON
+        // =========================
+
         string responseJson =
             request.downloadHandler.text;
-        string CleanResponse(string text)
-        {
-            // удаляем переносы
-            text = text.Replace("\n", " ");
 
-            // плохие фразы
-            string[] badStarts =
-            {
-        "time:",
-        "Time:",
-        "Scene:",
-        "Emotion:",
-        "System:",
-        "User:",
-        "Assistant:",
-        "Character:"
-    };
-
-            foreach (string bad in badStarts)
-            {
-                if (text.StartsWith(bad))
-                {
-                    int dots =
-                        text.IndexOf("...");
-
-                    if (dots != -1)
-                    {
-                        text =
-                            text.Substring(dots + 3);
-                    }
-                }
-            }
-
-            // удаляем meta мусор
-            string[] badPhrases =
-            {
-        "The user wants",
-        "I need to",
-        "I should",
-        "Let's",
-        "We need",
-        "First,",
-        "Okay,"
-    };
-
-            foreach (string phrase in badPhrases)
-            {
-                int index = text.IndexOf(phrase);
-
-                if (index != -1)
-                {
-                    text =
-                        text.Substring(index + phrase.Length);
-                }
-            }
-
-            // удаляем кавычки
-            text = text.Replace("\"", "");
-
-            // двойные пробелы
-            while (text.Contains("  "))
-            {
-                text = text.Replace("  ", " ");
-            }
-
-            return text.Trim();
-        }
         Debug.Log(responseJson);
 
+        // =========================
+        // PARSE RESPONSE
+        // =========================
+
         JObject jsonResponse =
-    JObject.Parse(responseJson);
+            JObject.Parse(responseJson);
 
         string aiText = "";
 
-        var message =
-            jsonResponse["choices"][0]["message"];
+        if (jsonResponse["message"] != null &&
+            jsonResponse["message"]["content"] != null)
+        {
+            aiText =
+                jsonResponse["message"]["content"]
+                .ToString();
+            int thinkIndex =
+    aiText.IndexOf("<think>");
 
-        if (message["content"] != null &&
-            message["content"].ToString() != "")
-        {
-            aiText =
-                message["content"].ToString();
+            if (thinkIndex != -1)
+            {
+                int endThink =
+                    aiText.IndexOf("</think>");
+
+                if (endThink != -1)
+                {
+                    aiText =
+                        aiText.Substring(endThink + 8);
+                }
+            }
         }
-        else if (message["reasoning"] != null)
+
+        // fallback
+        if (string.IsNullOrEmpty(aiText))
         {
-            aiText =
-                message["reasoning"].ToString();
+            aiText = "...";
         }
+
+        // =========================
+        // CLEAN RESPONSE
+        // =========================
+
+        aiText =
+            CleanResponse(aiText);
 
         Debug.Log("AI TEXT: " + aiText);
 
+        // =========================
+        // CALLBACK
+        // =========================
+
         onResponse?.Invoke(aiText);
+    }
+
+    // =========================
+    // CLEAN RESPONSE
+    // =========================
+
+    string CleanResponse(string text)
+    {
+        // переносы
+        text = text.Replace("\n", " ");
+
+        text = text.Replace("*", "");
+        text = text.Replace("#", "");
+
+        // кавычки
+        text = text.Replace("\"", "");
+
+        // двойные пробелы
+        while (text.Contains("  "))
+        {
+            text =
+                text.Replace("  ", " ");
+        }
+
+        // мусор
+        string[] badPhrases =
+        {
+            "The user wants",
+            "I need to",
+            "I should",
+            "Let's",
+            "We need",
+            "First,",
+            "Okay,"
+        };
+
+        foreach (string phrase in badPhrases)
+        {
+            int index =
+                text.IndexOf(phrase);
+
+            if (index != -1)
+            {
+                text =
+                    text.Substring(
+                        index + phrase.Length);
+            }
+        }
+
+        return text.Trim();
     }
 }

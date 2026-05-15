@@ -10,6 +10,8 @@ public class Message
 [Serializable]
 public class ChatRequest
 {
+    public bool stream;
+
     public string model;
 
     public Message[] messages;

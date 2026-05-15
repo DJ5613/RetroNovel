@@ -28,6 +28,9 @@ public class DialogueManager : MonoBehaviour
     private Coroutine typingCoroutine;
     private bool isTyping = false;
 
+    // AI MESSAGE
+    private bool aiMessageActive = false;
+
     // =========================
     // START
     // =========================
@@ -48,6 +51,7 @@ public class DialogueManager : MonoBehaviour
 
     public void ShowNode(string nodeID)
     {
+        aiMessageActive = false;
         Debug.Log("SHOW NODE: " + nodeID);
 
         ClearChoices();
@@ -61,6 +65,9 @@ public class DialogueManager : MonoBehaviour
 
             return;
         }
+
+        // AI режим выключается
+        aiMessageActive = false;
 
         // =========================
         // REQUIRED FLAGS
@@ -206,6 +213,12 @@ public class DialogueManager : MonoBehaviour
 
     public void ContinueDialogue()
     {
+        // AI сообщение активно
+        if (aiMessageActive)
+        {
+            return;
+        }
+
         if (currentNode == null)
             return;
 
@@ -352,9 +365,57 @@ public class DialogueManager : MonoBehaviour
     }
 
     // =========================
-    // GET CURRENT NODE ID
+    // SHOW AI MESSAGE
     // =========================
 
+    public void ShowAIMessage(
+    string speaker,
+    string message)
+    {
+
+        // стопаем старую печать
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+        }
+
+        isTyping = false;
+
+        // AI режим
+        aiMessageActive = true;
+
+        // speaker
+        nameText.text = speaker;
+
+        // portrait focus
+        if (characterManager.HasCharacter(speaker))
+        {
+            characterManager.SetSpeaker(
+                speaker);
+        }
+
+        // TYPEWRITER
+        typingCoroutine =
+            StartCoroutine(
+                TypeText(message));
+    }
+
+
+    public void ApplyAIEmotion(
+    string speaker,
+    string emotion)
+    {
+        if (characterManager.HasCharacter(speaker))
+        {
+            characterManager.ChangeEmotion(
+                speaker,
+                emotion);
+        }
+    }
+
+    // =========================
+    // GET CURRENT NODE ID
+    // =========================
     public string GetCurrentNodeID()
     {
         if (currentNode == null)
