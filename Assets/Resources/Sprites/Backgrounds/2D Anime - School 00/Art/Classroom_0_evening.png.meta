@@ -1,10 +1,17 @@
 fileFormatVersion: 2
-guid: d181858525379b247a8970c0c829ccbd
+guid: b50503c87d093674fbcf341253ab338c
+AssetOrigin:
+  serializedVersion: 1
+  productId: 338164
+  packageName: 2D Anime - School 00 (FREE)
+  packageVersion: 1.0
+  assetPath: Assets/2D Anime - School 00/Art/Classroom_0_evening.png
+  uploadId: 800398
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6385859132061903198
-    second: 6ca2a8e8-6638-408a-9c40-23a5568da286_0
+      213: -8026959640266869289
+    second: Classroom_0_evening_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +120,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 6ca2a8e8-6638-408a-9c40-23a5568da286_0
+      name: Classroom_0_evening_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 291
-        width: 1022
-        height: 1150
+        x: 0
+        y: 0
+        width: 4000
+        height: 2289
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e59eb300c012f9850800000000000000
-      internalID: 6385859132061903198
+      spriteID: 7d5fe7f5cb28a9090800000000000000
+      internalID: -8026959640266869289
       vertices: []
       indices: 
       edges: []
@@ -138,7 +145,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 52d1da751880d12499da079d5fe2b839
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +155,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      6ca2a8e8-6638-408a-9c40-23a5568da286_0: 6385859132061903198
+      Classroom_0_evening_0: -8026959640266869289
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

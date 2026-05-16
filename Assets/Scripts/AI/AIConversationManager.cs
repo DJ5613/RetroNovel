@@ -258,6 +258,12 @@ public class AIConversationManager : MonoBehaviour
         prompt +=
             "angry\n";
 
+        prompt +=
+            "thinking\n";
+
+        prompt +=
+            "shy\n";
+
         // =========================
         // RELATIONSHIPS
         // =========================
@@ -523,6 +529,26 @@ public class AIConversationManager : MonoBehaviour
                 text.Replace(
                     "[emotion:neutral]",
                     "");
+        }
+
+        if (text.Contains("[emotion:thinking]"))
+        {
+            text =
+                text.Replace(
+                    "[emotion:thinking]",
+                    "");
+
+            return "thinking";
+        }
+
+        if (text.Contains("[emotion:shy]"))
+        {
+            text =
+                text.Replace(
+                    "[emotion:shy]",
+                    "");
+
+            return "shy";
         }
 
         return "neutral";
