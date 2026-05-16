@@ -8,6 +8,7 @@ public class SaveSystem : MonoBehaviour
     public RelationshipSystem relationshipSystem;
     public SaveSlotUI[] saveSlots;
     public EventManager eventManager;
+    public AIConversationManager aiConversationManager;
 
     // =========================
     // SAVE GAME
@@ -51,6 +52,15 @@ public class SaveSystem : MonoBehaviour
         data.characters =
             dialogueManager.characterManager
                 .GetCharacters();
+
+        data.sumikoHistory =
+    aiConversationManager.GetHistory("Sumiko");
+
+        data.terukoHistory =
+            aiConversationManager.GetHistory("Teruko");
+
+        data.sadakoHistory =
+            aiConversationManager.GetHistory("Sadako");
 
         // =========================
         // SAVE JSON
@@ -137,6 +147,18 @@ public class SaveSystem : MonoBehaviour
 
         eventManager.currentDay =
     data.currentDay;
+
+        aiConversationManager.SetHistory(
+    "Sumiko",
+    data.sumikoHistory);
+
+        aiConversationManager.SetHistory(
+            "Teruko",
+            data.terukoHistory);
+
+        aiConversationManager.SetHistory(
+            "Sadako",
+            data.sadakoHistory);
 
         // =========================
         // LOAD NODE

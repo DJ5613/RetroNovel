@@ -1,6 +1,7 @@
-using UnityEngine;
-using TMPro;
 using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class AIConversationManager : MonoBehaviour
@@ -29,7 +30,8 @@ public class AIConversationManager : MonoBehaviour
     // MEMORY
     // =========================
 
-    private string conversationHistory = "";
+    private Dictionary<string, string> conversationHistories =
+    new Dictionary<string, string>();
 
     // =========================
     // REQUEST LOCK
@@ -131,19 +133,24 @@ public class AIConversationManager : MonoBehaviour
         // SAVE PLAYER MESSAGE
         // =========================
 
-        conversationHistory +=
+        string history =
+    GetCurrentHistory();
+
+        history +=
             "Player: " +
             playerMessage +
             "\n";
 
         // LIMIT MEMORY
 
-        if (conversationHistory.Length > 2500)
+        if (history.Length > 2500)
         {
-            conversationHistory =
-                conversationHistory.Substring(
-                    conversationHistory.Length - 2500);
+            history =
+                history.Substring(
+                    history.Length - 2500);
         }
+
+        SetCurrentHistory(history);
 
         // =========================
         // BUILD PROMPT
@@ -327,7 +334,7 @@ public class AIConversationManager : MonoBehaviour
 
         prompt +=
             "Conversation History:\n" +
-            conversationHistory +
+            GetCurrentHistory() +
             "\n";
 
         // =========================
@@ -416,7 +423,10 @@ public class AIConversationManager : MonoBehaviour
 
         // SAVE AI RESPONSE
 
-        conversationHistory +=
+        string history =
+    GetCurrentHistory();
+
+        history +=
             dialogueManager.GetCurrentSpeaker() +
             ": " +
             aiResponse +
@@ -424,12 +434,14 @@ public class AIConversationManager : MonoBehaviour
 
         // LIMIT MEMORY
 
-        if (conversationHistory.Length > 2500)
+        if (history.Length > 2500)
         {
-            conversationHistory =
-                conversationHistory.Substring(
-                    conversationHistory.Length - 2500);
+            history =
+                history.Substring(
+                    history.Length - 2500);
         }
+
+        SetCurrentHistory(history);
 
         // SHOW RESPONSE
 
@@ -661,7 +673,7 @@ public class AIConversationManager : MonoBehaviour
 
     public void ResetConversation()
     {
-        conversationHistory = "";
+        SetCurrentHistory("");
     }
 
     // =========================
@@ -672,5 +684,45 @@ public class AIConversationManager : MonoBehaviour
     {
         remainingTalks =
             Random.Range(5, 8);
+    }
+
+   
+
+    string GetCurrentHistory()
+    {
+        string character =
+            dialogueManager.GetCurrentSpeaker();
+
+        if (!conversationHistories.ContainsKey(character))
+        {
+            conversationHistories[character] = "";
+        }
+
+        return conversationHistories[character];
+    }
+
+    void SetCurrentHistory(string history)
+    {
+        string character =
+            dialogueManager.GetCurrentSpeaker();
+
+        conversationHistories[character] = history;
+    }
+
+    public string GetHistory(string character)
+    {
+        if (!conversationHistories.ContainsKey(character))
+        {
+            return "";
+        }
+
+        return conversationHistories[character];
+    }
+
+    public void SetHistory(
+        string character,
+        string history)
+    {
+        conversationHistories[character] = history;
     }
 }

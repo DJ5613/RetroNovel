@@ -19,6 +19,7 @@ public class DialogueChoice
 
     // если проверка не пройдена
     public string failNodeID;
+
 }
 
 [Serializable]
@@ -49,6 +50,8 @@ public class DialogueNode
 
     public List<string> hideCharacters;
 
+    public bool clearCharacters;
+
     // =========================
     // FLAGS SYSTEM
     // =========================
@@ -58,6 +61,8 @@ public class DialogueNode
 
     // требуемые флаги
     public List<string> requiredFlags;
+
+    public string music;
 }
 
 [Serializable]
