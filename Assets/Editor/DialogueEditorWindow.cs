@@ -3179,13 +3179,6 @@ previewCharacters =
                 dotColor);
         }
 
-
-
-
     }
 
 }
-
-
-
-
