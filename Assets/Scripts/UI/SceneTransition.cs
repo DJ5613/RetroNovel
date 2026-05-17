@@ -6,6 +6,11 @@ using System.Collections;
 [RequireComponent(typeof(Button))]
 public class SceneTransition : MonoBehaviour
 {
+    [Header("Fade")]
+    public CanvasGroup fadeGroup;
+
+    public float fadeDuration = 0.5f;
+
     [Header("Настройки перехода")]
     [Tooltip("Номер сцены в Build Settings")]
     public int sceneNumber = 1;
@@ -35,17 +40,32 @@ public class SceneTransition : MonoBehaviour
 
     private IEnumerator LoadSceneWithDelay()
     {
-        // Ждём указанную задержку
-        if (delayBeforeLoad > 0f)
+        if (fadeGroup != null)
         {
-            yield return new WaitForSeconds(delayBeforeLoad);
-        }
-        else
-        {
-            yield return null; // если задержка = 0 — просто следующий кадр
+            float t = 0f;
+
+            while (t < fadeDuration)
+            {
+                t += Time.deltaTime;
+
+                fadeGroup.alpha =
+                    Mathf.Lerp(
+                        0f,
+                        1f,
+                        t / fadeDuration);
+
+                yield return null;
+            }
+
+            fadeGroup.alpha = 1f;
         }
 
-        // Загружаем сцену
+        if (delayBeforeLoad > 0f)
+        {
+            yield return new WaitForSeconds(
+                delayBeforeLoad);
+        }
+
         SceneManager.LoadScene(sceneNumber);
     }
 }
