@@ -1,17 +1,10 @@
 fileFormatVersion: 2
-guid: 37f3a26ecd6c3fb41b1c5bdaacb3b4dd
-AssetOrigin:
-  serializedVersion: 1
-  productId: 338164
-  packageName: 2D Anime - School 00 (FREE)
-  packageVersion: 1.0
-  assetPath: Assets/2D Anime - School 00/Art/Classroom_0_season_autumn.png
-  uploadId: 800398
+guid: e2ad7c7e188ee5f4790753b62d4b9ad1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5208655823145817118
-    second: Classroom_0_season_autumn_0
+      213: -8964216374377329276
+    second: ab82f9e3-3809-4608-b2aa-cfafe44a7355_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,30 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Classroom_0_season_autumn_0
+      name: ab82f9e3-3809-4608-b2aa-cfafe44a7355_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 4000
-        height: 2289
+        width: 1748
+        height: 900
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -135,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2ebaf10202327b7b0800000000000000
-      internalID: -5208655823145817118
+      spriteID: 48dcf73b3b4b89380800000000000000
+      internalID: -8964216374377329276
       vertices: []
       indices: 
       edges: []
@@ -155,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Classroom_0_season_autumn_0: -5208655823145817118
+      ab82f9e3-3809-4608-b2aa-cfafe44a7355_0: -8964216374377329276
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

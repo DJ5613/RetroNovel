@@ -1,17 +1,10 @@
 fileFormatVersion: 2
-guid: e789757906e55d347b614a18f1b57090
-AssetOrigin:
-  serializedVersion: 1
-  productId: 338164
-  packageName: 2D Anime - School 00 (FREE)
-  packageVersion: 1.0
-  assetPath: Assets/2D Anime - School 00/Art/Classroom_0_students.png
-  uploadId: 800398
+guid: b50503c87d093674fbcf341253ab338c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7132250860992498561
-    second: Classroom_0_students_0
+      213: -8026959640266869289
+    second: Classroom_0_evening_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,24 +96,11 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Classroom_0_students_0
+      name: Classroom_0_evening_0
       rect:
         serializedVersion: 2
         x: 0
@@ -135,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f74719551a7250d90800000000000000
-      internalID: -7132250860992498561
+      spriteID: 7d5fe7f5cb28a9090800000000000000
+      internalID: -8026959640266869289
       vertices: []
       indices: 
       edges: []
@@ -155,9 +135,16 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Classroom_0_students_0: -7132250860992498561
+      Classroom_0_evening_0: -8026959640266869289
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 338164
+  packageName: 2D Anime - School 00 (FREE)
+  packageVersion: 1.0
+  assetPath: Assets/2D Anime - School 00/Art/Classroom_0_evening.png
+  uploadId: 800398
