@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class DialogueChoice
@@ -19,12 +20,15 @@ public class DialogueChoice
 
     // если проверка не пройдена
     public string failNodeID;
+
 }
 
 [Serializable]
 public class DialogueNode
 {
     public string id;
+
+    public Vector2 editorPosition;
 
     public string speaker;
     public string text;
@@ -49,6 +53,8 @@ public class DialogueNode
 
     public List<string> hideCharacters;
 
+    public bool clearCharacters;
+
     // =========================
     // FLAGS SYSTEM
     // =========================
@@ -58,6 +64,8 @@ public class DialogueNode
 
     // требуемые флаги
     public List<string> requiredFlags;
+
+    public string music;
 }
 
 [Serializable]

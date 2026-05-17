@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -110,7 +111,14 @@ public class DialogueManager : MonoBehaviour
                 GameFlags.Instance.SetFlag(flag);
             }
         }
+        // =========================
+        // CLEAR CHARACTERS
+        // =========================
 
+        if (currentNode.clearCharacters)
+        {
+            characterManager.HideAll();
+        }
         // =========================
         // BACKGROUND
         // =========================
@@ -216,6 +224,12 @@ public class DialogueManager : MonoBehaviour
                         OnChoiceSelected(choice);
                     });
             }
+        }
+
+        if (!string.IsNullOrEmpty(currentNode.music))
+        {
+            MusicManager.Instance.PlayMusic(
+                currentNode.music);
         }
     }
 

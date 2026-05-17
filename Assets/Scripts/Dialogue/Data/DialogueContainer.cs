@@ -4,5 +4,8 @@ using System.Collections.Generic;
 [Serializable]
 public class DialogueContainer
 {
-    public List<DialogueNode> nodes;
+    public List<GraphComment> comments;
+
+    public List<DialogueNode> nodes =
+        new List<DialogueNode>();
 }

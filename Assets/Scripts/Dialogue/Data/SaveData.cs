@@ -12,6 +12,10 @@ public class SaveData
     public int sumikoRelationship;
     public int terukoRelationship;
 
+    public string sumikoHistory;
+    public string terukoHistory;
+    public string sadakoHistory;
+
     // флаги
     public List<string> flags = new List<string>();
 
@@ -23,6 +27,7 @@ public class SaveData
     public string saveTime;
 
     public string routeName;
+
 }
 
 [System.Serializable]

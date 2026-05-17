@@ -1,23 +1,10 @@
 {
-    "comments": [
-        {
-            "text": "фывфывыфв",
-            "position": {
-                "x": 199.0,
-                "y": 311.0
-            },
-            "size": {
-                "x": 300.0,
-                "y": 120.0
-            }
-        }
-    ],
     "nodes": [
         {
             "id": "day1_start",
             "editorPosition": {
-                "x": 21.0,
-                "y": 101.0
+                "x": 20.0,
+                "y": 40.0
             },
             "speaker": "Sadako",
             "text": "Добро пожаловать.",
@@ -41,12 +28,12 @@
         {
             "id": "day1_hallway",
             "editorPosition": {
-                "x": 425.0,
-                "y": 89.0
+                "x": 554.0,
+                "y": 50.0
             },
             "speaker": "Sumiko",
             "text": "Привет!",
-            "nextNodeID": "day1_music_club",
+            "nextNodeID": "",
             "choices": [],
             "background": "classroom_day",
             "setCharacters": [
