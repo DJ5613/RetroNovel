@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class DialogueChoice
@@ -26,6 +27,8 @@ public class DialogueChoice
 public class DialogueNode
 {
     public string id;
+
+    public Vector2 editorPosition;
 
     public string speaker;
     public string text;

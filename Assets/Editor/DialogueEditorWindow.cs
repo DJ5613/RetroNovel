@@ -7,8 +7,19 @@ using UnityEngine;
 
 public class DialogueEditorWindow : EditorWindow
 {
-    float leftPanelWidth = 250f;
+    List<GraphComment> comments =
+    new List<GraphComment>();
 
+    bool isBoxSelecting;
+
+    Vector2 selectionStart;
+    Vector2 selectionEnd;
+
+    List<int> selectedNodes =
+        new List<int>();
+
+
+    float leftPanelWidth = 250f;
     float rightPanelWidth = 320f;
 
     bool isResizingPanels;
@@ -39,14 +50,19 @@ public class DialogueEditorWindow : EditorWindow
 
     bool isDraggingNode;
 
+    bool isDraggingComment;
+
+    int draggedComment = -1;
+
+    Vector2 commentDragOffset;
+
     string draggedNodeID;
 
 
     Dictionary<string, Rect> graphNodeRects =
     new Dictionary<string, Rect>();
 
-    Dictionary<string, Vector2> nodePositions =
-    new Dictionary<string, Vector2>();
+    
 
     Vector2 leftScroll;
     Vector2 rightScroll;
@@ -296,6 +312,25 @@ GUILayout.EndVertical();
             GUILayout.Width(60)))
         {
             LoadJSON();
+        }
+
+        if (GUILayout.Button(
+    "Add Comment",
+    EditorStyles.toolbarButton,
+    GUILayout.Width(100)))
+        {
+            comments.Add(
+                new GraphComment()
+                {
+                    position =
+                        new Vector2(300, 300),
+
+                    size =
+                        new Vector2(300, 120),
+
+                    text =
+                        "TODO"
+                });
         }
 
         if (GUILayout.Button(
@@ -1753,6 +1788,64 @@ GUILayout.EndVertical();
 
         Event e = Event.current;
 
+        // =========================
+        // BOX SELECTION START
+        // =========================
+
+        if (e.type == EventType.MouseDown
+            && e.button == 0)
+        {
+            bool clickedSomething = false;
+
+            foreach (Rect rect
+         in graphNodeRects.Values)
+            {
+                if (rect.Contains(e.mousePosition))
+                {
+                    clickedSomething = true;
+                    break;
+                }
+            }
+
+            // COMMENTS
+
+            for (int i = 0; i < comments.Count; i++)
+            {
+                GraphComment comment =
+                    comments[i];
+
+                Vector2 commentScreenPos =
+                    (comment.position * graphZoom)
+                    + graphOffset;
+
+                Rect commentRect =
+                    new Rect(
+                        commentScreenPos.x,
+                        commentScreenPos.y,
+                        comment.size.x * graphZoom,
+                        comment.size.y * graphZoom);
+
+                if (commentRect.Contains(e.mousePosition))
+                {
+                    clickedSomething = true;
+                    break;
+                }
+            }
+
+            if (!clickedSomething)
+            {
+                isBoxSelecting = true;
+
+                selectionStart =
+                    e.mousePosition;
+
+                selectionEnd =
+                    e.mousePosition;
+
+                selectedNodes.Clear();
+            }
+        }
+
         Vector2 zoomMouse =
     (e.mousePosition - graphOffset)
     / graphZoom;
@@ -1760,6 +1853,19 @@ GUILayout.EndVertical();
         if (isDraggingConnection)
         {
             currentConnectionMouse =
+                e.mousePosition;
+
+            Repaint();
+        }
+
+        // =========================
+        // BOX SELECTION DRAG
+        // =========================
+
+        if (isBoxSelecting
+            && e.type == EventType.MouseDrag)
+        {
+            selectionEnd =
                 e.mousePosition;
 
             Repaint();
@@ -1827,16 +1933,16 @@ GUILayout.EndVertical();
 
         foreach (DialogueNode node in nodes)
         {
-            if (!nodePositions.ContainsKey(node.id))
+            if (node.editorPosition == Vector2.zero)
             {
-                nodePositions[node.id] =
+                node.editorPosition =
                     new Vector2(
                         20,
                         40 + nodes.IndexOf(node) * 80);
             }
 
             Vector2 worldPos =
-    nodePositions[node.id];
+    node.editorPosition;
 
             Vector2 screenPos =
     (worldPos * graphZoom)
@@ -1865,13 +1971,141 @@ GUILayout.EndVertical();
     && draggedNodeID == node.id
     && e.type == EventType.MouseDrag)
             {
-                nodePositions[node.id] =
-                    zoomMouse - dragOffset;
+                if (isDraggingNode)
+                {
+                    Vector2 newPos =
+                        zoomMouse - dragOffset;
+
+                    Vector2 delta =
+                        newPos
+                        - nodes[selectedNode]
+                            .editorPosition;
+
+                    // MOVE MAIN NODE
+
+                    nodes[selectedNode]
+                        .editorPosition =
+                            newPos;
+
+                    // MOVE MULTI-SELECTION
+
+                    foreach (int index
+                             in selectedNodes)
+                    {
+                        if (index == selectedNode)
+                            continue;
+
+                        nodes[index]
+                            .editorPosition += delta;
+                    }
+
+                    Repaint();
+                }
 
                 Repaint();
             }
 
+            // =========================
+            // COMMENTS
+            // =========================
 
+            for (int i = 0;
+                 i < comments.Count;
+                 i++)
+            {
+                GraphComment comment =
+                    comments[i];
+
+                Vector2 commentScreenPos =
+    (comment.position * graphZoom)
+    + graphOffset;
+
+                Rect rect =
+                    new Rect(
+                        commentScreenPos.x,
+                        commentScreenPos.y,
+                        comment.size.x * graphZoom,
+                        comment.size.y * graphZoom);
+
+                // COMMENT DRAG START
+
+                Rect dragRect =
+    new Rect(
+        rect.x,
+        rect.y,
+        rect.width,
+        24);
+
+                EditorGUI.DrawRect(
+                    dragRect,
+                    new Color(
+                        0f,
+                        0f,
+                        0f,
+                        0.2f));
+
+                GUI.Label(
+                    new Rect(
+                        dragRect.x + 8,
+                        dragRect.y + 4,
+                        100,
+                        20),
+                    "Comment");
+
+                if (e.type == EventType.MouseDown
+                    && e.button == 0
+                    && dragRect.Contains(e.mousePosition))
+                {
+                    draggedComment = i;
+
+                    isDraggingComment = true;
+
+                    commentDragOffset =
+                        zoomMouse
+                        - comment.position;
+
+                    e.Use();
+                }
+
+                EditorGUI.DrawRect(
+                    rect,
+                    new Color(
+                        1f,
+                        0.95f,
+                        0.3f,
+                        0.25f));
+
+                GUI.Box(rect, "");
+
+                Rect textRect =
+    new Rect(
+        rect.x + 4,
+        rect.y + 28,
+        rect.width - 8,
+        rect.height - 32);
+
+                GUILayout.BeginArea(textRect);
+
+                comment.text =
+                    EditorGUILayout.TextArea(
+                        comment.text,
+                        GUILayout.ExpandHeight(true));
+
+                GUILayout.EndArea();
+
+                // COMMENT DRAG
+
+                if (isDraggingComment
+                    && draggedComment == i
+                    && e.type == EventType.MouseDrag)
+                {
+                    comments[i].position =
+    zoomMouse
+    - commentDragOffset;
+
+                    Repaint();
+                }
+            }
 
             // =========================
             // NODE COLORS
@@ -1933,7 +2167,9 @@ GUILayout.EndVertical();
 
             // SELECTED OUTLINE
 
-            if (nodes.IndexOf(node) == selectedNode)
+            if (nodes.IndexOf(node) == selectedNode
+    || selectedNodes.Contains(
+        nodes.IndexOf(node)))
             {
                 Rect outlineRect =
                     new Rect(
@@ -2169,6 +2405,41 @@ GUILayout.EndVertical();
             isDraggingNode = false;
 
             draggedNodeID = "";
+
+            isDraggingComment = false;
+
+            draggedComment = -1;
+        }
+
+        // =========================
+        // BOX SELECTION END
+        // =========================
+
+        if (isBoxSelecting
+            && e.type == EventType.MouseUp)
+        {
+            Rect selectionRect =
+                Rect.MinMaxRect(
+                    Mathf.Min(selectionStart.x, selectionEnd.x),
+                    Mathf.Min(selectionStart.y, selectionEnd.y),
+                    Mathf.Max(selectionStart.x, selectionEnd.x),
+                    Mathf.Max(selectionStart.y, selectionEnd.y));
+
+            selectedNodes.Clear();
+
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                if (graphNodeRects.ContainsKey(nodes[i].id)
+                    && selectionRect.Overlaps(
+                        graphNodeRects[nodes[i].id]))
+                {
+                    selectedNodes.Add(i);
+                }
+            }
+
+            isBoxSelecting = false;
+
+            Repaint();
         }
 
         // =========================
@@ -2218,10 +2489,7 @@ GUILayout.EndVertical();
 
                     // remove graph data
 
-                    if (nodePositions.ContainsKey(deletedID))
-                    {
-                        nodePositions.Remove(deletedID);
-                    }
+                    
 
                     if (graphNodeRects.ContainsKey(deletedID))
                     {
@@ -2267,12 +2535,9 @@ GUILayout.EndVertical();
 
                     // position
 
-                    if (nodePositions.ContainsKey(original.id))
-                    {
-                        nodePositions[duplicate.id] =
-                            nodePositions[original.id]
-                            + new Vector2(40, 40);
-                    }
+                    duplicate.editorPosition =
+    original.editorPosition
+    + new Vector2(40, 40);
 
                     SaveUndoState();
 
@@ -2286,6 +2551,40 @@ GUILayout.EndVertical();
                     e.Use();
                 }
             }
+        }
+
+        // =========================
+        // DRAW SELECTION RECT
+        // =========================
+
+        if (isBoxSelecting)
+        {
+            Rect selectionRect =
+                Rect.MinMaxRect(
+                    Mathf.Min(selectionStart.x, selectionEnd.x),
+                    Mathf.Min(selectionStart.y, selectionEnd.y),
+                    Mathf.Max(selectionStart.x, selectionEnd.x),
+                    Mathf.Max(selectionStart.y, selectionEnd.y));
+
+            EditorGUI.DrawRect(
+                selectionRect,
+                new Color(
+                    0.3f,
+                    0.6f,
+                    1f,
+                    0.15f));
+
+            Handles.color =
+                new Color(
+                    0.3f,
+                    0.6f,
+                    1f,
+                    0.9f);
+
+            Handles.DrawSolidRectangleWithOutline(
+                selectionRect,
+                Color.clear,
+                Handles.color);
         }
 
         DrawConnections();
@@ -2506,11 +2805,10 @@ GUILayout.EndVertical();
 
         foreach (DialogueNode node in nodes)
         {
-            if (!nodePositions.ContainsKey(node.id))
-                continue;
-
             Vector2 pos =
-                nodePositions[node.id];
+    node.editorPosition;
+
+            
 
             minX = Mathf.Min(minX, pos.x);
             minY = Mathf.Min(minY, pos.y);
@@ -2573,11 +2871,8 @@ GUILayout.EndVertical();
 
         foreach (DialogueNode node in nodes)
         {
-            if (!nodePositions.ContainsKey(node.id))
-                continue;
-
             Vector2 worldPos =
-                nodePositions[node.id];
+    node.editorPosition;
 
             float miniX =
                 minimapRect.x +
