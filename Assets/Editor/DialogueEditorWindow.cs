@@ -7,8 +7,25 @@ using UnityEngine;
 
 public class DialogueEditorWindow : EditorWindow
 {
+    float leftPanelWidth = 250f;
 
-    
+    float rightPanelWidth = 320f;
+
+    bool isResizingPanels;
+    bool isResizingRightPanel;
+
+    Stack<string> undoStack =
+    new Stack<string>();
+
+    Stack<string> redoStack =
+        new Stack<string>();
+
+    bool isDraggingConnection;
+
+    string connectionStartID = "";
+
+    Vector2 currentConnectionMouse;
+
     float graphZoom = 1f;
 
     Vector2 graphOffset = Vector2.zero;
@@ -110,22 +127,135 @@ public class DialogueEditorWindow : EditorWindow
         if (nodes.Count == 0)
             return;
 
+        Undo.RegisterCompleteObjectUndo(
+    this,
+    "Dialogue Change");
+
         DrawTopBar();
 
         GUILayout.BeginHorizontal();
 
+        // LEFT
+
+        GUILayout.BeginVertical(
+            GUILayout.Width(leftPanelWidth));
+
         DrawLeftPanel();
+
+        GUILayout.EndVertical();
+
+        // RESIZER
+
+        Rect resizeRect =
+            new Rect(
+                leftPanelWidth,
+                20,
+                6,
+                position.height);
+
+        EditorGUIUtility.AddCursorRect(
+            resizeRect,
+            MouseCursor.ResizeHorizontal);
+
+        EditorGUI.DrawRect(
+            resizeRect,
+            new Color(1, 1, 1, 0.1f));
+
+        Event e = Event.current;
+
+        if (e.type == EventType.MouseDown
+            && resizeRect.Contains(e.mousePosition))
+        {
+            isResizingPanels = true;
+        }
+
+        if (isResizingPanels)
+        {
+            leftPanelWidth =
+                Mathf.Clamp(
+                    e.mousePosition.x,
+                    180,
+                    position.width - 400);
+
+            Repaint();
+        }
+
+        if (e.type == EventType.MouseUp)
+        {
+            isResizingPanels = false;
+        }
+
+        // GRAPH
 
         if (showGraph)
         {
+            GUILayout.BeginVertical(
+                GUILayout.ExpandWidth(true),
+                GUILayout.ExpandHeight(true));
+
             DrawMiniGraph();
+
+            GUILayout.EndVertical();
         }
+
+        // RIGHT RESIZER
+
+        // RIGHT RESIZER
+
+        if (showGraph)
+        {
+            Rect rightResizeRect =
+                new Rect(
+                    position.width - rightPanelWidth - 6,
+                    20,
+                    6,
+                    position.height);
+
+            EditorGUIUtility.AddCursorRect(
+                rightResizeRect,
+                MouseCursor.ResizeHorizontal);
+
+            EditorGUI.DrawRect(
+                rightResizeRect,
+                new Color(1, 1, 1, 0.1f));
+
+            if (e.type == EventType.MouseDown
+                && rightResizeRect.Contains(e.mousePosition))
+            {
+                isResizingPanels = false;
+                isResizingRightPanel = true;
+            }
+
+            if (isResizingRightPanel)
+            {
+                rightPanelWidth =
+                    Mathf.Clamp(
+                        position.width - e.mousePosition.x,
+                        250,
+                        700);
+
+                Repaint();
+            }
+
+            if (e.type == EventType.MouseUp)
+            {
+                isResizingRightPanel = false;
+            }
+        }
+
+        // RIGHT
+
+        GUILayout.BeginVertical(
+    showGraph
+        ? GUILayout.Width(rightPanelWidth)
+        : GUILayout.ExpandWidth(true));
 
         DrawRightPanel();
 
+GUILayout.EndVertical();
+
         GUILayout.EndHorizontal();
 
-        Event e = Event.current;
 
         if (e.type == EventType.KeyDown &&
             e.control &&
@@ -190,8 +320,7 @@ public class DialogueEditorWindow : EditorWindow
 
     void DrawLeftPanel()
     {
-        GUILayout.BeginVertical(
-            GUILayout.Width(250));
+        GUILayout.BeginVertical();
 
         GUILayout.Label(
             "Nodes",
@@ -242,6 +371,8 @@ public class DialogueEditorWindow : EditorWindow
 
         if (GUILayout.Button("+ Add Node"))
         {
+            SaveUndoState();
+
             DialogueNode previous =
     nodes[selectedNode];
 
@@ -692,19 +823,103 @@ public class DialogueEditorWindow : EditorWindow
         // BACKGROUND
         // =========================
 
-        node.background =
-            EditorGUILayout.TextField(
-                "Background",
+        string backgroundsPath =
+    "Assets/Resources/Sprites/Backgrounds";
+
+        string[] backgroundFiles =
+            Directory.GetFiles(
+                backgroundsPath,
+                "*.png");
+
+        List<string> backgrounds =
+            new List<string>();
+
+        foreach (string file in backgroundFiles)
+        {
+            backgrounds.Add(
+                Path.GetFileNameWithoutExtension(
+                    file));
+        }
+
+        int currentBackgroundIndex =
+            backgrounds.IndexOf(
                 node.background);
+
+        if (currentBackgroundIndex < 0)
+        {
+            currentBackgroundIndex = 0;
+        }
+
+        currentBackgroundIndex =
+            EditorGUILayout.Popup(
+                "Background",
+                currentBackgroundIndex,
+                backgrounds.ToArray());
+
+        node.background =
+            backgrounds[currentBackgroundIndex];
 
         // =========================
         // MUSIC
         // =========================
 
-        node.music =
-            EditorGUILayout.TextField(
-                "Music",
+        // =========================
+        // MUSIC
+        // =========================
+
+        string musicPath =
+            "Assets/Resources/Audio/Music";
+
+        List<string> musicTracks =
+            new List<string>();
+
+        if (Directory.Exists(musicPath))
+        {
+            string[] musicFiles =
+                Directory.GetFiles(
+                    musicPath);
+
+            foreach (string file in musicFiles)
+            {
+                string extension =
+                    Path.GetExtension(file)
+                    .ToLower();
+
+                if (extension == ".mp3"
+                    || extension == ".wav"
+                    || extension == ".ogg")
+                {
+                    musicTracks.Add(
+                        Path.GetFileNameWithoutExtension(
+                            file));
+                }
+            }
+        }
+
+        // SAFETY
+
+        if (musicTracks.Count == 0)
+        {
+            musicTracks.Add("None");
+        }
+
+        int currentMusicIndex =
+            musicTracks.IndexOf(
                 node.music);
+
+        if (currentMusicIndex < 0)
+        {
+            currentMusicIndex = 0;
+        }
+
+        currentMusicIndex =
+            EditorGUILayout.Popup(
+                "Music",
+                currentMusicIndex,
+                musicTracks.ToArray());
+
+        node.music =
+            musicTracks[currentMusicIndex];
 
         // =========================
         // NEXT NODE
@@ -1383,6 +1598,76 @@ public class DialogueEditorWindow : EditorWindow
             "Loaded JSON: " + path);
     }
 
+    void SaveUndoState()
+    {
+        DialogueContainer container =
+            new DialogueContainer();
+
+        container.nodes = nodes;
+
+        string json =
+            JsonUtility.ToJson(container);
+
+        undoStack.Push(json);
+
+        // clear redo after new action
+
+        redoStack.Clear();
+
+
+
+    }
+
+    void PerformUndo()
+    {
+        if (undoStack.Count == 0)
+            return;
+
+        DialogueContainer current =
+            new DialogueContainer();
+
+        current.nodes = nodes;
+
+        redoStack.Push(
+            JsonUtility.ToJson(current));
+
+        string json =
+            undoStack.Pop();
+
+        DialogueContainer container =
+            JsonUtility.FromJson<DialogueContainer>(
+                json);
+
+        nodes = container.nodes;
+
+        Repaint();
+    }
+
+    void PerformRedo()
+    {
+        if (redoStack.Count == 0)
+            return;
+
+        DialogueContainer current =
+            new DialogueContainer();
+
+        current.nodes = nodes;
+
+        undoStack.Push(
+            JsonUtility.ToJson(current));
+
+        string json =
+            redoStack.Pop();
+
+        DialogueContainer container =
+            JsonUtility.FromJson<DialogueContainer>(
+                json);
+
+        nodes = container.nodes;
+
+        Repaint();
+    }
+
     // =========================
     // ADD EMPTY NODE
     // =========================
@@ -1424,8 +1709,8 @@ public class DialogueEditorWindow : EditorWindow
     void DrawMiniGraph()
     {
         GUILayout.BeginVertical(
-            "box",
-            GUILayout.Width(300));
+    "box",
+    GUILayout.ExpandWidth(true));
 
 
 
@@ -1435,8 +1720,12 @@ public class DialogueEditorWindow : EditorWindow
 
         Rect graphArea =
     GUILayoutUtility.GetRect(
-        position.width - 500,
-        position.height - 100);
+        0,
+        10000,
+        0,
+        10000,
+        GUILayout.ExpandWidth(true),
+        GUILayout.ExpandHeight(true));
 
 
 
@@ -1460,21 +1749,27 @@ public class DialogueEditorWindow : EditorWindow
             0.35f,
             new Color(0.4f, 0.4f, 0.4f));
 
-        Matrix4x4 oldMatrix =
-    GUI.matrix;
-
-        GUIUtility.ScaleAroundPivot(
-            Vector2.one * graphZoom,
-            Vector2.zero);
+        
 
         Event e = Event.current;
+
+        Vector2 zoomMouse =
+    (e.mousePosition - graphOffset)
+    / graphZoom;
+
+        if (isDraggingConnection)
+        {
+            currentConnectionMouse =
+                e.mousePosition;
+
+            Repaint();
+        }
 
         // =========================
         // GRAPH ZOOM
         // =========================
 
-        if (e.type == EventType.ScrollWheel &&
-            graphArea.Contains(e.mousePosition))
+        if (e.type == EventType.ScrollWheel)
         {
             float oldZoom = graphZoom;
 
@@ -1505,8 +1800,7 @@ public class DialogueEditorWindow : EditorWindow
         // =========================
 
         if (e.button == 2 &&
-    e.type == EventType.MouseDown &&
-    graphArea.Contains(e.mousePosition))
+    e.type == EventType.MouseDown)
         {
             isPanningGraph = true;
 
@@ -1545,7 +1839,8 @@ public class DialogueEditorWindow : EditorWindow
     nodePositions[node.id];
 
             Vector2 screenPos =
-    worldPos + graphOffset;
+    (worldPos * graphZoom)
+    + graphOffset;
 
 
 
@@ -1561,24 +1856,22 @@ public class DialogueEditorWindow : EditorWindow
     new Rect(
         screenPos.x,
         screenPos.y,
-        220,
-nodeHeight);
+        220 * graphZoom,
+        nodeHeight * graphZoom);
 
-            
+
 
             if (isDraggingNode
     && draggedNodeID == node.id
     && e.type == EventType.MouseDrag)
             {
                 nodePositions[node.id] =
-    ((e.mousePosition / graphZoom)
-    - dragOffset)
-    - graphOffset;
+                    zoomMouse - dragOffset;
 
                 Repaint();
             }
 
-            
+
 
             // =========================
             // NODE COLORS
@@ -1664,14 +1957,65 @@ nodeHeight);
                 nodeRect,
                 nodeColor);
 
+            GUIStyle zoomStyle =
+    new GUIStyle(GUI.skin.box);
+
+            zoomStyle.fontSize =
+                Mathf.RoundToInt(
+                    14 * graphZoom);
+
             GUI.Box(
-                nodeRect,
-                node.id);
+    nodeRect,
+    node.id,
+    zoomStyle);
+
+            // CONNECTION POINT
+
+            Rect connectionPoint =
+    new Rect(
+        nodeRect.xMax - 8 * graphZoom,
+        nodeRect.center.y - 6 * graphZoom,
+        12 * graphZoom,
+        12 * graphZoom);
+
+            if (connectionPoint.Contains(
+    e.mousePosition))
+            {
+                EditorGUI.DrawRect(
+                    connectionPoint,
+                    Color.cyan);
+            }
+            else
+            {
+                EditorGUI.DrawRect(
+                    connectionPoint,
+                    new Color(
+                        0.9f,
+                        0.9f,
+                        0.9f));
+            }
+
+            if (e.type == EventType.MouseDown
+    && e.button == 0
+    && connectionPoint.Contains(
+        e.mousePosition))
+            {
+                isDraggingConnection = true;
+
+                connectionStartID = node.id;
+
+                currentConnectionMouse =
+                    e.mousePosition;
+
+                e.Use();
+            }
 
             if (e.type == EventType.MouseDown
                 && e.button == 0
                 && nodeRect.Contains(e.mousePosition))
             {
+                SaveUndoState();
+
                 selectedNode =
                     nodes.IndexOf(node);
 
@@ -1680,22 +2024,29 @@ nodeHeight);
                 draggedNodeID = node.id;
 
                 dragOffset =
-    (e.mousePosition / graphZoom)
-    - screenPos;
+    zoomMouse - worldPos;
 
                 e.Use();
             }
 
             graphNodeRects[node.id] =
-    new Rect(
-        nodeRect.x * graphZoom,
-        nodeRect.y * graphZoom,
-        nodeRect.width * graphZoom,
-        nodeRect.height * graphZoom
-    );
+    nodeRect;
 
+            graphNodeRects[node.id] =
+    nodeRect;
 
+            // =========================
+            // MINI LABEL STYLE
+            // =========================
 
+            GUIStyle miniLabel =
+                new GUIStyle(EditorStyles.label);
+
+            miniLabel.fontSize =
+                Mathf.RoundToInt(12 * graphZoom);
+
+            miniLabel.normal.textColor =
+                Color.white;
 
             // NEXT NODE LABEL
 
@@ -1704,47 +2055,244 @@ nodeHeight);
                 GUI.Label(
                     new Rect(
                         nodeRect.x,
-                        nodeRect.y + 45,
-                        220,
-                        20),
-                    "↓ " + node.nextNodeID);
+                        nodeRect.y + 45 * graphZoom,
+                        220 * graphZoom,
+                        20 * graphZoom),
+                    "↓ " + node.nextNodeID,
+                    miniLabel);
             }
 
             // CHOICES
 
             if (node.choices != null)
             {
-                float yOffset = 65;
+                float yOffset = 65 * graphZoom;
 
                 foreach (DialogueChoice choice
                          in node.choices)
                 {
+                    string relationshipPreview =
+    "";
+
+                    if (choice.sadakoChange != 0)
+                    {
+                        relationshipPreview +=
+                            " ❤️" +
+                            (choice.sadakoChange > 0 ? "+" : "") +
+                            choice.sadakoChange;
+                    }
+
+                    if (choice.sumikoChange != 0)
+                    {
+                        relationshipPreview +=
+                            " 💛" +
+                            (choice.sumikoChange > 0 ? "+" : "") +
+                            choice.sumikoChange;
+                    }
+
+                    if (choice.terukoChange != 0)
+                    {
+                        relationshipPreview +=
+                            " 💜" +
+                            (choice.terukoChange > 0 ? "+" : "") +
+                            choice.terukoChange;
+                    }
+
                     GUI.Label(
                         new Rect(
                             nodeRect.x,
                             nodeRect.y + yOffset,
-                            220,
-                            20),
+                            220 * graphZoom,
+                            20 * graphZoom),
                         "├─ " +
                         choice.text +
+                        relationshipPreview +
                         " → " +
-                        choice.nextNodeID);
+                        choice.nextNodeID,
+                        miniLabel);
 
-                    yOffset += 20;
+                    yOffset += 20 * graphZoom;
                 }
             }
 
         }
+
+        if (isDraggingConnection
+    && e.type == EventType.MouseUp)
+        {
+            foreach (DialogueNode targetNode
+                     in nodes)
+            {
+                if (targetNode.id ==
+                    connectionStartID)
+                {
+                    continue;
+                }
+
+                if (!graphNodeRects.ContainsKey(
+                    targetNode.id))
+                {
+                    continue;
+                }
+
+                Rect targetRect =
+                    graphNodeRects[
+                        targetNode.id];
+
+                if (targetRect.Contains(
+                    e.mousePosition))
+                {
+                    DialogueNode startNode =
+                        nodes.Find(
+                            n => n.id ==
+                            connectionStartID);
+
+                    if (startNode != null)
+                    {
+                        startNode.nextNodeID =
+                            targetNode.id;
+                    }
+
+                    break;
+                }
+            }
+
+            isDraggingConnection = false;
+
+            connectionStartID = "";
+
+            Repaint();
+        }
+
         if (e.type == EventType.MouseUp)
         {
             isDraggingNode = false;
 
             draggedNodeID = "";
         }
-        GUI.matrix = oldMatrix;
+
+        // =========================
+        // HOTKEYS
+        // =========================
+
+        if (e.type == EventType.KeyDown)
+        {
+
+            // UNDO
+
+            if (e.control
+                && e.keyCode == KeyCode.Z)
+            {
+                PerformUndo();
+
+                Repaint();
+
+                e.Use();
+            }
+
+            // REDO
+
+            if (e.control
+                && e.keyCode == KeyCode.Y)
+            {
+                PerformRedo();
+
+                Repaint();
+
+                e.Use();
+            }
+
+            // DELETE NODE
+
+            if (e.keyCode == KeyCode.Delete)
+            {
+                if (selectedNode >= 0
+                    && selectedNode < nodes.Count)
+                {
+                    string deletedID =
+                        nodes[selectedNode].id;
+
+                    SaveUndoState();
+
+                    nodes.RemoveAt(selectedNode);
+
+                    // remove graph data
+
+                    if (nodePositions.ContainsKey(deletedID))
+                    {
+                        nodePositions.Remove(deletedID);
+                    }
+
+                    if (graphNodeRects.ContainsKey(deletedID))
+                    {
+                        graphNodeRects.Remove(deletedID);
+                    }
+
+                    // safety
+
+                    if (nodes.Count == 0)
+                    {
+                        AddEmptyNode();
+                    }
+
+                    selectedNode =
+                        Mathf.Clamp(
+                            selectedNode - 1,
+                            0,
+                            nodes.Count - 1);
+
+                    Repaint();
+
+                    e.Use();
+                }
+            }
+
+            // DUPLICATE NODE
+
+            if (e.control
+                && e.keyCode == KeyCode.D)
+            {
+                if (selectedNode >= 0
+                    && selectedNode < nodes.Count)
+                {
+                    DialogueNode original =
+                        nodes[selectedNode];
+
+                    DialogueNode duplicate =
+                        JsonUtility.FromJson<DialogueNode>(
+                            JsonUtility.ToJson(original));
+
+                    duplicate.id =
+                        GenerateUniqueNodeID();
+
+                    // position
+
+                    if (nodePositions.ContainsKey(original.id))
+                    {
+                        nodePositions[duplicate.id] =
+                            nodePositions[original.id]
+                            + new Vector2(40, 40);
+                    }
+
+                    SaveUndoState();
+
+                    nodes.Add(duplicate);
+
+                    selectedNode =
+                        nodes.Count - 1;
+
+                    Repaint();
+
+                    e.Use();
+                }
+            }
+        }
+
         DrawConnections();
 
         GUI.EndGroup();
+
+        DrawMinimap(graphArea);
 
         GUILayout.EndVertical();
     }
@@ -1757,6 +2305,15 @@ nodeHeight);
     {
         return "node_" +
                nodes.Count.ToString("000");
+    }
+
+    string GenerateUniqueNodeID()
+    {
+        return
+            "node_" +
+            System.Guid.NewGuid()
+            .ToString("N")
+            .Substring(0, 6);
     }
 
     void DrawConnections()
@@ -1795,7 +2352,40 @@ nodeHeight);
                 }
             }
         }
+        // TEMP CONNECTION
 
+        if (isDraggingConnection
+            && graphNodeRects.ContainsKey(
+                connectionStartID))
+        {
+            Rect fromRect =
+                graphNodeRects[
+                    connectionStartID];
+
+            Vector3 startPos =
+                new Vector3(
+                    fromRect.xMax,
+                    fromRect.center.y,
+                    0);
+
+            Vector3 endPos =
+                currentConnectionMouse;
+
+            Vector3 startTangent =
+                startPos + Vector3.right * 50;
+
+            Vector3 endTangent =
+                endPos + Vector3.left * 50;
+
+            Handles.DrawBezier(
+                startPos,
+                endPos,
+                startTangent,
+                endTangent,
+                Color.white,
+                null,
+                3f);
+        }
         Handles.EndGUI();
     }
 
@@ -1900,6 +2490,136 @@ nodeHeight);
 
         Handles.EndGUI();
     }
+    void DrawMinimap(Rect graphArea)
+    {
+        Rect minimapRect =
+            new Rect(
+                graphArea.xMax - 210,
+                graphArea.y + 10,
+                200,
+                140);
+
+        float minX = float.MaxValue;
+        float minY = float.MaxValue;
+        float maxX = float.MinValue;
+        float maxY = float.MinValue;
+
+        foreach (DialogueNode node in nodes)
+        {
+            if (!nodePositions.ContainsKey(node.id))
+                continue;
+
+            Vector2 pos =
+                nodePositions[node.id];
+
+            minX = Mathf.Min(minX, pos.x);
+            minY = Mathf.Min(minY, pos.y);
+
+            maxX = Mathf.Max(maxX, pos.x + 220);
+            maxY = Mathf.Max(maxY, pos.y + 80);
+        }
+
+        float graphWidth =
+    maxX - minX;
+
+        float graphHeight =
+            maxY - minY;
+
+        graphWidth =
+    Mathf.Max(graphWidth, 1);
+
+        graphHeight =
+            Mathf.Max(graphHeight, 1);
+
+        float scaleX =
+            minimapRect.width / graphWidth;
+
+        float scaleY =
+            minimapRect.height / graphHeight;
+
+        float minimapScale =
+            Mathf.Min(scaleX, scaleY) * 0.9f;
+        // background
+
+        EditorGUI.DrawRect(
+            minimapRect,
+            new Color(
+                0f,
+                0f,
+                0f,
+                0.75f));
+
+        // border
+
+        Handles.color =
+            new Color(
+                1f,
+                1f,
+                1f,
+                0.2f);
+
+        Handles.DrawSolidRectangleWithOutline(
+            minimapRect,
+            Color.clear,
+            new Color(
+                1f,
+                1f,
+                1f,
+                0.2f));
+
+        // =========================
+        // NODE DOTS
+        // =========================
+
+        foreach (DialogueNode node in nodes)
+        {
+            if (!nodePositions.ContainsKey(node.id))
+                continue;
+
+            Vector2 worldPos =
+                nodePositions[node.id];
+
+            float miniX =
+                minimapRect.x +
+                (worldPos.x - minX)
+* minimapScale;
+
+            float miniY =
+                minimapRect.y +
+                (worldPos.y - minY)
+* minimapScale;
+
+            Rect dot =
+                new Rect(
+                    miniX,
+                    miniY,
+                    6,
+                    6);
+
+            Color dotColor =
+                new Color(
+                    0.7f,
+                    0.7f,
+                    0.7f);
+
+            // selected node
+
+            if (nodes[selectedNode].id ==
+                node.id)
+            {
+                dotColor = Color.white;
+            }
+
+            EditorGUI.DrawRect(
+                dot,
+                dotColor);
+        }
+
+        
+
+        
+    }
+
 }
 
 
