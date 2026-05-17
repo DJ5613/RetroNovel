@@ -1,10 +1,23 @@
 {
+    "comments": [
+        {
+            "text": "фывфывыфв",
+            "position": {
+                "x": 199.0,
+                "y": 311.0
+            },
+            "size": {
+                "x": 300.0,
+                "y": 120.0
+            }
+        }
+    ],
     "nodes": [
         {
             "id": "day1_start",
             "editorPosition": {
-                "x": 20.0,
-                "y": 40.0
+                "x": 21.0,
+                "y": 101.0
             },
             "speaker": "Sadako",
             "text": "Добро пожаловать.",
@@ -28,137 +41,12 @@
         {
             "id": "day1_hallway",
             "editorPosition": {
-                "x": 409.0869445800781,
-                "y": 66.0
+                "x": 425.0,
+                "y": 89.0
             },
             "speaker": "Sumiko",
             "text": "Привет!",
-            "nextNodeID": "",
-            "choices": [
-                {
-                    "text": "New Choice",
-                    "nextNodeID": "node_007",
-                    "sadakoChange": 0,
-                    "sumikoChange": 0,
-                    "terukoChange": 0,
-                    "requiredSadako": 0,
-                    "requiredSumiko": 0,
-                    "requiredTeruko": 0,
-                    "failNodeID": ""
-                },
-                {
-                    "text": "New Choice",
-                    "nextNodeID": "node_005",
-                    "sadakoChange": 0,
-                    "sumikoChange": 0,
-                    "terukoChange": 0,
-                    "requiredSadako": 0,
-                    "requiredSumiko": 0,
-                    "requiredTeruko": 0,
-                    "failNodeID": ""
-                }
-            ],
-            "background": "classroom_day",
-            "setCharacters": [
-                {
-                    "name": "Sumiko",
-                    "emotion": "happy",
-                    "position": "left"
-                }
-            ],
-            "emotionChanges": [],
-            "hideCharacters": [
-                "Sadako"
-            ],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": "school_theme"
-        },
-        {
-            "id": "node_005",
-            "editorPosition": {
-                "x": 717.7825317382813,
-                "y": 171.2174072265625
-            },
-            "speaker": "Sumiko",
-            "text": "...",
-            "nextNodeID": "",
-            "choices": [],
-            "background": "classroom_day",
-            "setCharacters": [
-                {
-                    "name": "Sumiko",
-                    "emotion": "happy",
-                    "position": "left"
-                }
-            ],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": "school_theme"
-        },
-        {
-            "id": "node_007",
-            "editorPosition": {
-                "x": 745.608642578125,
-                "y": 32.95651626586914
-            },
-            "speaker": "Sumiko",
-            "text": "...",
-            "nextNodeID": "node_004",
-            "choices": [],
-            "background": "classroom_day",
-            "setCharacters": [
-                {
-                    "name": "Sumiko",
-                    "emotion": "happy",
-                    "position": "left"
-                }
-            ],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": "school_theme"
-        },
-        {
-            "id": "node_004",
-            "editorPosition": {
-                "x": 1071.6956787109375,
-                "y": 33.82606887817383
-            },
-            "speaker": "Sumiko",
-            "text": "...",
-            "nextNodeID": "",
-            "choices": [],
-            "background": "classroom_day",
-            "setCharacters": [
-                {
-                    "name": "Sadako",
-                    "emotion": "happy",
-                    "position": "center"
-                }
-            ],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": "school_theme"
-        },
-        {
-            "id": "выв",
-            "editorPosition": {
-                "x": 1044.7391357421875,
-                "y": 333.8260803222656
-            },
-            "speaker": "Sumiko",
-            "text": "...",
-            "nextNodeID": "",
+            "nextNodeID": "day1_music_club",
             "choices": [],
             "background": "classroom_day",
             "setCharacters": [

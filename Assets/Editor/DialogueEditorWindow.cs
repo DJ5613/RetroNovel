@@ -1164,48 +1164,13 @@ previewCharacters =
         GUI.backgroundColor = Color.white;
 
         // =========================
-        // NEXT NODE DROPDOWN
+        // NEXT NODE
         // =========================
 
-        List<string> nodeIDs =
-            new List<string>();
-
-        nodeIDs.Add("");
-
-        // собрать все id
-
-        // только ноды после текущей
-
-        for (int i = selectedNode + 1;
-             i < nodes.Count;
-             i++)
-        {
-            nodeIDs.Add(nodes[i].id);
-        }
-
-        // найти текущий index
-
-        int currentIndex =
-            nodeIDs.IndexOf(
-                node.nextNodeID);
-
-        if (currentIndex < 0)
-        {
-            currentIndex = 0;
-        }
-
-        // dropdown
-
-        currentIndex =
-            EditorGUILayout.Popup(
-                "Next Node",
-                currentIndex,
-                nodeIDs.ToArray());
-
-        // сохранить выбранный id
-
         node.nextNodeID =
-            nodeIDs[currentIndex];
+            EditorGUILayout.TextField(
+                "Next Node",
+                node.nextNodeID);
 
         // =========================
         // PREVIEW
@@ -1702,6 +1667,8 @@ previewCharacters =
 
         container.nodes = nodes;
 
+        container.comments = comments;
+
         string json =
             JsonUtility.ToJson(
                 container,
@@ -1758,7 +1725,15 @@ previewCharacters =
             JsonUtility.FromJson<DialogueContainer>(
                 json);
 
+        previewCharacters.Clear();
+
+        comments.Clear();
+
         nodes = container.nodes;
+
+        comments =
+    container.comments
+    ?? new List<GraphComment>();
 
         selectedNode = 0;
 
