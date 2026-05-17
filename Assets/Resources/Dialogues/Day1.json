@@ -28,13 +28,36 @@
         {
             "id": "day1_hallway",
             "editorPosition": {
-                "x": 383.0,
-                "y": 46.0
+                "x": 409.0869445800781,
+                "y": 66.0
             },
             "speaker": "Sumiko",
             "text": "Привет!",
             "nextNodeID": "",
-            "choices": [],
+            "choices": [
+                {
+                    "text": "New Choice",
+                    "nextNodeID": "node_007",
+                    "sadakoChange": 0,
+                    "sumikoChange": 0,
+                    "terukoChange": 0,
+                    "requiredSadako": 0,
+                    "requiredSumiko": 0,
+                    "requiredTeruko": 0,
+                    "failNodeID": ""
+                },
+                {
+                    "text": "New Choice",
+                    "nextNodeID": "node_005",
+                    "sadakoChange": 0,
+                    "sumikoChange": 0,
+                    "terukoChange": 0,
+                    "requiredSadako": 0,
+                    "requiredSumiko": 0,
+                    "requiredTeruko": 0,
+                    "failNodeID": ""
+                }
+            ],
             "background": "classroom_day",
             "setCharacters": [
                 {
@@ -44,17 +67,19 @@
                 }
             ],
             "emotionChanges": [],
-            "hideCharacters": [],
+            "hideCharacters": [
+                "Sadako"
+            ],
             "clearCharacters": false,
             "setFlags": [],
             "requiredFlags": [],
             "music": "school_theme"
         },
         {
-            "id": "node_002",
+            "id": "node_005",
             "editorPosition": {
-                "x": 901.0,
-                "y": 87.0
+                "x": 717.7825317382813,
+                "y": 171.2174072265625
             },
             "speaker": "Sumiko",
             "text": "...",
@@ -76,10 +101,60 @@
             "music": "school_theme"
         },
         {
-            "id": "node_003",
+            "id": "node_007",
             "editorPosition": {
-                "x": 1274.0,
-                "y": 291.0
+                "x": 745.608642578125,
+                "y": 32.95651626586914
+            },
+            "speaker": "Sumiko",
+            "text": "...",
+            "nextNodeID": "node_004",
+            "choices": [],
+            "background": "classroom_day",
+            "setCharacters": [
+                {
+                    "name": "Sumiko",
+                    "emotion": "happy",
+                    "position": "left"
+                }
+            ],
+            "emotionChanges": [],
+            "hideCharacters": [],
+            "clearCharacters": false,
+            "setFlags": [],
+            "requiredFlags": [],
+            "music": "school_theme"
+        },
+        {
+            "id": "node_004",
+            "editorPosition": {
+                "x": 1071.6956787109375,
+                "y": 33.82606887817383
+            },
+            "speaker": "Sumiko",
+            "text": "...",
+            "nextNodeID": "",
+            "choices": [],
+            "background": "classroom_day",
+            "setCharacters": [
+                {
+                    "name": "Sadako",
+                    "emotion": "happy",
+                    "position": "center"
+                }
+            ],
+            "emotionChanges": [],
+            "hideCharacters": [],
+            "clearCharacters": false,
+            "setFlags": [],
+            "requiredFlags": [],
+            "music": "school_theme"
+        },
+        {
+            "id": "выв",
+            "editorPosition": {
+                "x": 1044.7391357421875,
+                "y": 333.8260803222656
             },
             "speaker": "Sumiko",
             "text": "...",
