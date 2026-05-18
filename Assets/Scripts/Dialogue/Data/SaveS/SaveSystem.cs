@@ -71,7 +71,7 @@ public class SaveSystem : MonoBehaviour
         // =========================
 
         data.currentDay =
-            eventManager.currentDay;
+            GameManager.Instance.currentDay;
 
         data.saveTime =
             System.DateTime.Now.ToString(
@@ -145,8 +145,6 @@ public class SaveSystem : MonoBehaviour
 
         GameFlags.Instance.LoadFlags(data.flags);
 
-        eventManager.currentDay =
-    data.currentDay;
 
         aiConversationManager.SetHistory(
     "Sumiko",

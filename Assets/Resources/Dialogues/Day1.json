@@ -1,970 +1,721 @@
 {
-    "comments": [],
+    "comments": [
+        {
+            "text": "пися попка",
+            "position": {
+                "x": 1164.0,
+                "y": 613.0
+            },
+            "size": {
+                "x": 350.0,
+                "y": 120.0
+            }
+        }
+    ],
     "nodes": [
         {
             "id": "day1_start",
             "editorPosition": {
-                "x": 20.0,
-                "y": 40.0
-            },
-            "speaker": "Narrator",
-            "text": "Голова раскалывалась. Будто ты почти не спал.",
-            "nextNodeID": "day1_2",
-            "choices": [],
-            "background": "bg_any_scene",
-            "setCharacters": [],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": "school_theme"
-        },
-        {
-            "id": "day1_2",
-            "editorPosition": {
-                "x": 204.0,
-                "y": 130.0
+                "x": -306.0,
+                "y": 66.0
             },
             "speaker": "Narrator",
             "text": "За окном медленно шумел город. До выпускного оставалось меньше месяца.",
-            "nextNodeID": "day1_3",
-            "choices": [],
+            "nextNodeID": "node_016",
+            "choices": [
+                {
+                    "text": "New Choice",
+                    "nextNodeID": "node_016",
+                    "sadakoChange": 10,
+                    "sumikoChange": 0,
+                    "terukoChange": 10,
+                    "requiredSadako": 0,
+                    "requiredSumiko": 0,
+                    "requiredTeruko": 0,
+                    "failNodeID": "",
+                    "requiredFlags": [],
+                    "blockedFlags": [],
+                    "hideIfLocked": false,
+                    "setFlags": []
+                }
+            ],
+            "priority": 0,
             "background": "bg_any_scene",
             "setCharacters": [],
             "emotionChanges": [],
             "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
+            "clearCharacters": true,
+            "setFlags": [
+                "day1_started"
+            ],
             "requiredFlags": [],
+            "requiredSadako": 0,
+            "requiredSumiko": 0,
+            "requiredTeruko": 0,
+            "blockedFlags": [],
+            "failNodeID": "",
             "music": "school_theme"
         },
         {
-            "id": "day1_3",
+            "id": "day1_school_gate",
             "editorPosition": {
-                "x": 654.0,
-                "y": 250.0
+                "x": 500.0,
+                "y": 100.0
             },
-            "speaker": "Narrator",
-            "text": "На столе рядом с телевизором лежала старая VHS-кассета без подписи.",
-            "nextNodeID": "day1_choice_cassette",
-            "choices": [],
-            "background": "bg_any_scene",
-            "setCharacters": [],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": "school_theme"
-        },
-        {
-            "id": "day1_choice_cassette",
-            "editorPosition": {
-                "x": 364.0,
-                "y": 388.0
-            },
-            "speaker": "Narrator",
-            "text": "Кассета выглядела так, будто пролежала здесь уже очень давно.",
+            "speaker": "Sadako",
+            "text": "Ты новенький? Постарайся не опозориться в первый же день.",
             "nextNodeID": "",
             "choices": [
                 {
-                    "text": "Вставить кассету",
-                    "nextNodeID": "day1_watch",
-                    "sadakoChange": 0,
+                    "text": "Ответить спокойно",
+                    "nextNodeID": "day1_sadako_good",
+                    "sadakoChange": 2,
                     "sumikoChange": 0,
                     "terukoChange": 0,
                     "requiredSadako": 0,
                     "requiredSumiko": 0,
                     "requiredTeruko": 0,
-                    "failNodeID": ""
+                    "failNodeID": "",
+                    "requiredFlags": [],
+                    "blockedFlags": [],
+                    "hideIfLocked": false,
+                    "setFlags": [
+                        "sadako_good_start"
+                    ]
                 },
                 {
-                    "text": "Проигнорировать её",
-                    "nextNodeID": "day1_ignore",
-                    "sadakoChange": 0,
+                    "text": "Съязвить",
+                    "nextNodeID": "day1_sadako_bad",
+                    "sadakoChange": -2,
                     "sumikoChange": 0,
                     "terukoChange": 0,
                     "requiredSadako": 0,
                     "requiredSumiko": 0,
                     "requiredTeruko": 0,
-                    "failNodeID": ""
+                    "failNodeID": "",
+                    "requiredFlags": [],
+                    "blockedFlags": [],
+                    "hideIfLocked": false,
+                    "setFlags": [
+                        "sadako_bad_start"
+                    ]
                 }
             ],
+            "priority": 0,
             "background": "bg_any_scene",
-            "setCharacters": [],
+            "setCharacters": [
+                {
+                    "name": "Sadako",
+                    "emotion": "neutral",
+                    "position": "left"
+                }
+            ],
             "emotionChanges": [],
             "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
+            "clearCharacters": true,
+            "setFlags": [
+                "met_sadako"
+            ],
             "requiredFlags": [],
+            "requiredSadako": 0,
+            "requiredSumiko": 0,
+            "requiredTeruko": 0,
+            "blockedFlags": [],
+            "failNodeID": "",
             "music": "school_theme"
         },
         {
-            "id": "day1_ignore",
+            "id": "day1_sadako_good",
             "editorPosition": {
-                "x": 20.0,
-                "y": 360.0
+                "x": 900.0,
+                "y": 0.0
             },
-            "speaker": "Narrator",
-            "text": "Ты попытался отвернуться... но почему-то всё равно не мог перестать смотреть на неё.",
-            "nextNodeID": "day1_watch",
+            "speaker": "Sadako",
+            "text": "Хм. Не ожидала нормального ответа.",
+            "nextNodeID": "day1_hallway",
             "choices": [],
-            "background": "",
-            "setCharacters": [],
+            "priority": 10,
+            "background": "bg_school_gate",
+            "setCharacters": [
+                {
+                    "name": "Sadako",
+                    "emotion": "happy",
+                    "position": "left"
+                }
+            ],
             "emotionChanges": [],
             "hideCharacters": [],
             "clearCharacters": false,
-            "setFlags": [],
+            "setFlags": [
+                "sadako_route"
+            ],
             "requiredFlags": [],
-            "music": ""
-        },
-        {
-            "id": "day1_watch",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 440.0
-            },
-            "speaker": "Narrator",
-            "text": "Экран телевизора вспыхнул серым шумом.",
-            "nextNodeID": "day1_watch_2",
-            "choices": [],
-            "background": "tv_static",
-            "setCharacters": [],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": "vhs_noise"
-        },
-        {
-            "id": "day1_watch_2",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 520.0
-            },
-            "speaker": "Narrator",
-            "text": "На секунду тебе показалось, будто в отражении экрана стояла девушка.",
-            "nextNodeID": "day1_watch_3",
-            "choices": [],
-            "background": "",
-            "setCharacters": [],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": ""
-        },
-        {
-            "id": "day1_watch_3",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 600.0
-            },
-            "speaker": "Narrator",
-            "text": "А потом всё исчезло.",
-            "nextNodeID": "day1_school_1",
-            "choices": [],
-            "background": "",
-            "setCharacters": [],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": ""
-        },
-        {
-            "id": "day1_school_1",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 680.0
-            },
-            "speaker": "Narrator",
-            "text": "Когда ты пришёл в школу, коридоры уже были полны учеников.",
-            "nextNodeID": "day1_school_2",
-            "choices": [],
-            "background": "school_hall",
-            "setCharacters": [],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
+            "requiredSadako": 0,
+            "requiredSumiko": 0,
+            "requiredTeruko": 0,
+            "blockedFlags": [],
+            "failNodeID": "",
             "music": "school_theme"
         },
         {
-            "id": "day1_school_2",
+            "id": "day1_sadako_bad",
             "editorPosition": {
-                "x": 20.0,
-                "y": 760.0
+                "x": 900.0,
+                "y": 250.0
+            },
+            "speaker": "Sadako",
+            "text": "Уже раздражаешь.",
+            "nextNodeID": "day1_hallway",
+            "choices": [],
+            "priority": 1,
+            "background": "bg_any_scene",
+            "setCharacters": [
+                {
+                    "name": "Sadako",
+                    "emotion": "angry",
+                    "position": "left"
+                }
+            ],
+            "emotionChanges": [],
+            "hideCharacters": [],
+            "clearCharacters": false,
+            "setFlags": [
+                "sadako_dislike"
+            ],
+            "requiredFlags": [],
+            "requiredSadako": 0,
+            "requiredSumiko": 0,
+            "requiredTeruko": 0,
+            "blockedFlags": [],
+            "failNodeID": "",
+            "music": "school_theme"
+        },
+        {
+            "id": "day1_hallway",
+            "editorPosition": {
+                "x": 1350.0,
+                "y": 100.0
             },
             "speaker": "Sumiko",
-            "text": "Ты сегодня какой-то бледный.",
-            "nextNodeID": "day1_school_3",
-            "choices": [],
-            "background": "",
+            "text": "О! Новенький! Ты выглядишь потерянным.",
+            "nextNodeID": "day1_fail_cassette",
+            "choices": [
+                {
+                    "text": "Познакомиться",
+                    "nextNodeID": "day1_sumiko_friend",
+                    "sadakoChange": 0,
+                    "sumikoChange": 2,
+                    "terukoChange": 0,
+                    "requiredSadako": 0,
+                    "requiredSumiko": 0,
+                    "requiredTeruko": 0,
+                    "failNodeID": "",
+                    "requiredFlags": [],
+                    "blockedFlags": [],
+                    "hideIfLocked": false,
+                    "setFlags": [
+                        "sumiko_friend"
+                    ]
+                },
+                {
+                    "text": "Спросить про старую кассету",
+                    "nextNodeID": "day1_cassette",
+                    "sadakoChange": 0,
+                    "sumikoChange": 1,
+                    "terukoChange": 0,
+                    "requiredSadako": 1,
+                    "requiredSumiko": 0,
+                    "requiredTeruko": 0,
+                    "failNodeID": "day1_fail_cassette",
+                    "requiredFlags": [
+                        "sadako_route"
+                    ],
+                    "blockedFlags": [],
+                    "hideIfLocked": false,
+                    "setFlags": [
+                        "cassette_found"
+                    ]
+                },
+                {
+                    "text": "Секретная фраза",
+                    "nextNodeID": "day1_teruko_secret",
+                    "sadakoChange": 0,
+                    "sumikoChange": 0,
+                    "terukoChange": 3,
+                    "requiredSadako": 2,
+                    "requiredSumiko": 0,
+                    "requiredTeruko": 0,
+                    "failNodeID": "",
+                    "requiredFlags": [
+                        "cassette_found"
+                    ],
+                    "blockedFlags": [
+                        "sadako_dislike"
+                    ],
+                    "hideIfLocked": true,
+                    "setFlags": [
+                        "teruko_interest"
+                    ]
+                }
+            ],
+            "priority": 0,
+            "background": "bg_any_scene",
             "setCharacters": [
                 {
                     "name": "Sumiko",
+                    "emotion": "happy",
+                    "position": "right"
+                }
+            ],
+            "emotionChanges": [],
+            "hideCharacters": [
+                "Sadako"
+            ],
+            "clearCharacters": false,
+            "setFlags": [
+                "met_sumiko"
+            ],
+            "requiredFlags": [],
+            "requiredSadako": -100,
+            "requiredSumiko": -100,
+            "requiredTeruko": -100,
+            "blockedFlags": [],
+            "failNodeID": "",
+            "music": "school_theme"
+        },
+        {
+            "id": "day1_fail_cassette",
+            "editorPosition": {
+                "x": 1800.0,
+                "y": 400.0
+            },
+            "speaker": "Sumiko",
+            "text": "Ты вообще не понимаешь, о чём говоришь.",
+            "nextNodeID": "day1_lunch",
+            "choices": [],
+            "priority": 0,
+            "background": "bg_any_scene",
+            "setCharacters": [
+                {
+                    "name": "Sumiko",
+                    "emotion": "6de729ca-0771-471b-8ecd-442ebac4738e",
+                    "position": "right"
+                }
+            ],
+            "emotionChanges": [],
+            "hideCharacters": [],
+            "clearCharacters": false,
+            "setFlags": [],
+            "requiredFlags": [],
+            "requiredSadako": 0,
+            "requiredSumiko": 0,
+            "requiredTeruko": 0,
+            "blockedFlags": [],
+            "failNodeID": "",
+            "music": "school_theme"
+        },
+        {
+            "id": "day1_cassette",
+            "editorPosition": {
+                "x": 1800.0,
+                "y": 50.0
+            },
+            "speaker": "Sumiko",
+            "text": "Тише. Не говори об этом здесь.",
+            "nextNodeID": "day1_hidden_scene",
+            "choices": [],
+            "priority": 50,
+            "background": "bg_any_scene",
+            "setCharacters": [
+                {
+                    "name": "Sumiko",
+                    "emotion": "6de729ca-0771-471b-8ecd-442ebac4738e",
+                    "position": "right"
+                }
+            ],
+            "emotionChanges": [],
+            "hideCharacters": [],
+            "clearCharacters": false,
+            "setFlags": [
+                "world_broken"
+            ],
+            "requiredFlags": [],
+            "requiredSadako": 0,
+            "requiredSumiko": 0,
+            "requiredTeruko": 0,
+            "blockedFlags": [],
+            "failNodeID": "",
+            "music": "school_theme"
+        },
+        {
+            "id": "day1_hidden_scene",
+            "editorPosition": {
+                "x": 2250.0,
+                "y": 50.0
+            },
+            "speaker": "Narrator",
+            "text": "На секунду весь школьный коридор будто завис.",
+            "nextNodeID": "day1_lunch",
+            "choices": [],
+            "priority": 100,
+            "background": "bg_glitch_hallway",
+            "setCharacters": [],
+            "emotionChanges": [],
+            "hideCharacters": [
+                "Sumiko"
+            ],
+            "clearCharacters": false,
+            "setFlags": [
+                "hidden_scene_seen"
+            ],
+            "requiredFlags": [
+                "world_broken"
+            ],
+            "requiredSadako": 2,
+            "requiredSumiko": 0,
+            "requiredTeruko": 0,
+            "blockedFlags": [],
+            "failNodeID": "day1_lunch",
+            "music": "glitch_theme"
+        },
+        {
+            "id": "day1_teruko_secret",
+            "editorPosition": {
+                "x": 1800.0,
+                "y": -250.0
+            },
+            "speaker": "Teruko",
+            "text": "Ты тоже это заметил?",
+            "nextNodeID": "day1_lunch",
+            "choices": [],
+            "priority": 80,
+            "background": "bg_any_scene",
+            "setCharacters": [
+                {
+                    "name": "Teruko",
                     "emotion": "neutral",
                     "position": "center"
                 }
             ],
             "emotionChanges": [],
+            "hideCharacters": [
+                "Sumiko"
+            ],
+            "clearCharacters": false,
+            "setFlags": [
+                "met_teruko"
+            ],
+            "requiredFlags": [
+                "cassette_found"
+            ],
+            "requiredSadako": 2,
+            "requiredSumiko": 0,
+            "requiredTeruko": 0,
+            "blockedFlags": [
+                "sadako_dislike"
+            ],
+            "failNodeID": "day1_lunch",
+            "music": "school_theme"
+        },
+        {
+            "id": "day1_sumiko_friend",
+            "editorPosition": {
+                "x": 1800.0,
+                "y": 200.0
+            },
+            "speaker": "Sumiko",
+            "text": "Хе-хе. Думаю, мы поладим.",
+            "nextNodeID": "day1_lunch",
+            "choices": [],
+            "priority": 5,
+            "background": "bg_any_scene",
+            "setCharacters": [
+                {
+                    "name": "Sumiko",
+                    "emotion": "happy",
+                    "position": "right"
+                }
+            ],
+            "emotionChanges": [],
             "hideCharacters": [],
             "clearCharacters": false,
             "setFlags": [],
             "requiredFlags": [],
-            "music": ""
+            "requiredSadako": 0,
+            "requiredSumiko": 0,
+            "requiredTeruko": 0,
+            "blockedFlags": [],
+            "failNodeID": "",
+            "music": "school_theme"
         },
         {
-            "id": "day1_school_3",
+            "id": "day1_lunch",
             "editorPosition": {
-                "x": 20.0,
-                "y": 840.0
+                "x": 2700.0,
+                "y": 100.0
             },
-            "speaker": "Sumiko",
-            "text": "Опять всю ночь сидел за телевизором?",
+            "speaker": "Narrator",
+            "text": "Наступил обеденный перерыв.",
             "nextNodeID": "",
             "choices": [
                 {
-                    "text": "Да просто плохо спал.",
-                    "nextNodeID": "day1_sumiko_good",
+                    "text": "Пойти к Садако",
+                    "nextNodeID": "ai_day1_sadako",
+                    "sadakoChange": 1,
+                    "sumikoChange": 0,
+                    "terukoChange": 0,
+                    "requiredSadako": 0,
+                    "requiredSumiko": 0,
+                    "requiredTeruko": 0,
+                    "failNodeID": "",
+                    "requiredFlags": [
+                        "met_sadako"
+                    ],
+                    "blockedFlags": [],
+                    "hideIfLocked": false,
+                    "setFlags": [
+                        "talked_sadako_day1"
+                    ]
+                },
+                {
+                    "text": "Пойти к Сумико",
+                    "nextNodeID": "ai_day1_sumiko",
                     "sadakoChange": 0,
                     "sumikoChange": 1,
                     "terukoChange": 0,
                     "requiredSadako": 0,
                     "requiredSumiko": 0,
                     "requiredTeruko": 0,
-                    "failNodeID": ""
+                    "failNodeID": "",
+                    "requiredFlags": [
+                        "met_sumiko"
+                    ],
+                    "blockedFlags": [],
+                    "hideIfLocked": false,
+                    "setFlags": [
+                        "talked_sumiko_day1"
+                    ]
                 },
                 {
-                    "text": "Не твоё дело.",
-                    "nextNodeID": "day1_sumiko_bad",
+                    "text": "Подняться на крышу",
+                    "nextNodeID": "ai_day1_teruko",
                     "sadakoChange": 0,
-                    "sumikoChange": -1,
-                    "terukoChange": 0,
+                    "sumikoChange": 0,
+                    "terukoChange": 2,
                     "requiredSadako": 0,
                     "requiredSumiko": 0,
-                    "requiredTeruko": 0,
-                    "failNodeID": ""
+                    "requiredTeruko": 1,
+                    "failNodeID": "day1_rooftop_locked",
+                    "requiredFlags": [
+                        "met_teruko"
+                    ],
+                    "blockedFlags": [],
+                    "hideIfLocked": false,
+                    "setFlags": [
+                        "talked_teruko_day1"
+                    ]
                 }
             ],
-            "background": "",
-            "setCharacters": [],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": ""
-        },
-        {
-            "id": "day1_sumiko_good",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 920.0
-            },
-            "speaker": "Sumiko",
-            "text": "М-м... Понятно.",
-            "nextNodeID": "day1_teruko_1",
-            "choices": [],
-            "background": "",
-            "setCharacters": [],
-            "emotionChanges": [
-                {
-                    "name": "Sumiko",
-                    "emotion": "slight_smile"
-                }
-            ],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": ""
-        },
-        {
-            "id": "day1_sumiko_bad",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 1000.0
-            },
-            "speaker": "Sumiko",
-            "text": "...Ладно.",
-            "nextNodeID": "day1_teruko_1",
-            "choices": [],
-            "background": "",
-            "setCharacters": [],
-            "emotionChanges": [
-                {
-                    "name": "Sumiko",
-                    "emotion": "sad"
-                }
-            ],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": ""
-        },
-        {
-            "id": "day1_teruko_1",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 1080.0
-            },
-            "speaker": "Teruko",
-            "text": "СТАРК!!",
-            "nextNodeID": "day1_teruko_2",
-            "choices": [],
-            "background": "",
-            "setCharacters": [
-                {
-                    "name": "Teruko",
-                    "emotion": "happy",
-                    "position": "left"
-                }
-            ],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": ""
-        },
-        {
-            "id": "day1_teruko_2",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 1160.0
-            },
-            "speaker": "Teruko",
-            "text": "Ты обязан сегодня пойти со мной после уроков!",
-            "nextNodeID": "day1_teruko_3",
-            "choices": [],
-            "background": "",
-            "setCharacters": [],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": ""
-        },
-        {
-            "id": "day1_teruko_3",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 1240.0
-            },
-            "speaker": "Narrator",
-            "text": "Тэруко как обычно говорила слишком громко для школьного коридора.",
-            "nextNodeID": "day1_teruko_4",
-            "choices": [],
-            "background": "",
-            "setCharacters": [],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": ""
-        },
-        {
-            "id": "day1_teruko_4",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 1320.0
-            },
-            "speaker": "Teruko",
-            "text": "У нас набор в кружок кинолюбов!",
-            "nextNodeID": "day1_teruko_5",
-            "choices": [],
-            "background": "",
-            "setCharacters": [],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": ""
-        },
-        {
-            "id": "day1_teruko_5",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 1400.0
-            },
-            "speaker": "Sumiko",
-            "text": "Ты это каждому человеку в школе уже сказала.",
-            "nextNodeID": "day1_sadako_1",
-            "choices": [],
-            "background": "",
-            "setCharacters": [],
-            "emotionChanges": [
-                {
-                    "name": "Sumiko",
-                    "emotion": "annoyed"
-                }
-            ],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": ""
-        },
-        {
-            "id": "day1_sadako_1",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 1480.0
-            },
-            "speaker": "Narrator",
-            "text": "В этот момент ты заметил незнакомую девушку у окна.",
-            "nextNodeID": "day1_sadako_2",
-            "choices": [],
-            "background": "",
-            "setCharacters": [
-                {
-                    "name": "Sadako",
-                    "emotion": "neutral",
-                    "position": "right"
-                }
-            ],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": ""
-        },
-        {
-            "id": "day1_sadako_2",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 1560.0
-            },
-            "speaker": "Narrator",
-            "text": "Почему-то казалось, будто ты уже видел её раньше.",
-            "nextNodeID": "day1_sadako_3",
-            "choices": [],
-            "background": "",
-            "setCharacters": [],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": ""
-        },
-        {
-            "id": "day1_sadako_3",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 1640.0
-            },
-            "speaker": "Sadako",
-            "text": "...",
-            "nextNodeID": "day1_sadako_4",
-            "choices": [],
-            "background": "",
-            "setCharacters": [],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": ""
-        },
-        {
-            "id": "day1_sadako_4",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 1720.0
-            },
-            "speaker": "Sadako",
-            "text": "Ты ведь тоже слышал этот шум?",
-            "nextNodeID": "day1_sadako_5",
-            "choices": [],
-            "background": "",
-            "setCharacters": [],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": "low_ambient"
-        },
-        {
-            "id": "day1_sadako_5",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 1800.0
-            },
-            "speaker": "Narrator",
-            "text": "По спине пробежал холод.",
-            "nextNodeID": "day1_sadako_6",
-            "choices": [],
-            "background": "",
-            "setCharacters": [],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": ""
-        },
-        {
-            "id": "day1_sadako_6",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 1880.0
-            },
-            "speaker": "Teruko",
-            "text": "Эй, Садако! Ты идёшь сегодня в клуб?",
-            "nextNodeID": "day1_sadako_7",
-            "choices": [],
-            "background": "",
-            "setCharacters": [],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": ""
-        },
-        {
-            "id": "day1_sadako_7",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 1960.0
-            },
-            "speaker": "Narrator",
-            "text": "Садако медленно перевела взгляд на Тэруко.",
-            "nextNodeID": "day1_sadako_8",
-            "choices": [],
-            "background": "",
-            "setCharacters": [],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": ""
-        },
-        {
-            "id": "day1_sadako_8",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 2040.0
-            },
-            "speaker": "Sadako",
-            "text": "Если меня пригласили... наверное.",
-            "nextNodeID": "day1_lunch",
-            "choices": [],
-            "background": "",
-            "setCharacters": [],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": ""
-        },
-        {
-            "id": "day1_lunch",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 2120.0
-            },
-            "speaker": "Narrator",
-            "text": "Остаток уроков прошёл странно быстро.",
-            "nextNodeID": "day1_lunch_2",
-            "choices": [],
-            "background": "",
+            "priority": 0,
+            "background": "bg_cafeteria",
             "setCharacters": [],
             "emotionChanges": [],
             "hideCharacters": [
-                "Sadako"
+                "Sadako",
+                "Sumiko",
+                "Teruko"
             ],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": ""
-        },
-        {
-            "id": "day1_lunch_2",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 2200.0
-            },
-            "speaker": "Narrator",
-            "text": "Иногда тебе казалось, будто в коридоре снова слышится шум телевизора.",
-            "nextNodeID": "day1_club_1",
-            "choices": [],
-            "background": "",
-            "setCharacters": [],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": ""
-        },
-        {
-            "id": "day1_club_1",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 2280.0
-            },
-            "speaker": "Narrator",
-            "text": "После занятий Тэруко буквально затащила тебя в старый кабинет кружка.",
-            "nextNodeID": "day1_club_2",
-            "choices": [],
-            "background": "club_room",
-            "setCharacters": [],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": ""
-        },
-        {
-            "id": "day1_club_2",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 2360.0
-            },
-            "speaker": "Teruko",
-            "text": "Добро пожаловать в лучшее место этой школы!",
-            "nextNodeID": "day1_club_3",
-            "choices": [],
-            "background": "",
-            "setCharacters": [
-                {
-                    "name": "Teruko",
-                    "emotion": "happy",
-                    "position": "left"
-                },
-                {
-                    "name": "Sumiko",
-                    "emotion": "neutral",
-                    "position": "center"
-                },
-                {
-                    "name": "Sadako",
-                    "emotion": "neutral",
-                    "position": "right"
-                }
-            ],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": ""
-        },
-        {
-            "id": "day1_club_3",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 2440.0
-            },
-            "speaker": "Narrator",
-            "text": "В углу кабинета стоял старый телевизор.",
-            "nextNodeID": "day1_club_4",
-            "choices": [],
-            "background": "",
-            "setCharacters": [],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": ""
-        },
-        {
-            "id": "day1_club_4",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 2520.0
-            },
-            "speaker": "Narrator",
-            "text": "Рядом с ним лежала ещё одна VHS-кассета.",
-            "nextNodeID": "day1_club_5",
-            "choices": [],
-            "background": "",
-            "setCharacters": [],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
+            "clearCharacters": true,
             "setFlags": [
-                "sawSecondCassette"
+                "free_time_unlocked"
             ],
             "requiredFlags": [],
-            "music": ""
+            "requiredSadako": 0,
+            "requiredSumiko": 0,
+            "requiredTeruko": 0,
+            "blockedFlags": [],
+            "failNodeID": "",
+            "music": "daily_theme"
         },
         {
-            "id": "day1_club_5",
+            "id": "day1_rooftop_locked",
             "editorPosition": {
-                "x": 20.0,
-                "y": 2600.0
-            },
-            "speaker": "Sumiko",
-            "text": "Этот телевизор раньше вроде стоял в старом корпусе.",
-            "nextNodeID": "day1_club_6",
-            "choices": [],
-            "background": "",
-            "setCharacters": [],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": ""
-        },
-        {
-            "id": "day1_club_6",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 2680.0
-            },
-            "speaker": "Sadako",
-            "text": "...Правда?",
-            "nextNodeID": "day1_club_7",
-            "choices": [],
-            "background": "",
-            "setCharacters": [],
-            "emotionChanges": [
-                {
-                    "name": "Sadako",
-                    "emotion": "nervous"
-                }
-            ],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": ""
-        },
-        {
-            "id": "day1_club_7",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 2760.0
+                "x": 3150.0,
+                "y": 350.0
             },
             "speaker": "Narrator",
-            "text": "На секунду экран телевизора сам по себе вспыхнул белым шумом.",
-            "nextNodeID": "day1_club_8",
+            "text": "Дверь на крышу оказалась закрыта.",
+            "nextNodeID": "day1_end",
             "choices": [],
-            "background": "tv_static",
-            "setCharacters": [],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": "vhs_noise"
-        },
-        {
-            "id": "day1_club_8",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 2840.0
-            },
-            "speaker": "Narrator",
-            "text": "А потом снова погас.",
-            "nextNodeID": "free_time_day1",
-            "choices": [],
-            "background": "",
+            "priority": 0,
+            "background": "bg_rooftop_door",
             "setCharacters": [],
             "emotionChanges": [],
             "hideCharacters": [],
             "clearCharacters": true,
             "setFlags": [],
             "requiredFlags": [],
-            "music": ""
+            "requiredSadako": 0,
+            "requiredSumiko": 0,
+            "requiredTeruko": 0,
+            "blockedFlags": [],
+            "failNodeID": "",
+            "music": "daily_theme"
         },
         {
-            "id": "free_time_day1",
+            "id": "ai_day1_sadako",
             "editorPosition": {
-                "x": 20.0,
-                "y": 2920.0
+                "x": 3150.0,
+                "y": 0.0
             },
-            "speaker": "Narrator",
-            "text": "После собрания клуба у тебя ещё оставалось немного времени.",
-            "nextNodeID": "",
-            "choices": [
-                {
-                    "text": "Поговорить с Сумико",
-                    "nextNodeID": "sumiko_ai_day1",
-                    "sadakoChange": 0,
-                    "sumikoChange": 0,
-                    "terukoChange": 0,
-                    "requiredSadako": 0,
-                    "requiredSumiko": 0,
-                    "requiredTeruko": 0,
-                    "failNodeID": ""
-                },
-                {
-                    "text": "Поговорить с Тэруко",
-                    "nextNodeID": "teruko_ai_day1",
-                    "sadakoChange": 0,
-                    "sumikoChange": 0,
-                    "terukoChange": 0,
-                    "requiredSadako": 0,
-                    "requiredSumiko": 0,
-                    "requiredTeruko": 0,
-                    "failNodeID": ""
-                },
-                {
-                    "text": "Поговорить с Садако",
-                    "nextNodeID": "sadako_ai_day1",
-                    "sadakoChange": 0,
-                    "sumikoChange": 0,
-                    "terukoChange": 0,
-                    "requiredSadako": 0,
-                    "requiredSumiko": 0,
-                    "requiredTeruko": 0,
-                    "failNodeID": ""
-                },
-                {
-                    "text": "Пойти домой",
-                    "nextNodeID": "day1_end_1",
-                    "sadakoChange": 0,
-                    "sumikoChange": 0,
-                    "terukoChange": 0,
-                    "requiredSadako": 0,
-                    "requiredSumiko": 0,
-                    "requiredTeruko": 0,
-                    "failNodeID": ""
-                }
-            ],
-            "background": "school_evening",
-            "setCharacters": [],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": "calm_evening"
-        },
-        {
-            "id": "sumiko_ai_day1",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 3000.0
-            },
-            "speaker": "Sumiko",
-            "text": "Сумико спокойно посмотрела на тебя.",
-            "nextNodeID": "free_time_day1",
+            "speaker": "Sadako",
+            "text": "Не ожидала, что ты сам подойдёшь.",
+            "nextNodeID": "day1_end",
             "choices": [],
-            "background": "music_room",
+            "priority": 0,
+            "background": "bg_classroom",
             "setCharacters": [
                 {
-                    "name": "Sumiko",
-                    "emotion": "neutral",
+                    "name": "Sadako",
+                    "emotion": "soft",
                     "position": "center"
                 }
             ],
             "emotionChanges": [],
             "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
+            "clearCharacters": true,
+            "setFlags": [
+                "sadako_ai_day1"
+            ],
             "requiredFlags": [],
-            "music": ""
+            "requiredSadako": 0,
+            "requiredSumiko": 0,
+            "requiredTeruko": 0,
+            "blockedFlags": [],
+            "failNodeID": "",
+            "music": "sadako_theme"
         },
         {
-            "id": "teruko_ai_day1",
+            "id": "ai_day1_sumiko",
             "editorPosition": {
-                "x": 20.0,
-                "y": 3080.0
+                "x": 3150.0,
+                "y": 150.0
             },
-            "speaker": "Teruko",
-            "text": "Тэруко сразу начала что-то увлечённо рассказывать.",
-            "nextNodeID": "free_time_day1",
+            "speaker": "Sumiko",
+            "text": "Ты реально весёлый.",
+            "nextNodeID": "day1_end",
             "choices": [],
-            "background": "roof",
+            "priority": 0,
+            "background": "bg_cafeteria",
             "setCharacters": [
                 {
-                    "name": "Teruko",
+                    "name": "Sumiko",
                     "emotion": "happy",
                     "position": "center"
                 }
             ],
             "emotionChanges": [],
             "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
+            "clearCharacters": true,
+            "setFlags": [
+                "sumiko_ai_day1"
+            ],
             "requiredFlags": [],
-            "music": ""
+            "requiredSadako": 0,
+            "requiredSumiko": 0,
+            "requiredTeruko": 0,
+            "blockedFlags": [],
+            "failNodeID": "",
+            "music": "sumiko_theme"
         },
         {
-            "id": "sadako_ai_day1",
+            "id": "ai_day1_teruko",
             "editorPosition": {
-                "x": 20.0,
-                "y": 3160.0
+                "x": 3150.0,
+                "y": -150.0
             },
-            "speaker": "Sadako",
-            "text": "Садако молча смотрела в окно.",
-            "nextNodeID": "free_time_day1",
+            "speaker": "Teruko",
+            "text": "Иногда мне кажется, что школа исчезает по ночам.",
+            "nextNodeID": "day1_end",
             "choices": [],
-            "background": "old_school",
+            "priority": 0,
+            "background": "bg_rooftop",
             "setCharacters": [
                 {
-                    "name": "Sadako",
+                    "name": "Teruko",
                     "emotion": "neutral",
                     "position": "center"
                 }
             ],
             "emotionChanges": [],
             "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
+            "clearCharacters": true,
+            "setFlags": [
+                "teruko_ai_day1"
+            ],
             "requiredFlags": [],
-            "music": ""
+            "requiredSadako": 0,
+            "requiredSumiko": 0,
+            "requiredTeruko": 0,
+            "blockedFlags": [],
+            "failNodeID": "",
+            "music": "teruko_theme"
         },
         {
-            "id": "day1_end_1",
+            "id": "day1_end",
             "editorPosition": {
-                "x": 20.0,
-                "y": 3240.0
+                "x": 3800.0,
+                "y": 100.0
             },
             "speaker": "Narrator",
-            "text": "Возвращаясь домой, ты всё никак не мог избавиться от странного чувства тревоги.",
-            "nextNodeID": "day1_end_2",
+            "text": "Первый день закончился. Но ощущение тревоги никуда не исчезло.",
+            "nextNodeID": "",
             "choices": [],
-            "background": "street_evening",
+            "priority": 0,
+            "background": "bg_city_evening",
+            "setCharacters": [],
+            "emotionChanges": [],
+            "hideCharacters": [
+                "Sadako",
+                "Sumiko",
+                "Teruko"
+            ],
+            "clearCharacters": true,
+            "setFlags": [
+                "day1_complete"
+            ],
+            "requiredFlags": [],
+            "requiredSadako": 0,
+            "requiredSumiko": 0,
+            "requiredTeruko": 0,
+            "blockedFlags": [],
+            "failNodeID": "",
+            "music": "ending_theme"
+        },
+        {
+            "id": "node_016",
+            "editorPosition": {
+                "x": 57.0,
+                "y": 26.0
+            },
+            "speaker": "Narrator",
+            "text": "...",
+            "nextNodeID": "day1_school_gate",
+            "choices": [],
+            "priority": 0,
+            "background": "bg_any_scene",
             "setCharacters": [],
             "emotionChanges": [],
             "hideCharacters": [],
-            "clearCharacters": false,
+            "clearCharacters": true,
             "setFlags": [],
             "requiredFlags": [],
-            "music": "night_theme"
-        },
-        {
-            "id": "day1_end_2",
-            "editorPosition": {
-                "x": 20.0,
-                "y": 3320.0
-            },
-            "speaker": "Narrator",
-            "text": "Будто этот день уже когда-то происходил.",
-            "nextNodeID": "day2_start",
-            "choices": [],
-            "background": "",
-            "setCharacters": [],
-            "emotionChanges": [],
-            "hideCharacters": [],
-            "clearCharacters": false,
-            "setFlags": [],
-            "requiredFlags": [],
-            "music": ""
+            "requiredSadako": 0,
+            "requiredSumiko": 0,
+            "requiredTeruko": 0,
+            "blockedFlags": [],
+            "failNodeID": "",
+            "music": "school_theme"
         }
     ]
 }
