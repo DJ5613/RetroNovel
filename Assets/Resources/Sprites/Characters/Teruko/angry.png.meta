@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: edbb8ded12365df449ed7b6f0b505af8
+guid: b390e253ced0c7147aa9082cb0743877
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1391677968228686108
-    second: 1cdc59cf-eb91-425a-9340-e56e398a4f06_0
-  - first:
-      213: -3249946390576666331
-    second: 1cdc59cf-eb91-425a-9340-e56e398a4f06_1
+      213: -2858175439895277804
+    second: 4a698fbb-839c-457f-bbba-a0e36fbb4d4d_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -116,11 +113,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 1cdc59cf-eb91-425a-9340-e56e398a4f06_0
+      name: 4a698fbb-839c-457f-bbba-a0e36fbb4d4d_0
       rect:
         serializedVersion: 2
         x: 2
-        y: 289
+        y: 307
         width: 1022
         height: 1150
       alignment: 0
@@ -131,30 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4e6edf5e244cface0800000000000000
-      internalID: -1391677968228686108
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 1cdc59cf-eb91-425a-9340-e56e398a4f06_1
-      rect:
-        serializedVersion: 2
-        x: 518
-        y: 1426
-        width: 8
-        height: 7
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5296d9a0afed5e2d0800000000000000
-      internalID: -3249946390576666331
+      spriteID: 41fcb47a498b558d0800000000000000
+      internalID: -2858175439895277804
       vertices: []
       indices: 
       edges: []
@@ -163,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 0124806a6b261e440a724db60688dec8
+    spriteID: f75b1829ed58a2140a1819da9ae3d23d
     internalID: 0
     vertices: []
     indices: 
@@ -173,8 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      1cdc59cf-eb91-425a-9340-e56e398a4f06_0: -1391677968228686108
-      1cdc59cf-eb91-425a-9340-e56e398a4f06_1: -3249946390576666331
+      4a698fbb-839c-457f-bbba-a0e36fbb4d4d_0: -2858175439895277804
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

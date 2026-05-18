@@ -30,6 +30,8 @@ public class DialogueManager : MonoBehaviour
     private Coroutine typingCoroutine;
     private bool isTyping = false;
 
+    private string currentSpeakerVisual = "";
+
 
     // AI MESSAGE
     private bool aiMessageActive = false;
@@ -191,11 +193,24 @@ public class DialogueManager : MonoBehaviour
         // =========================
         // ACTIVE SPEAKER
         // =========================
+        // =========================
+        // ACTIVE SPEAKER
+        // =========================
 
-        if (characterManager.HasCharacter(currentNode.speaker))
+        if (currentSpeakerVisual != currentNode.speaker)
         {
-            characterManager.SetSpeaker(
-                currentNode.speaker);
+            currentSpeakerVisual =
+                currentNode.speaker;
+
+            if (characterManager.HasCharacter(currentNode.speaker))
+            {
+                characterManager.SetSpeaker(
+                    currentNode.speaker);
+            }
+            else
+            {
+                characterManager.ClearSpeaker();
+            }
         }
 
         // =========================
@@ -461,4 +476,6 @@ public class DialogueManager : MonoBehaviour
 
         return currentNode.speaker;
     }
+
+
 }

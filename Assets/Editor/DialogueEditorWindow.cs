@@ -101,12 +101,7 @@ previewCharacters =
             setCharacters =
                 new List<CharacterState>()
             {
-                new CharacterState()
-                {
-                    name = "Sadako",
-                    emotion = "neutral",
-                    position = "center"
-                }
+                
             }
         },
 
@@ -575,22 +570,9 @@ previewCharacters =
         // SAFETY
         // =========================
 
-        if (node.setCharacters == null)
-        {
-            node.setCharacters =
-                new List<CharacterState>();
-        }
+        
 
-        if (node.setCharacters.Count == 0)
-        {
-            node.setCharacters.Add(
-                new CharacterState()
-                {
-                    name = node.speaker,
-                    emotion = "neutral",
-                    position = "center"
-                });
-        }
+        
 
         GUILayout.BeginVertical();
 
@@ -756,11 +738,11 @@ previewCharacters =
                 Color.red;
 
             if (GUILayout.Button(
-                "Remove Character"))
+    "Remove Character"))
             {
                 node.setCharacters.RemoveAt(i);
 
-                break;
+                GUIUtility.ExitGUI();
             }
 
             GUI.backgroundColor =
