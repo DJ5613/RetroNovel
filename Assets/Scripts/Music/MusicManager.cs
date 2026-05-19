@@ -36,7 +36,7 @@ public class MusicManager : MonoBehaviour
 
         AudioClip clip =
             Resources.Load<AudioClip>(
-                "Music/" + musicName);
+                "Audio/Music/" + musicName);
 
         // not found
 

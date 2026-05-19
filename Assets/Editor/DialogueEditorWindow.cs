@@ -3724,9 +3724,5 @@ previewCharacters =
                 dot,
                 dotColor);
         }
-
     }
-
-
-
 }
