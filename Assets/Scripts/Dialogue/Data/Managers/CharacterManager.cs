@@ -266,6 +266,11 @@ public class CharacterManager : MonoBehaviour
                 character.position);
         }
     }
+
+    public void ClearSpeaker()
+    {
+        DimAll();
+    }
 }
 
 // =========================

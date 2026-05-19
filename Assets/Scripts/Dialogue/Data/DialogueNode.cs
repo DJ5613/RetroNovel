@@ -7,6 +7,7 @@ public class DialogueChoice
 {
     public string text;
     public string nextNodeID;
+    
 
     // изменение отношений
     public int sadakoChange;
@@ -21,6 +22,26 @@ public class DialogueChoice
     // если проверка не пройдена
     public string failNodeID;
 
+    // =========================
+    // FLAG CONDITIONS
+    // =========================
+
+    // обязательные флаги
+    public List<string> requiredFlags;
+
+    // запрещённые флаги
+    public List<string> blockedFlags;
+
+    // скрывать choice если условия не выполнены
+    public bool hideIfLocked;
+
+    // =========================
+    // FLAG REWARDS
+    // =========================
+
+    // установить флаги после выбора
+    public List<string> setFlags;
+
 }
 
 [Serializable]
@@ -29,7 +50,6 @@ public class DialogueNode
     public string id;
 
     public Vector2 editorPosition;
-
     public string speaker;
     public string text;
 
@@ -37,6 +57,7 @@ public class DialogueNode
 
     public List<DialogueChoice> choices;
 
+    public int priority;
     // =========================
     // BACKGROUND
     // =========================
@@ -65,7 +86,31 @@ public class DialogueNode
     // требуемые флаги
     public List<string> requiredFlags;
 
+    // =========================
+    // RELATIONSHIP CONDITIONS
+    // =========================
+
+    public int requiredSadako;
+    public int requiredSumiko;
+    public int requiredTeruko;
+
+    // =========================
+    // BLOCKED FLAGS
+    // =========================
+
+    public List<string> blockedFlags;
+
+    // =========================
+    // FAIL NODE
+    // =========================
+
+    public string failNodeID;
+
+
     public string music;
+
+   
+
 }
 
 [Serializable]

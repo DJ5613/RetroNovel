@@ -21,6 +21,7 @@ public class DialogueManager : MonoBehaviour
     public BackgroundManager backgroundManager;
     public EventManager eventManager;
     public AIConversationManager aiConversationManager;
+    public FreeTimeManager freeTimeManager;
 
     [Header("Typewriter")]
     public float typingSpeed = 0.03f;
@@ -29,6 +30,11 @@ public class DialogueManager : MonoBehaviour
 
     private Coroutine typingCoroutine;
     private bool isTyping = false;
+
+    private string currentSpeakerVisual = "";
+
+    private int nodeRedirectDepth = 0;
+    private const int MAX_REDIRECT_DEPTH = 10;
 
 
     // AI MESSAGE
@@ -57,15 +63,52 @@ public class DialogueManager : MonoBehaviour
         aiMessageActive = false;
         Debug.Log("SHOW NODE: " + nodeID);
 
+        nodeRedirectDepth++;
+
+        if (nodeRedirectDepth >
+            MAX_REDIRECT_DEPTH)
+        {
+            Debug.LogError(
+                "Infinite node redirect detected!");
+
+            return;
+        }
+
         ClearChoices();
 
         currentNode = database.GetNode(nodeID);
+
+
         aiConversationManager.CloseAIChat();
 
         if (currentNode == null)
         {
             Debug.LogError(
                 "Нода не найдена: " + nodeID);
+
+            return;
+        }
+
+        // =========================
+        // NODE CONDITIONS
+        // =========================
+
+        if (!ConditionChecker.CanEnterNode(
+            currentNode,
+            relationshipSystem))
+        {
+            Debug.Log(
+                "Node conditions failed: " +
+                currentNode.id);
+
+            // fail node
+
+            if (!string.IsNullOrEmpty(
+                currentNode.failNodeID))
+            {
+                ShowNode(
+                    currentNode.failNodeID);
+            }
 
             return;
         }
@@ -82,23 +125,6 @@ public class DialogueManager : MonoBehaviour
         // AI режим выключается
         aiMessageActive = false;
 
-        // =========================
-        // REQUIRED FLAGS
-        // =========================
-
-        if (currentNode.requiredFlags != null)
-        {
-            foreach (string flag in currentNode.requiredFlags)
-            {
-                if (!GameFlags.Instance.HasFlag(flag))
-                {
-                    Debug.Log(
-                        "Нет нужного флага: " + flag);
-
-                    return;
-                }
-            }
-        }
 
         // =========================
         // SET FLAGS
@@ -191,11 +217,24 @@ public class DialogueManager : MonoBehaviour
         // =========================
         // ACTIVE SPEAKER
         // =========================
+        // =========================
+        // ACTIVE SPEAKER
+        // =========================
 
-        if (characterManager.HasCharacter(currentNode.speaker))
+        if (currentSpeakerVisual != currentNode.speaker)
         {
-            characterManager.SetSpeaker(
-                currentNode.speaker);
+            currentSpeakerVisual =
+                currentNode.speaker;
+
+            if (characterManager.HasCharacter(currentNode.speaker))
+            {
+                characterManager.SetSpeaker(
+                    currentNode.speaker);
+            }
+            else
+            {
+                characterManager.ClearSpeaker();
+            }
         }
 
         // =========================
@@ -203,26 +242,50 @@ public class DialogueManager : MonoBehaviour
         // =========================
 
         if (currentNode.choices != null &&
+
+
             currentNode.choices.Count > 0)
         {
             foreach (DialogueChoice choice in currentNode.choices)
             {
+                bool available =
+    ConditionChecker.IsChoiceAvailable(
+        choice,
+        relationshipSystem);
+
+                // скрыть choice
+
+                if (!available &&
+                    choice.hideIfLocked)
+                {
+                    continue;
+                }
+
                 GameObject buttonObj =
                     Instantiate(
                         choicePrefab,
                         choicesContainer);
 
+                Button button =
+                    buttonObj.GetComponent<Button>();
+
                 buttonObj
                     .GetComponentInChildren<TextMeshProUGUI>()
                     .text = choice.text;
 
-                buttonObj
-                    .GetComponent<Button>()
-                    .onClick
-                    .AddListener(() =>
+                // disabled state
+
+                if (!available)
+                {
+                    button.interactable = false;
+                }
+                else
+                {
+                    button.onClick.AddListener(() =>
                     {
                         OnChoiceSelected(choice);
                     });
+                }
             }
         }
 
@@ -231,6 +294,8 @@ public class DialogueManager : MonoBehaviour
             MusicManager.Instance.PlayMusic(
                 currentNode.music);
         }
+
+        nodeRedirectDepth = 0;
     }
 
     // =========================
@@ -254,6 +319,7 @@ public class DialogueManager : MonoBehaviour
         {
             return;
         }
+
 
         // если текст ещё печатается
         if (isTyping)
@@ -292,7 +358,7 @@ public class DialogueManager : MonoBehaviour
 
         if (currentNode.id == "free_time_start")
         {
-            FindObjectOfType<FreeTimeManager>()
+            freeTimeManager
                 .OpenFreeTime();
 
             return;
@@ -310,31 +376,24 @@ public class DialogueManager : MonoBehaviour
 
     void OnChoiceSelected(DialogueChoice choice)
     {
-        relationshipSystem.ApplyChoice(choice);
-
-        bool passed = true;
+        
 
         // =========================
-        // RELATIONSHIP CHECKS
+        // SET FLAGS
         // =========================
 
-        if (relationshipSystem.sadako <
-            choice.requiredSadako)
+        if (choice.setFlags != null)
         {
-            passed = false;
+            foreach (string flag in choice.setFlags)
+            {
+                GameFlags.Instance.SetFlag(flag);
+            }
         }
 
-        if (relationshipSystem.sumiko <
-            choice.requiredSumiko)
-        {
-            passed = false;
-        }
-
-        if (relationshipSystem.teruko <
-            choice.requiredTeruko)
-        {
-            passed = false;
-        }
+        bool passed =
+     ConditionChecker.IsChoiceAvailable(
+         choice,
+         relationshipSystem);
 
         string nextID =
             choice.nextNodeID;
@@ -344,6 +403,11 @@ public class DialogueManager : MonoBehaviour
             !string.IsNullOrEmpty(choice.failNodeID))
         {
             nextID = choice.failNodeID;
+        }
+
+        if (passed)
+        {
+            relationshipSystem.ApplyChoice(choice);
         }
 
         if (string.IsNullOrEmpty(nextID))
@@ -461,4 +525,6 @@ public class DialogueManager : MonoBehaviour
 
         return currentNode.speaker;
     }
+
+    
 }

@@ -290,7 +290,7 @@ public class AIConversationManager : MonoBehaviour
 
         prompt +=
             "Current Day: " +
-            eventManager.currentDay +
+            GameManager.Instance.currentDay +
             "\n";
 
         // =========================

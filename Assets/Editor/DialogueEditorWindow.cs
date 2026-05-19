@@ -13,6 +13,13 @@ previewCharacters =
 
     bool isPlaytesting;
 
+    HashSet<string> playtestFlags =
+    new HashSet<string>();
+
+    int playtestSadako;
+    int playtestSumiko;
+    int playtestTeruko;
+
     DialogueNode playtestNode;
 
     List<GraphComment> comments =
@@ -101,12 +108,7 @@ previewCharacters =
             setCharacters =
                 new List<CharacterState>()
             {
-                new CharacterState()
-                {
-                    name = "Sadako",
-                    emotion = "neutral",
-                    position = "center"
-                }
+                
             }
         },
 
@@ -575,22 +577,9 @@ previewCharacters =
         // SAFETY
         // =========================
 
-        if (node.setCharacters == null)
-        {
-            node.setCharacters =
-                new List<CharacterState>();
-        }
+        
 
-        if (node.setCharacters.Count == 0)
-        {
-            node.setCharacters.Add(
-                new CharacterState()
-                {
-                    name = node.speaker,
-                    emotion = "neutral",
-                    position = "center"
-                });
-        }
+        
 
         GUILayout.BeginVertical();
 
@@ -756,11 +745,11 @@ previewCharacters =
                 Color.red;
 
             if (GUILayout.Button(
-                "Remove Character"))
+    "Remove Character"))
             {
                 node.setCharacters.RemoveAt(i);
 
-                break;
+                GUIUtility.ExitGUI();
             }
 
             GUI.backgroundColor =
@@ -972,7 +961,230 @@ previewCharacters =
 
         node.music =
             musicTracks[currentMusicIndex];
+        // =========================
+        // NODE PRIORITY
+        // =========================
 
+        EditorGUILayout.Space(10);
+
+        GUILayout.Label(
+            "Priority",
+            EditorStyles.boldLabel);
+
+        node.priority =
+            EditorGUILayout.IntField(
+                "Priority",
+                node.priority);
+
+        // =========================
+        // NODE FLAGS
+        // =========================
+
+        GUILayout.Space(15);
+
+        GUILayout.Label(
+            "Node Flags",
+            EditorStyles.boldLabel);
+
+        // =========================
+        // NODE RELATIONSHIP REQUIREMENTS
+        // =========================
+
+        GUILayout.Space(10);
+
+        GUILayout.Label(
+            "Relationship Requirements",
+            EditorStyles.miniBoldLabel);
+
+        node.requiredSadako =
+            EditorGUILayout.IntField(
+                "Required Sadako",
+                node.requiredSadako);
+
+        node.requiredSumiko =
+            EditorGUILayout.IntField(
+                "Required Sumiko",
+                node.requiredSumiko);
+
+        node.requiredTeruko =
+            EditorGUILayout.IntField(
+                "Required Teruko",
+                node.requiredTeruko);
+
+        // =========================
+        // REQUIRED FLAGS
+        // =========================
+
+        GUILayout.Space(5);
+
+        GUILayout.Label(
+            "Required Flags",
+            EditorStyles.miniBoldLabel);
+
+        if (node.requiredFlags == null)
+        {
+            node.requiredFlags =
+                new List<string>();
+        }
+
+        for (int r = 0;
+             r < node.requiredFlags.Count;
+             r++)
+        {
+            GUILayout.BeginHorizontal();
+
+            node.requiredFlags[r] =
+                EditorGUILayout.TextField(
+                    node.requiredFlags[r]);
+
+            GUI.backgroundColor =
+                Color.red;
+
+            if (GUILayout.Button(
+                "X",
+                GUILayout.Width(30)))
+            {
+                node.requiredFlags.RemoveAt(r);
+
+                break;
+            }
+
+            GUI.backgroundColor =
+                Color.white;
+
+            GUILayout.EndHorizontal();
+        }
+
+        GUI.backgroundColor =
+            Color.green;
+
+        if (GUILayout.Button(
+            "+ Add Required Flag"))
+        {
+            node.requiredFlags.Add("");
+        }
+
+        GUI.backgroundColor =
+            Color.white;
+
+        // =========================
+        // BLOCKED FLAGS
+        // =========================
+
+        GUILayout.Space(10);
+
+        GUILayout.Label(
+            "Blocked Flags",
+            EditorStyles.miniBoldLabel);
+
+        if (node.blockedFlags == null)
+        {
+            node.blockedFlags =
+                new List<string>();
+        }
+
+        for (int b = 0;
+             b < node.blockedFlags.Count;
+             b++)
+        {
+            GUILayout.BeginHorizontal();
+
+            node.blockedFlags[b] =
+                EditorGUILayout.TextField(
+                    node.blockedFlags[b]);
+
+            GUI.backgroundColor =
+                Color.red;
+
+            if (GUILayout.Button(
+                "X",
+                GUILayout.Width(30)))
+            {
+                node.blockedFlags.RemoveAt(b);
+
+                break;
+            }
+
+            GUI.backgroundColor =
+                Color.white;
+
+            GUILayout.EndHorizontal();
+        }
+
+        GUI.backgroundColor =
+            Color.green;
+
+        if (GUILayout.Button(
+            "+ Add Blocked Flag"))
+        {
+            node.blockedFlags.Add("");
+        }
+
+        GUI.backgroundColor =
+            Color.white;
+
+        GUILayout.Space(10);
+
+        node.failNodeID =
+            EditorGUILayout.TextField(
+                "Fail Node",
+                node.failNodeID);
+
+        // =========================
+        // SET FLAGS
+        // =========================
+
+        GUILayout.Space(10);
+
+        GUILayout.Label(
+            "Set Flags",
+            EditorStyles.miniBoldLabel);
+
+        if (node.setFlags == null)
+        {
+            node.setFlags =
+                new List<string>();
+        }
+
+        for (int s = 0;
+             s < node.setFlags.Count;
+             s++)
+        {
+            GUILayout.BeginHorizontal();
+
+            node.setFlags[s] =
+                EditorGUILayout.TextField(
+                    node.setFlags[s]);
+
+            GUI.backgroundColor =
+                Color.red;
+
+            if (GUILayout.Button(
+                "X",
+                GUILayout.Width(30)))
+            {
+                node.setFlags.RemoveAt(s);
+
+                break;
+            }
+
+            GUI.backgroundColor =
+                Color.white;
+
+            GUILayout.EndHorizontal();
+        }
+
+        GUI.backgroundColor =
+            Color.green;
+
+        if (GUILayout.Button(
+            "+ Add Set Flag"))
+        {
+            node.setFlags.Add("");
+        }
+
+        GUI.backgroundColor =
+            Color.white;
 
         // =========================
         // CHOICES
@@ -1013,6 +1225,10 @@ previewCharacters =
                 EditorGUILayout.TextField(
                     "Text",
                     choice.text);
+
+            
+
+            
 
             // NEXT NODE
 
@@ -1127,6 +1343,216 @@ previewCharacters =
                     "Teruko Change",
                     choice.terukoChange);
 
+            // =========================
+            // RELATIONSHIP REQUIREMENTS
+            // =========================
+
+            GUILayout.Space(5);
+
+            GUILayout.Label(
+                "Requirements",
+                EditorStyles.boldLabel);
+
+            choice.requiredSadako =
+                EditorGUILayout.IntField(
+                    "Required Sadako",
+                    choice.requiredSadako);
+
+            choice.requiredSumiko =
+                EditorGUILayout.IntField(
+                    "Required Sumiko",
+                    choice.requiredSumiko);
+
+            choice.requiredTeruko =
+                EditorGUILayout.IntField(
+                    "Required Teruko",
+                    choice.requiredTeruko);
+
+            // FAIL NODE
+
+            choice.failNodeID =
+                EditorGUILayout.TextField(
+                    "Fail Node",
+                    choice.failNodeID);
+
+            // =========================
+            // FLAG CONDITIONS
+            // =========================
+
+            GUILayout.Space(10);
+
+            GUILayout.Label(
+                "Flag Conditions",
+                EditorStyles.boldLabel);
+
+            // REQUIRED FLAGS
+
+            if (choice.requiredFlags == null)
+            {
+                choice.requiredFlags =
+                    new List<string>();
+            }
+
+            for (int r = 0;
+                 r < choice.requiredFlags.Count;
+                 r++)
+            {
+                GUILayout.BeginHorizontal();
+
+                choice.requiredFlags[r] =
+                    EditorGUILayout.TextField(
+                        "Required Flag",
+                        choice.requiredFlags[r]);
+
+                GUI.backgroundColor =
+                    Color.red;
+
+                if (GUILayout.Button(
+                    "X",
+                    GUILayout.Width(30)))
+                {
+                    choice.requiredFlags.RemoveAt(r);
+
+                    break;
+                }
+
+                GUI.backgroundColor =
+                    Color.white;
+
+                GUILayout.EndHorizontal();
+            }
+
+            GUI.backgroundColor =
+                Color.green;
+
+            if (GUILayout.Button(
+                "+ Add Required Flag"))
+            {
+                choice.requiredFlags.Add("");
+            }
+
+            GUI.backgroundColor =
+                Color.white;
+
+            // BLOCKED FLAGS
+
+            GUILayout.Space(5);
+
+            if (choice.blockedFlags == null)
+            {
+                choice.blockedFlags =
+                    new List<string>();
+            }
+
+            for (int b = 0;
+                 b < choice.blockedFlags.Count;
+                 b++)
+            {
+                GUILayout.BeginHorizontal();
+
+                choice.blockedFlags[b] =
+                    EditorGUILayout.TextField(
+                        "Blocked Flag",
+                        choice.blockedFlags[b]);
+
+                GUI.backgroundColor =
+                    Color.red;
+
+                if (GUILayout.Button(
+                    "X",
+                    GUILayout.Width(30)))
+                {
+                    choice.blockedFlags.RemoveAt(b);
+
+                    break;
+                }
+
+                GUI.backgroundColor =
+                    Color.white;
+
+                GUILayout.EndHorizontal();
+            }
+
+            GUI.backgroundColor =
+                Color.green;
+
+            if (GUILayout.Button(
+                "+ Add Blocked Flag"))
+            {
+                choice.blockedFlags.Add("");
+            }
+
+            GUI.backgroundColor =
+                Color.white;
+
+            // =========================
+            // HIDE IF LOCKED
+            // =========================
+
+            GUILayout.Space(5);
+
+            choice.hideIfLocked =
+                EditorGUILayout.Toggle(
+                    "Hide If Locked",
+                    choice.hideIfLocked);
+
+            // =========================
+            // SET FLAGS
+            // =========================
+
+            GUILayout.Space(10);
+
+            GUILayout.Label(
+                "Set Flags",
+                EditorStyles.boldLabel);
+
+            if (choice.setFlags == null)
+            {
+                choice.setFlags =
+                    new List<string>();
+            }
+
+            for (int s = 0;
+                 s < choice.setFlags.Count;
+                 s++)
+            {
+                GUILayout.BeginHorizontal();
+
+                choice.setFlags[s] =
+                    EditorGUILayout.TextField(
+                        "Set Flag",
+                        choice.setFlags[s]);
+
+                GUI.backgroundColor =
+                    Color.red;
+
+                if (GUILayout.Button(
+                    "X",
+                    GUILayout.Width(30)))
+                {
+                    choice.setFlags.RemoveAt(s);
+
+                    break;
+                }
+
+                GUI.backgroundColor =
+                    Color.white;
+
+                GUILayout.EndHorizontal();
+            }
+
+            GUI.backgroundColor =
+                Color.green;
+
+            if (GUILayout.Button(
+                "+ Add Set Flag"))
+            {
+                choice.setFlags.Add("");
+            }
+
+            GUI.backgroundColor =
+                Color.white;
+
             GUILayout.Space(10);
 
             GUI.backgroundColor = Color.red;
@@ -1191,8 +1617,16 @@ previewCharacters =
                 if (selectedNode >= 0
                     && selectedNode < nodes.Count)
                 {
+                    playtestFlags.Clear();
+
+                    playtestSadako = 0;
+                    playtestSumiko = 0;
+                    playtestTeruko = 0;
+
                     playtestNode =
                         nodes[selectedNode];
+
+                    ApplyNodeFlags(playtestNode);
 
                     isPlaytesting = true;
                 }
@@ -1465,8 +1899,35 @@ previewCharacters =
             foreach (DialogueChoice choice
                      in node.choices)
             {
+                bool hasRequiredFlags =
+    HasRequiredFlags(
+        choice.requiredFlags);
+
+                bool hasBlockedFlags =
+                    HasBlockedFlags(
+                        choice.blockedFlags);
+
+                bool meetsRelationships =
+                    MeetsRelationshipRequirements(
+                        choice);
+
+                bool isLocked =
+                    !hasRequiredFlags
+                    || hasBlockedFlags
+                    || !meetsRelationships;
+
+                if (choice.hideIfLocked
+                    && isLocked)
+                {
+                    continue;
+                }
+
+                GUI.enabled = !isLocked;
+
                 if (GUILayout.Button(choice.text))
                 {
+                    ApplyChoiceConsequences(choice);
+
                     DialogueNode next =
                         nodes.Find(
                             n => n.id
@@ -1475,9 +1936,11 @@ previewCharacters =
                     if (next != null)
                     {
                         playtestNode = next;
+                        ApplyNodeFlags(playtestNode);
                     }
                 }
             }
+            GUI.enabled = true;
         }
 
         // =========================
@@ -1503,6 +1966,7 @@ previewCharacters =
                     if (next != null)
                     {
                         playtestNode = next;
+                        ApplyNodeFlags(playtestNode);
                     }
                 }
             }
@@ -1527,38 +1991,8 @@ previewCharacters =
                 nodes[selectedNode];
 
             DialogueNode duplicate =
-                new DialogueNode()
-                {
-                    id = GenerateNodeID(),
-
-                    speaker =
-                        original.speaker,
-
-                    text =
-                        original.text,
-
-                    background =
-                        original.background,
-
-                    music =
-                        original.music,
-
-                    nextNodeID =
-                        original.nextNodeID,
-
-                    clearCharacters =
-                        original.clearCharacters,
-
-                    hideCharacters =
-                        new List<string>(
-                            original.hideCharacters),
-
-                    choices =
-                        new List<DialogueChoice>(),
-
-                    setCharacters =
-                        new List<CharacterState>()
-                };
+    JsonUtility.FromJson<DialogueNode>(
+        JsonUtility.ToJson(original));
 
             // copy characters
 
@@ -2329,6 +2763,52 @@ previewCharacters =
                         0.4f);
             }
 
+            // =========================
+            // PRIORITY OUTLINE
+            // =========================
+
+            if (node.priority > 0)
+            {
+                Color priorityColor =
+                    Color.white;
+
+                if (node.priority >= 100)
+                {
+                    priorityColor =
+                        new Color(
+                            1f,
+                            0.2f,
+                            0.2f);
+                }
+                else if (node.priority >= 50)
+                {
+                    priorityColor =
+                        new Color(
+                            0.8f,
+                            0.3f,
+                            1f);
+                }
+                else if (node.priority >= 10)
+                {
+                    priorityColor =
+                        new Color(
+                            0.3f,
+                            0.6f,
+                            1f);
+                }
+
+                Rect priorityRect =
+                    new Rect(
+                        nodeRect.x - 6,
+                        nodeRect.y - 6,
+                        nodeRect.width + 12,
+                        nodeRect.height + 12);
+
+                EditorGUI.DrawRect(
+                    priorityRect,
+                    priorityColor);
+            }
+
             // SELECTED OUTLINE
 
             if (nodes.IndexOf(node) == selectedNode
@@ -2859,6 +3339,97 @@ previewCharacters =
             .Substring(0, 6);
     }
 
+    bool HasRequiredFlags(List<string> requiredFlags)
+    {
+        if (requiredFlags == null)
+            return true;
+
+        foreach (string flag in requiredFlags)
+        {
+            if (!playtestFlags.Contains(flag))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    bool HasBlockedFlags(List<string> blockedFlags)
+    {
+        if (blockedFlags == null)
+            return false;
+
+        foreach (string flag in blockedFlags)
+        {
+            if (playtestFlags.Contains(flag))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    bool MeetsRelationshipRequirements(
+        DialogueChoice choice)
+    {
+        if (playtestSadako
+            < choice.requiredSadako)
+        {
+            return false;
+        }
+
+        if (playtestSumiko
+            < choice.requiredSumiko)
+        {
+            return false;
+        }
+
+        if (playtestTeruko
+            < choice.requiredTeruko)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    void ApplyChoiceConsequences(
+        DialogueChoice choice)
+    {
+        playtestSadako +=
+            choice.sadakoChange;
+
+        playtestSumiko +=
+            choice.sumikoChange;
+
+        playtestTeruko +=
+            choice.terukoChange;
+
+        if (choice.setFlags != null)
+        {
+            foreach (string flag
+                     in choice.setFlags)
+            {
+                playtestFlags.Add(flag);
+            }
+        }
+    }
+
+    void ApplyNodeFlags(
+        DialogueNode node)
+    {
+        if (node.setFlags == null)
+            return;
+
+        foreach (string flag
+                 in node.setFlags)
+        {
+            playtestFlags.Add(flag);
+        }
+    }
+
     void DrawConnections()
     {
         Handles.BeginGUI();
@@ -3155,5 +3726,7 @@ previewCharacters =
         }
 
     }
+
+
 
 }
