@@ -21,6 +21,7 @@ public class DialogueManager : MonoBehaviour
     public BackgroundManager backgroundManager;
     public EventManager eventManager;
     public AIConversationManager aiConversationManager;
+    public FreeTimeManager freeTimeManager;
 
     [Header("Typewriter")]
     public float typingSpeed = 0.03f;
@@ -357,7 +358,7 @@ public class DialogueManager : MonoBehaviour
 
         if (currentNode.id == "free_time_start")
         {
-            FindObjectOfType<FreeTimeManager>()
+            freeTimeManager
                 .OpenFreeTime();
 
             return;

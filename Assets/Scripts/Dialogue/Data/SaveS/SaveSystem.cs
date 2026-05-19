@@ -78,7 +78,7 @@ public class SaveSystem : MonoBehaviour
                 "dd.MM.yyyy HH:mm");
 
         data.routeName =
-            dialogueManager.GetCurrentSpeaker();
+    GetCurrentRouteName();
 
         // =========================
         // SAVE JSON
@@ -145,6 +145,13 @@ public class SaveSystem : MonoBehaviour
 
         GameFlags.Instance.LoadFlags(data.flags);
 
+        // =========================
+        // RESTORE DAY
+        // =========================
+
+        GameManager.Instance.currentDay =
+            data.currentDay;
+
 
         aiConversationManager.SetHistory(
     "Sumiko",
@@ -201,5 +208,19 @@ public class SaveSystem : MonoBehaviour
         {
             slotUI.Refresh();
         }
+    }
+
+    string GetCurrentRouteName()
+    {
+        if (GameFlags.Instance.HasFlag("sadako_route"))
+            return "Sadako Route";
+
+        if (GameFlags.Instance.HasFlag("sumiko_route"))
+            return "Sumiko Route";
+
+        if (GameFlags.Instance.HasFlag("teruko_route"))
+            return "Teruko Route";
+
+        return "Common Route";
     }
 }

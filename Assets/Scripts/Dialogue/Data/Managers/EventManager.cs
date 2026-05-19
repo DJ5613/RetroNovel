@@ -26,21 +26,10 @@ public class EventManager : MonoBehaviour
             if (eventData.day != GameManager.Instance.currentDay)
                 continue;
 
-            if (eventData.requiredFlags != null)
+            if (!ConditionChecker.HasRequiredFlags(
+    eventData.requiredFlags))
             {
-                bool failed = false;
-
-                foreach (string flag in eventData.requiredFlags)
-                {
-                    if (!GameFlags.Instance.HasFlag(flag))
-                    {
-                        failed = true;
-                        break;
-                    }
-                }
-
-                if (failed)
-                    continue;
+                continue;
             }
 
             if (selectedEvent == null)

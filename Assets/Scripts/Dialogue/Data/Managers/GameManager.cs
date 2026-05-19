@@ -20,12 +20,4 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void NextDay()
-    {
-        currentDay++;
-
-        Debug.Log(
-            "Наступил день: " +
-            currentDay);
-    }
 }
