@@ -19,6 +19,19 @@ public class CharacterManager : MonoBehaviour
     private Dictionary<string, CharacterData> activeCharacters =
         new Dictionary<string, CharacterData>();
 
+    private Dictionary<string, string> speakerAliases =
+    new Dictionary<string, string>()
+{
+    { "Sadako", "Sadako" },
+    { "Садако", "Sadako" },
+
+    { "Sumiko", "Sumiko" },
+    { "Сумико", "Sumiko" },
+
+    { "Teruko", "Teruko" },
+    { "Теруко", "Teruko" }
+};
+
     // =========================
     // SHOW CHARACTER
     // =========================
@@ -28,6 +41,9 @@ public class CharacterManager : MonoBehaviour
         string emotion,
         string position)
     {
+        characterName =
+        NormalizeSpeaker(characterName);
+
         string path =
             $"Sprites/Characters/{characterName}/{emotion}";
 
@@ -57,8 +73,11 @@ public class CharacterManager : MonoBehaviour
         // установить спрайт
         slot.sprite = sprite;
 
-        // затемнить по умолчанию
-        slot.color = inactiveColor;
+        // новый персонаж = затемнённый
+        if (!activeCharacters.ContainsKey(characterName))
+        {
+            slot.color = inactiveColor;
+        }
 
         // обновить/добавить персонажа
         if (activeCharacters.ContainsKey(characterName))
@@ -89,6 +108,9 @@ public class CharacterManager : MonoBehaviour
         string characterName,
         string newEmotion)
     {
+        characterName =
+    NormalizeSpeaker(characterName);
+
         if (!activeCharacters.ContainsKey(characterName))
         {
             Debug.LogWarning(
@@ -112,6 +134,9 @@ public class CharacterManager : MonoBehaviour
 
     public void HideCharacter(string characterName)
     {
+        characterName =
+    NormalizeSpeaker(characterName);
+
         if (!activeCharacters.ContainsKey(characterName))
             return;
 
@@ -148,6 +173,16 @@ public class CharacterManager : MonoBehaviour
         slot.sprite = null;
     }
 
+
+    string NormalizeSpeaker(string speaker)
+    {
+        if (speakerAliases.ContainsKey(speaker))
+        {
+            return speakerAliases[speaker];
+        }
+
+        return speaker;
+    }
     // =========================
     // SET SPEAKER
     // =========================
@@ -159,6 +194,9 @@ public class CharacterManager : MonoBehaviour
 
         if (string.IsNullOrEmpty(speakerName))
             return;
+
+        speakerName =
+            NormalizeSpeaker(speakerName);
 
         if (!activeCharacters.ContainsKey(speakerName))
         {
@@ -186,6 +224,9 @@ public class CharacterManager : MonoBehaviour
 
     public bool HasCharacter(string characterName)
     {
+        characterName =
+    NormalizeSpeaker(characterName);
+
         return activeCharacters.ContainsKey(characterName);
     }
 

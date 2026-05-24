@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
@@ -7,6 +8,9 @@ using UnityEngine;
 
 public class DialogueEditorWindow : EditorWindow
 {
+    string cachedDialogueText = "";
+    int cachedNodeIndex = -1;
+
     Dictionary<string, CharacterState>
 previewCharacters =
     new Dictionary<string, CharacterState>();
@@ -409,9 +413,14 @@ previewCharacters =
 
             if (GUILayout.Button(nodes[i].id))
             {
+                GUI.FocusControl("");
+                EditorGUIUtility.editingTextField = false;
+
                 selectedNode = i;
 
                 previewCharacters.Clear();
+
+                Repaint();
             }
         }
 
@@ -470,6 +479,8 @@ previewCharacters =
 
             selectedNode =
                 nodes.Count - 1;
+
+            GUI.FocusControl(null);
         }
         // =========================
         // CREATE CONNECTED NODE
@@ -788,12 +799,27 @@ previewCharacters =
         // TEXT
         // =========================
 
+        if (cachedNodeIndex != selectedNode)
+        {
+            cachedNodeIndex = selectedNode;
+
+            cachedDialogueText = node.text;
+
+            GUI.FocusControl("");
+
+            EditorGUIUtility.editingTextField = false;
+        }
+
         GUILayout.Label("Dialogue");
 
-        node.text =
+        GUI.SetNextControlName("DialogueTextArea");
+
+        cachedDialogueText =
             EditorGUILayout.TextArea(
-                node.text,
+                cachedDialogueText,
                 GUILayout.Height(150));
+
+        node.text = cachedDialogueText;
 
         // =========================
         // HIDE CHARACTERS
@@ -872,9 +898,16 @@ previewCharacters =
     "Assets/Resources/Sprites/Backgrounds";
 
         string[] backgroundFiles =
-            Directory.GetFiles(
-                backgroundsPath,
-                "*.png");
+    Directory.GetFiles(
+        backgroundsPath,
+        "*.*",
+        SearchOption.AllDirectories)
+    .Where(file =>
+        file.EndsWith(".png") ||
+        file.EndsWith(".jpg") ||
+        file.EndsWith(".jpeg"))
+    .ToArray();
+
 
         List<string> backgrounds =
             new List<string>();
